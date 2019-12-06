@@ -1,6 +1,8 @@
 package lexer;
 
-import dataStructures.Scope;
+import java.util.List;
+
+import dataStructures.Tag;
 
 public class Lexer {
 	private CodeReader reader;
@@ -13,7 +15,7 @@ public class Lexer {
 		tagger = new Tagger();
 	}
 
-	public Scope analyze(String filename){
+	public List<Tag> analyze(String filename){
 		return tagger.Tag(tokenizer.tokenize(reader.readFile(filename)));
 	}
 }

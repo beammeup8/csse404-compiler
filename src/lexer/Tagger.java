@@ -2,10 +2,10 @@ package lexer;
 
 import java.util.List;
 
-import dataStructures.Scope;
+import dataStructures.Tag;
 
 public class Tagger {
-	public Scope Tag(List<String> tokens) {
+	public List<Tag> Tag(List<String> tokens) {
 		return null;
 	}
 }

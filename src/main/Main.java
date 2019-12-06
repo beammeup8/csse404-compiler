@@ -8,7 +8,6 @@ public class Main {
 		String filename = "dummyFile.java";
 		Lexer lexer = new Lexer();
 		lexer.analyze(filename);
-
 	}
 
 }
