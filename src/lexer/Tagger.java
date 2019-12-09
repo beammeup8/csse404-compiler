@@ -2,17 +2,44 @@ package lexer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 import dataStructures.Tag;
 import dataStructures.Type;
 
 public class Tagger {
 	private Map<String, Type> knownTypes;
+	private Set<String> reservedWords;
 
 	public Tagger() {
 		knownTypes = getTypeMap();
+		reservedWords = new HashSet<>();
+		reservedWords.add("class");
+		reservedWords.add("public");
+		reservedWords.add("static");
+		reservedWords.add("extends");
+		reservedWords.add("void");
+		reservedWords.add("int");
+		reservedWords.add("boolean");
+		reservedWords.add("if");
+		reservedWords.add("else");
+		reservedWords.add("while");
+		reservedWords.add("return");
+		reservedWords.add("null");
+		reservedWords.add("true");
+		reservedWords.add("false");
+		reservedWords.add("this");
+		reservedWords.add("new");
+		reservedWords.add("String");
+		reservedWords.add("main");
+		reservedWords.add("System.out.println");
+		reservedWords.add("private");
+		reservedWords.add("protected");
+		reservedWords.add("for");
 	}
 
 	private Map<String, Type> getTypeMap() {
@@ -22,43 +49,82 @@ public class Tagger {
 
 	public List<Tag> tag(String code) {
 		List<Tag> tags = new ArrayList<Tag>();
-		String[] pieces = code.split(" ");
-		for (String s : pieces) {
-			s = s.trim();
+		String[] pieces = code.split("[ \n\t\r]");
+		Stack<String> stack = new Stack<>();
+		addToStack(pieces, stack);
+		while (!stack.isEmpty()) {
+			String s = stack.pop();
 			if (s.equals("")) {
 				continue;
 			}
-			tags.add(new Tag(getType(s), s));
+			Type type = getType(s);
+			if (type != Type.Unknown) {
+				tags.add(new Tag(type, s));
+			} else {
+				splitToStack(s, stack);
+			}
 		}
 		return tags;
 	}
-
-	private Type getType(String token) {
-		if (token.length() == 1) {
-			char c = token.charAt(0);
-			if (isLetter(c)) {
-				return Type.Letter;
-			}
-			if (isOperator(c)) {
-				return Type.Operator;
-			}
-			if (isDelimiter(c)) {
-				return Type.Delimiter;
-			}
-			if (isWhiteSpace(c)) {
-				return Type.Whitespace;
+	
+	private void addToStack(String[] arr, Stack<String> stack) {
+		for (int i = arr.length - 1; i >= 0; i--) {
+			stack.push(arr[i]);
+		}
+	}
+	
+	private void splitToStack(String token, Stack<String> stack) {
+		System.out.println(token);
+		StringBuilder current = new StringBuilder(token.length());
+		char c1 = token.charAt(token.length() - 1);
+		char c2;
+		String last2;
+		
+		for (int i = token.length() - 2; i >= 0; i--) {
+			c2 = c1;
+			c1 = token.charAt(i);
+			last2 = "" + c1 + c2;
+			if (isOperator(last2)) {
+				stack.push(current.reverse().toString());
+				current = new StringBuilder(token.length());
+				stack.push(last2);
+				i--;
+			} else if (isOperator(c2) || isDelimiter(c2)) {
+				stack.push(current.reverse().toString());
+				current = new StringBuilder(token.length());
+				stack.push("" + c2);
+			} else {
+				current.append(c2);
 			}
 		}
-
-		if (isInteger(token)) {
-			return Type.Integer;
+		if (isOperator(c1) || isDelimiter(c1)) {
+			stack.push(current.reverse().toString());
+			stack.push("" + c1);
+		} else {
+			current.append(c1);
+			stack.push(current.reverse().toString());
 		}
 		
-		if (isID(token)) {
+	}
+
+	private Type getType(String token) {		
+		if (isReservedWord(token)) {
+			return Type.ReservedWord;
+		} else if (isInteger(token)) {
+			return Type.Integer;
+		} else if (isOperator(token)) {
+			return Type.Operator;
+		} else if (isDelimiter(token)) {
+			return Type.Delimiter;
+		} else if (isID(token)) {
 			return Type.ID;
 		}
 
 		return Type.Unknown;
+	}
+	
+	private boolean isReservedWord(String s) {
+		return reservedWords.contains(s);
 	}
 	
 	private boolean isInteger(String s) {
@@ -77,15 +143,31 @@ public class Tagger {
 	
 	private boolean isID(String s) {
 		char[] digits = s.toCharArray();
-		if (!isLetter(digits[0])) {
+		if (!isLetter(digits[0]) && digits[0] != '_') {
 			return false;
 		}
 		for (char c : digits) {
-			if (!isDigit(c) && ! isLetter(c)) {
+			if (!isDigit(c) && ! isLetter(c) && c != '_') {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	private boolean isDelimiter(String s) {
+		if (s.length() != 1) {
+			return false;
+		}
+		return isDelimiter(s.charAt(0));
+	}
+	
+	private boolean isOperator(String s) {
+		if (s.length() == 1) {
+			return isOperator(s.charAt(0));
+		} else if (s.equals("<=") || s.equals(">=") || s.equals("==") || s.equals("!=") || s.equals("&&") || s.equals("||")) {
+			return true;
+		}
+		return false;
 	}
 
 	private boolean isDigit(char c) {
