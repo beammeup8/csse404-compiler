@@ -48,7 +48,7 @@ public class Tagger {
 	}
 
 	public List<Tag> tag(String code) {
-		List<Tag> tags = new ArrayList<Tag>();
+		List<Tag> tags = new ArrayList<>();
 		String[] pieces = code.split("[ \n\t\r]");
 		Stack<String> stack = new Stack<>();
 		addToStack(pieces, stack);
@@ -64,7 +64,35 @@ public class Tagger {
 				splitToStack(s, stack);
 			}
 		}
+		checkSpecialCases(tags);
 		return tags;
+	}
+	
+	private void checkSpecialCases(List<Tag> tags) {
+		// check for System.out.println
+		for (int i = 0; i < tags.size() - 4; i++) {
+			if (tags.get(i).symbol.equals("System")) {
+				if (tags.get(i+1).symbol.equals(".")) {
+					if (tags.get(i+2).symbol.equals("out")) {
+						if (tags.get(i+3).symbol.equals(".")) {
+							if (tags.get(i+4).symbol.equals("println")) {
+								tags.remove(i+4);
+								tags.remove(i+3);
+								tags.remove(i+2);
+								tags.remove(i+1);
+								tags.set(i, new Tag(Type.ReservedWord, "System.out.println"));
+							} else {
+								i += 3;
+							}
+						} else {
+							i += 2;
+						}
+					} else {
+						i++;
+					}
+				}
+			}
+		}
 	}
 	
 	private void addToStack(String[] arr, Stack<String> stack) {
@@ -74,7 +102,6 @@ public class Tagger {
 	}
 	
 	private void splitToStack(String token, Stack<String> stack) {
-		System.out.println(token);
 		StringBuilder current = new StringBuilder(token.length());
 		char c1 = token.charAt(token.length() - 1);
 		char c2;
