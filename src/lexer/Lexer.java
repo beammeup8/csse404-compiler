@@ -14,6 +14,7 @@ public class Lexer {
 	}
 
 	public List<Tag> analyze(String filename){
-		return tagger.tag(reader.readFile(filename));
+		List<Tag >tags = tagger.tag(reader.readFile(filename));
+		return tags;
 	}
 }

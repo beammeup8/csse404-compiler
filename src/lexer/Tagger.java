@@ -1,10 +1,8 @@
 package lexer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -12,11 +10,9 @@ import dataStructures.Tag;
 import dataStructures.Type;
 
 public class Tagger {
-	private Map<String, Type> knownTypes;
 	private Set<String> reservedWords;
 
 	public Tagger() {
-		knownTypes = getTypeMap();
 		reservedWords = new HashSet<>();
 		reservedWords.add("class");
 		reservedWords.add("public");
@@ -40,11 +36,6 @@ public class Tagger {
 		reservedWords.add("private");
 		reservedWords.add("protected");
 		reservedWords.add("for");
-	}
-
-	private Map<String, Type> getTypeMap() {
-		Map<String, Type> typeMap = new HashMap<String, Type>();
-		return typeMap;
 	}
 
 	public List<Tag> tag(String code) {
@@ -212,9 +203,5 @@ public class Tagger {
 	private boolean isDelimiter(char c) {
 		return c == ';' || c == '.' || c == ',' || c == '=' || c == '(' || c == ')' || c == '{' || c == '}' || c == '['
 				|| c == ']';
-	}
-	
-	private boolean isWhiteSpace(char c){
-		return c == '\n' || c == '\t' || c == ' ';
 	}
 }
