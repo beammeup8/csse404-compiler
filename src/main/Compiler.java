@@ -20,7 +20,9 @@ public class Compiler {
 	}
 	public void compile(List<String> filenames){
 		for(String s: filenames){
+			System.out.println("Compiling " + s);
 			compile(s);
+			System.out.println("\n");
 		}
 	}
 }
