@@ -1,13 +1,18 @@
 package main;
 
-import lexer.CodeReader;
-import lexer.Tagger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println(new CodeReader().readFile("sampleCode/shortExample.java"));
-		System.out.println(new Tagger().tag("aaa = 6;\nSystem.out.println(aaa+5);").toString());
+		List<String> filesToCompile = new ArrayList<String>();
+		//add files
+		filesToCompile.add("sampleCode/shortExample.java");
+		
+		//run
+		Compiler compiler = new Compiler();
+		compiler.compile(filesToCompile);
 	}
 
 }
