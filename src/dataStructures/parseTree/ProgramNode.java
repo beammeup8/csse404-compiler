@@ -5,7 +5,6 @@ import java.util.List;
 
 import dataStructures.ParserType;
 import dataStructures.Tag;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
 
 public class ProgramNode extends Node {
 	
@@ -23,7 +22,7 @@ public class ProgramNode extends Node {
 		children.add(classDecl);
 		if(head.integer < tags.size()){
 			System.err.println("End of File Not Reached");
-			throw new SyntaxException("End of File not Reached");
+			//TODO throw error
 		}
 	}
 
