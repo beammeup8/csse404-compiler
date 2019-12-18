@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import dataStructures.Tag;
-import dataStructures.Type;
+import dataStructures.LexerType;
 
 public class Tagger {
 	private Set<String> reservedWords;
@@ -48,8 +48,8 @@ public class Tagger {
 			if (s.equals("")) {
 				continue;
 			}
-			Type type = getType(s);
-			if (type != Type.Unknown) {
+			LexerType type = getType(s);
+			if (type != LexerType.Unknown) {
 				tags.add(new Tag(type, s));
 			} else {
 				splitToStack(s, stack);
@@ -71,7 +71,7 @@ public class Tagger {
 								tags.remove(i+3);
 								tags.remove(i+2);
 								tags.remove(i+1);
-								tags.set(i, new Tag(Type.ReservedWord, "System.out.println"));
+								tags.set(i, new Tag(LexerType.ReservedWord, "System.out.println"));
 							} else {
 								i += 3;
 							}
@@ -125,20 +125,20 @@ public class Tagger {
 		
 	}
 
-	private Type getType(String token) {		
+	private LexerType getType(String token) {		
 		if (isReservedWord(token)) {
-			return Type.ReservedWord;
+			return LexerType.ReservedWord;
 		} else if (isInteger(token)) {
-			return Type.Integer;
+			return LexerType.Integer;
 		} else if (isOperator(token)) {
-			return Type.Operator;
+			return LexerType.Operator;
 		} else if (isDelimiter(token)) {
-			return Type.Delimiter;
+			return LexerType.Delimiter;
 		} else if (isID(token)) {
-			return Type.ID;
+			return LexerType.ID;
 		}
 
-		return Type.Unknown;
+		return LexerType.Unknown;
 	}
 	
 	private boolean isReservedWord(String s) {

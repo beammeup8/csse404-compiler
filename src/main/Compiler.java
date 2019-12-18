@@ -3,21 +3,26 @@ package main;
 import java.util.List;
 
 import dataStructures.Tag;
+import dataStructures.parseTree.Node;
 import lexer.Lexer;
 import output.Outputter;
+import parser.Parser;
 
 public class Compiler {
 	private Lexer lexer;
-	private Outputter<Tag> outputter;
+	private Parser parser;
+	private Outputter<Node> outputter;
 	
 	public Compiler() {
 		lexer = new Lexer();
-		outputter = new Outputter<Tag>();
+		parser = new Parser();
+		outputter = new Outputter<Node>();
 	}
 	
 	public void compile(String filename){
 		List<Tag> tags = lexer.analyze(filename);
-		outputter.output(filename, tags);
+		Node parseTree = parser.parse(tags);
+		outputter.output(filename, parseTree);
 	}
 	public void compile(List<String> filenames){
 		for(String s: filenames){

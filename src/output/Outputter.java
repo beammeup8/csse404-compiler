@@ -24,4 +24,15 @@ public class Outputter<T> {
 			e.printStackTrace();
 		}
 	}
+
+	public void output(String filename, T toOutput) {
+		int dotIndex = filename.lastIndexOf(".java");
+		String outFile = filename.substring(0, dotIndex) + fileExtension; 
+		try(FileWriter out = new FileWriter(new File(outFile))){
+			out.append(toOutput.toString());
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

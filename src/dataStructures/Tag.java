@@ -1,12 +1,12 @@
 package dataStructures;
 
 public class Tag {
-	public Type type;
+	public LexerType type;
 	public String symbol;
 	
 	
 	
-	public Tag(Type type, String symbol) {
+	public Tag(LexerType type, String symbol) {
 		this.type = type;
 		this.symbol = symbol;
 	}
