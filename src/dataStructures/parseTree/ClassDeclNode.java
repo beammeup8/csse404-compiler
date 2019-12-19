@@ -24,8 +24,7 @@ public class ClassDeclNode extends Node {
 			addNonTerminal(tags, head, initialHead, ParserType.ClassVarDeclLst);
 			addNonTerminal(tags, head, initialHead, ParserType.MethodDeclLst);
 			addTerminal(tags, head, initialHead, "}");
-			addNonTerminal(tags, head, initialHead, ParserType.ClassDecl);
-			
+			addNonTerminal(tags, head, initialHead, ParserType.ClassDeclLst);
 		} catch (Exception e) {
 			setToEpsilon(head, initialHead);
 		}
