@@ -39,7 +39,7 @@ public abstract class Node implements Iterable<Node> {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.ID) {
 			head.integer = initialHead;
-			throw new Exception();
+			throw new Exception("ID not found: " + tag.toString());
 		}
 		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
@@ -50,7 +50,7 @@ public abstract class Node implements Iterable<Node> {
 		Tag tag = tags.get(head.integer);
 		if (!tag.symbol.equals(symbol)) {
 			head.integer = initialHead;
-			throw new Exception();
+			throw new Exception("Bad Symbol: " + tag.symbol + " Expected Symbol: " + symbol);
 		}
 		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
@@ -61,7 +61,7 @@ public abstract class Node implements Iterable<Node> {
 		Node node = NodeFactory.getNode(tags, head, type);
 		if(node == null){
 			head.integer = initialHead;
-			throw new Exception(tags.toString());
+			throw new Exception("Failed to find proper form of " + type.name());
 		}
 		children.add(node);
 	}
