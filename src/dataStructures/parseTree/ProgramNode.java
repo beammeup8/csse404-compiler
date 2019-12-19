@@ -10,12 +10,12 @@ public class ProgramNode extends Node {
 	
 	public ProgramNode(List<Tag> tags, IntWrap head) throws Exception {
 		super(null, ParserType.Program);
-		Node mainClassDecl = NodeFactory.getMainClassDecl(tags, head);
+		Node mainClassDecl = NodeFactory.getNode(tags, head, ParserType.MainClassDecl);
 		if(mainClassDecl == null){
 			throw new InvalidClassException(tags.toString());
 		}
 		children.add(mainClassDecl);
-		Node classDecl = NodeFactory.getClassDecl(tags, head);
+		Node classDecl = NodeFactory.getNode(tags, head, ParserType.ClassDecl);
 		if(classDecl == null){
 			throw new InvalidClassException(tags.toString());
 		}

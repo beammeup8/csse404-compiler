@@ -2,20 +2,24 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import dataStructures.ParserType;
 import dataStructures.Tag;
 
 public class NodeFactory {
 
-	public static Node getProgramNode(List<Tag> tags, IntWrap head) throws Exception {
-		return new ProgramNode(tags, head);
+	public static Node getNode(List<Tag> tags, IntWrap head, ParserType type) throws Exception {
+		switch (type) {
+		case Program:
+			return new ProgramNode(tags, head);
+		case MainClassDecl:
+			return new MainClassDeclNode(tags, head);
+		case ClassDecl:
+			return new ClassDeclNode(tags, head);
+		case Negation:
+			break;
+		default:
+			break;
+		}
+		return null;
 	}
-	
-	public static Node getMainClassDecl(List<Tag> tags, IntWrap head){
-		return new MainClassDeclNode(tags, head);
-	}
-	
-	public static Node getClassDecl(List<Tag> tags, IntWrap head){
-		return new ClassDeclNode(tags, head);
-	}
-
 }
