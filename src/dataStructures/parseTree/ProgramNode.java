@@ -15,8 +15,12 @@ public class ProgramNode extends Node {
 	
 	public ProgramNode(List<Tag> tags, IntWrap head) throws Exception {
 		int initialHead = head.integer;
-		addNonTerminal(tags, head, initialHead, ParserType.MainClassDecl);
-		addNonTerminal(tags, head, initialHead, ParserType.ClassDecl);
+		try {
+			addNonTerminal(tags, head, initialHead, ParserType.MainClassDecl);
+			addNonTerminal(tags, head, initialHead, ParserType.ClassDecl);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 		if(head.integer < tags.size()){
 			System.err.println("End of File Not Reached");
 			//TODO throw error

@@ -14,6 +14,7 @@ public class Parser {
 		try {
 			return NodeFactory.getNode(tags, new IntWrap(), ParserType.Program);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.exit(0);
 		}
 		return null;
