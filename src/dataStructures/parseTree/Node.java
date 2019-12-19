@@ -35,7 +35,7 @@ public abstract class Node implements Iterable<Node> {
 		return builder.toString();
 	}
 
-	public void addID(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
+	protected void addID(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.ID) {
 			head.integer = initialHead;
@@ -46,7 +46,7 @@ public abstract class Node implements Iterable<Node> {
 		head.integer++;
 	}
 
-	public void addTerminal(List<Tag> tags, IntWrap head, int initialHead, String symbol) throws Exception {
+	protected void addTerminal(List<Tag> tags, IntWrap head, int initialHead, String symbol) throws Exception {
 		Tag tag = tags.get(head.integer);
 		if (!tag.symbol.equals(symbol)) {
 			head.integer = initialHead;
@@ -57,13 +57,19 @@ public abstract class Node implements Iterable<Node> {
 		head.integer++;
 	}
 	
-	public void addNonTerminal(List<Tag> tags, IntWrap head, int initialHead, ParserType type) throws Exception {
+	protected void addNonTerminal(List<Tag> tags, IntWrap head, int initialHead, ParserType type) throws Exception {
 		Node node = NodeFactory.getNode(tags, head, type);
 		if(node == null){
 			head.integer = initialHead;
 			throw new Exception(tags.toString());
 		}
 		children.add(node);
+	}
+	
+	protected void setToEpsilon(IntWrap head, int initialHead){
+		children.clear();
+		children.add(EpsilonNode.getEpsilonNode());
+		head.integer = initialHead;
 	}
 
 	public Iterator<Node> iterator() {
