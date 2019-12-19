@@ -15,8 +15,6 @@ public class NodeFactory {
 			return new MainClassDeclNode(tags, head);
 		case ClassDecl:
 			return new ClassDeclNode(tags, head);
-		case Negation:
-			break;
 		default:
 			break;
 		}

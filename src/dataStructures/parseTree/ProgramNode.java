@@ -9,7 +9,6 @@ import dataStructures.Tag;
 public class ProgramNode extends Node {
 	
 	public ProgramNode(List<Tag> tags, IntWrap head) throws Exception {
-		super(null, ParserType.Program);
 		Node mainClassDecl = NodeFactory.getNode(tags, head, ParserType.MainClassDecl);
 		if(mainClassDecl == null){
 			throw new InvalidClassException(tags.toString());
@@ -30,6 +29,11 @@ public class ProgramNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public ParserType getType() {
+		return ParserType.Program;
 	}
 
 }
