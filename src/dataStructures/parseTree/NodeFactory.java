@@ -22,33 +22,33 @@ public class NodeFactory {
 		case ClassDeclLst:
 			return new ClassDeclLstNode(tags, head);
 		case ClassVarDecl:
-			break;
+			return new ClassVarDeclNode(tags, head);
 		case ClassVarDeclLst:
-			break;
+			return new ClassVarDeclLstNode(tags, head);
 		case Comp:
-			break;
+			return new CompNode(tags, head);
 		case CompExpr:
-			break;
+			return new CompExprNode(tags, head);
 		case Comparator:
-			break;
+			return new ComparatorNode(tags, head);
 		case Decl:
-			break;
+			return new DeclNode(tags, head);
 		case EPSILON:
-			break;
+			return EpsilonNode.getEpsilonNode();
 		case Expr:
-			break;
+			return new ExprNode(tags, head);
 		case Extnd:
-			break;
+			return new ExtndNode(tags, head);
 		case FormLst:
-			break;
+			return new FormLstNode(tags, head);
 		case Formal:
-			break;
+			return new FormalNode(tags, head);
 		case Logic:
-			break;
+			return new LogicNode(tags, head);
 		case LogicExpr:
-			break;
+			return new LogicExprNode(tags, head);
 		case MethodCall:
-			break;
+			return new MethodCallNode(tags, head);
 		case MethodDecl:
 			return new MethodDeclNode(tags, head);
 		case MethodDeclLst:
