@@ -5,7 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import dataStructures.LexerType;
 import dataStructures.ParserType;
+import dataStructures.Tag;
 
 public abstract class Node implements Iterable<Node> {
 	protected List<Node> children;
@@ -31,6 +33,37 @@ public abstract class Node implements Iterable<Node> {
 
 		builder.append(")");
 		return builder.toString();
+	}
+
+	public void addID(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
+		Tag tag = tags.get(head.integer);
+		if (tag.type != LexerType.ID) {
+			head.integer = initialHead;
+			throw new Exception();
+		}
+		Node node = new TerminalNode(tag);
+		children.add(node);
+		head.integer++;
+	}
+
+	public void addTerminal(List<Tag> tags, IntWrap head, int initialHead, String symbol) throws Exception {
+		Tag tag = tags.get(head.integer);
+		if (!tag.symbol.equals(symbol)) {
+			head.integer = initialHead;
+			throw new Exception();
+		}
+		Node node = new TerminalNode(tag);
+		children.add(node);
+		head.integer++;
+	}
+	
+	public void addNonTerminal(List<Tag> tags, IntWrap head, int initialHead, ParserType type) throws Exception {
+		Node node = NodeFactory.getNode(tags, head, type);
+		if(node == null){
+			head.integer = initialHead;
+			throw new Exception(tags.toString());
+		}
+		children.add(node);
 	}
 
 	public Iterator<Node> iterator() {

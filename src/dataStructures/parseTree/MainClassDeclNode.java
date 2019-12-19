@@ -7,8 +7,11 @@ import dataStructures.Tag;
 
 public class MainClassDeclNode extends Node {
 
-	public MainClassDeclNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+	// MainClassDecl -> class ID { public static void main ( String [  ] ID ) { StmtLst } }
+	public MainClassDeclNode(List<Tag> tags, IntWrap head) throws Exception {
+		int initialHead = head.integer;
+		addTerminal(tags, head, initialHead, "class");
+		addID(tags, head, initialHead);
 	}
 
 	@Override
