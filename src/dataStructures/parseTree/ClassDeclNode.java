@@ -9,7 +9,6 @@ public class ClassDeclNode extends Node {
 
 	public ClassDeclNode(List<Tag> tags, IntWrap head) {
 		super(null, ParserType.ClassDecl);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
