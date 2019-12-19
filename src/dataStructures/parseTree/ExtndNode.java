@@ -5,16 +5,27 @@ import java.util.List;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
+/**
+ * Extnd -> extends ID | EPSILON
+ * 
+ * @author mastermk beemanla
+ *
+ */
 public class ExtndNode extends Node {
 
 	public ExtndNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+		int initialHead = head.integer;
+		try {
+			addTerminal(tags, head, initialHead, "extends");
+			addID(tags, head, initialHead);
+		} catch (Exception exception) {
+			setToEpsilon(head, initialHead);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.Extnd;
 	}
 
 	@Override

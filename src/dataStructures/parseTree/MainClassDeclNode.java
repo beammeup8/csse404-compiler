@@ -5,9 +5,14 @@ import java.util.List;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
+/**
+ * MainClassDecl -> class ID { public static void main ( String [ ] ID ) { StmtLst } }
+ * 
+ * @author mastermk beemanla
+ *
+ */
 public class MainClassDeclNode extends Node {
 
-	// MainClassDecl -> class ID { public static void main ( String [ ] ID ) { StmtLst } }
 	public MainClassDeclNode(List<Tag> tags, IntWrap head) throws Exception {
 		int initialHead = head.integer;
 		addTerminal(tags, head, initialHead, "class");
