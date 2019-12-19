@@ -50,23 +50,23 @@ public class NodeFactory {
 		case MethodCall:
 			break;
 		case MethodDecl:
-			break;
+			return new MethodDeclNode(tags, head);
 		case MethodDeclLst:
-			break;
+			return new MethodDeclLstNode(tags, head);
 		case MultDiv:
-			break;
+			return new MultDivNode(tags, head);
 		case MultDivExpr:
-			break;
+			return new MultDivExprNode(tags, head);
 		case ParamLst:
-			break;
+			return new ParamLstNode(tags, head);
 		case Stmt:
-			break;
+			return new StmtNode(tags, head);
 		case StmtLst:
-			break;
+			return new StmtLstNode(tags, head);
 		case TermExpr:
-			break;
+			return new TermExprNode(tags, head);
 		case Terminal:
-			break;
+			return new TerminalNode(tags.get(head.integer));
 		default:
 			break;
 

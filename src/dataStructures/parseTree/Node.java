@@ -41,7 +41,7 @@ public abstract class Node implements Iterable<Node> {
 			head.integer = initialHead;
 			throw new Exception();
 		}
-		Node node = new TerminalNode(tag);
+		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
 		head.integer++;
 	}
@@ -52,7 +52,7 @@ public abstract class Node implements Iterable<Node> {
 			head.integer = initialHead;
 			throw new Exception();
 		}
-		Node node = new TerminalNode(tag);
+		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
 		head.integer++;
 	}
