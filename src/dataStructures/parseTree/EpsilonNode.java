@@ -19,8 +19,7 @@ public class EpsilonNode extends Node{
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.EPSILON;
 	}
 
 	@Override
