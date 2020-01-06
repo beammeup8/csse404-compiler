@@ -61,7 +61,7 @@ public abstract class Node implements Iterable<Node> {
 		Tag tag = tags.get(head.integer);
 		if (!tag.symbol.equals(symbol)) {
 			head.integer = initialHead;
-			throw new Exception("Bad Symbol: " + tag.symbol + " Expected Symbol: " + symbol);
+			throw new Exception("Bad Symbol: \"" + tag.symbol + "\",  Expected Symbol: \"" + symbol + "\"");
 		}
 		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);

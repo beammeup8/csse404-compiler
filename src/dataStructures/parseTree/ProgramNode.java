@@ -12,18 +12,18 @@ import dataStructures.Tag;
  *
  */
 public class ProgramNode extends Node {
-	
+
 	public ProgramNode(List<Tag> tags, IntWrap head) throws Exception {
 		int initialHead = head.integer;
 		try {
 			addNonTerminal(tags, head, initialHead, ParserType.MainClassDecl);
 			addNonTerminal(tags, head, initialHead, ParserType.ClassDecl);
+			if (head.integer < tags.size()) {
+				System.err.println("End of File Not Reached\n" + "Remaining tags are: "
+						+ tags.subList(head.integer, tags.size()).toString());
+			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-		}
-		if(head.integer < tags.size()){
-			System.err.println("End of File Not Reached");
-			//TODO throw error
 		}
 	}
 
