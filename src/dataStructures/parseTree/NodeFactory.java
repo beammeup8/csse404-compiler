@@ -43,8 +43,6 @@ public class NodeFactory {
 			return new FormLstNode(tags, head);
 		case Formal:
 			return new FormalNode(tags, head);
-		case Logic:
-			return new LogicNode(tags, head);
 		case LogicExpr:
 			return new LogicExprNode(tags, head);
 		case MethodCall:
@@ -67,6 +65,14 @@ public class NodeFactory {
 			return new TermExprNode(tags, head);
 		case Terminal:
 			return new TerminalNode(tags.get(head.integer));
+		case Type:
+			return new TypeNode(tags, head);
+		case FirstParam:
+			return new FirstParamNode(tags, head);
+		case MethodExpr:
+			return new MethodExpNode(tags, head);
+		case NegExpr:
+			return new NegExprNode(tags, head);
 		default:
 			break;
 
