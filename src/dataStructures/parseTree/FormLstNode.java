@@ -8,13 +8,19 @@ import dataStructures.Tag;
 public class FormLstNode extends Node {
 
 	public FormLstNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+		int initialHead = head.integer;
+		try {
+			addTerminal(tags, head, initialHead, ",");
+			addNonTerminal(tags, head, initialHead, ParserType.Formal);
+			addNonTerminal(tags, head, initialHead, ParserType.FormLst);
+		} catch (Exception exception) {
+			setToEpsilon(head, initialHead);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.FormLst;
 	}
 
 	@Override

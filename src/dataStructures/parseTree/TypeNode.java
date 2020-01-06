@@ -7,14 +7,24 @@ import dataStructures.Tag;
 
 public class TypeNode extends Node {
 
-	public TypeNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+	public TypeNode(List<Tag> tags, IntWrap head) throws Exception {
+		int initialHead = head.integer;
+		if (tags.get(head.integer).symbol.equals("boolean")) {
+			addTerminal(tags, head, initialHead, "boolean");
+		} else if (tags.get(head.integer).symbol.equals("int")) {
+			addTerminal(tags, head, initialHead, "int");
+			if (tags.get(head.integer + 1).symbol.equals("[")) {
+				addTerminal(tags, head, initialHead, "[");
+				addTerminal(tags, head, initialHead, "]");
+			}
+		} else {
+			addID(tags, head, initialHead);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.Type;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class EpsilonNode extends Node{
 	
 	@Override
 	public String toString() {
-		return "\u03B5";
+		return "\u03B5 ";
 	}
 
 	@Override
