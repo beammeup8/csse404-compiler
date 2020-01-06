@@ -8,13 +8,19 @@ import dataStructures.Tag;
 public class ParamLstNode extends Node {
 
 	public ParamLstNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub.
+		int initialHead = head.integer;
+		try {
+			addTerminal(tags, head, initialHead, ",");
+			addNonTerminal(tags, head, initialHead, ParserType.Expr);
+			addNonTerminal(tags, head, initialHead, ParserType.ParamLst);
+		} catch (Exception e) {
+			setToEpsilon(head, initialHead);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub.
-		return null;
+		return ParserType.ParamLst;
 	}
 
 	@Override

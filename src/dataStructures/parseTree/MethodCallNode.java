@@ -8,13 +8,34 @@ import dataStructures.Tag;
 public class MethodCallNode extends Node {
 
 	public MethodCallNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+		int initialHead = head.integer;
+		String symbol = tags.get(head.integer).symbol;
+		try {
+			if (symbol.equals("[")) {
+				addTerminal(tags, head, initialHead, "[");
+				addNonTerminal(tags, head, initialHead, ParserType.Expr);
+				addTerminal(tags, head, initialHead, "]");
+				addNonTerminal(tags, head, initialHead, ParserType.MethodCall);
+			} else {
+				addTerminal(tags, head, initialHead, ".");
+				if (tags.get(head.integer).symbol.equals("length") && !tags.get(head.integer + 1).symbol.equals("(")) {
+					addTerminal(tags, head, initialHead, "length");
+				} else {
+					addID(tags, head, initialHead);
+					addTerminal(tags, head, initialHead, "(");
+					addNonTerminal(tags, head, initialHead, ParserType.FirstParam);
+					addTerminal(tags, head, initialHead, ")");
+				}
+			}
+			addNonTerminal(tags, head, initialHead, ParserType.MethodCall);
+		} catch (Exception e) {
+			setToEpsilon(head, initialHead);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.MethodCall;
 	}
 
 	@Override

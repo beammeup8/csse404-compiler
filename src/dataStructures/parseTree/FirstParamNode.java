@@ -8,13 +8,18 @@ import dataStructures.Tag;
 public class FirstParamNode extends Node {
 
 	public FirstParamNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+		int initialHead = head.integer;
+		try {
+			addNonTerminal(tags, head, initialHead, ParserType.Expr);
+			addNonTerminal(tags, head, initialHead, ParserType.ParamLst);
+		} catch (Exception e) {
+			setToEpsilon(head, initialHead);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.FirstParam;
 	}
 
 	@Override

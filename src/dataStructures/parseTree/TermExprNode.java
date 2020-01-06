@@ -7,14 +7,17 @@ import dataStructures.Tag;
 
 public class TermExprNode extends Node {
 
-	public TermExprNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub.
+	public TermExprNode(List<Tag> tags, IntWrap head) throws Exception {
+		int initialHead = head.integer;
+		String symbol = tags.get(head.integer).symbol;
+		if(symbol.equals("this") || symbol.equals("true") || symbol.equals("false")){
+			addTerminal(tags, head, initialHead, symbol);
+		}
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub.
-		return null;
+		return ParserType.TermExpr;
 	}
 
 	@Override

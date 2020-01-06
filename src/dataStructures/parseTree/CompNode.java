@@ -7,14 +7,15 @@ import dataStructures.Tag;
 
 public class CompNode extends Node {
 
-	public CompNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+	public CompNode(List<Tag> tags, IntWrap head) throws Exception {
+		int initialHead = head.integer;
+		addNonTerminal(tags, head, initialHead, ParserType.AddSub);
+		addNonTerminal(tags, head, initialHead, ParserType.CompExpr);
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.Comp;
 	}
 
 	@Override

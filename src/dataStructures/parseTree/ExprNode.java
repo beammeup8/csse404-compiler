@@ -5,6 +5,11 @@ import java.util.List;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
+/**
+ * Expr ->	Comp LogicExpr
+ * @author mastermk beemanla
+ *
+ */
 public class ExprNode extends Node {
 
 	public ExprNode(List<Tag> tags, IntWrap head) throws Exception {

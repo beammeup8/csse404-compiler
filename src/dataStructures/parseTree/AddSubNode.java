@@ -7,14 +7,15 @@ import dataStructures.Tag;
 
 public class AddSubNode extends Node {
 
-	public AddSubNode(List<Tag> tags, IntWrap head) {
-		// TODO Auto-generated constructor stub
+	public AddSubNode(List<Tag> tags, IntWrap head) throws Exception {
+		int initialHead = head.integer;
+		addNonTerminal(tags, head, initialHead, ParserType.MultDiv);
+		addNonTerminal(tags, head, initialHead, ParserType.AddSubExpr);
 	}
 
 	@Override
 	public ParserType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return ParserType.AddSub;
 	}
 
 	@Override
