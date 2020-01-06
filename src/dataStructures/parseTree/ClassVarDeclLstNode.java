@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -13,7 +14,7 @@ public class ClassVarDeclLstNode extends Node {
 		try {
 			addNonTerminal(tags, head, initialHead, ParserType.ClassVarDecl);
 			addNonTerminal(tags, head, initialHead, ParserType.ClassVarDeclLst);
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			setToEpsilon(head, initialHead);
 		}
 	}

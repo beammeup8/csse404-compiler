@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
@@ -9,14 +10,14 @@ import dataStructures.Tag;
 
 public class TermExprNode extends Node {
 
-	public TermExprNode(List<Tag> tags, IntWrap head) throws Exception {
+	public TermExprNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		String symbol = tags.get(head.integer).symbol;
 		if (symbol.equals("this") || symbol.equals("null") || symbol.equals("true") || symbol.equals("false")) {
 			addTerminal(tags, head, initialHead, symbol);
 		} else if (symbol.equals("new")) {
 			addTerminal(tags, head, initialHead, "new");
-			if (tags.get(head.integer + 1).symbol.equals("int")) {
+			if (tags.get(head.integer).symbol.equals("int")) {
 				addTerminal(tags, head, initialHead, "int");
 				addTerminal(tags, head, initialHead, "[");
 				addNonTerminal(tags, head, initialHead, ParserType.Expr);

@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -13,7 +14,7 @@ import dataStructures.Tag;
  */
 public class ExprNode extends Node {
 
-	public ExprNode(List<Tag> tags, IntWrap head) throws Exception {
+	public ExprNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		addNonTerminal(tags, head, initialHead, ParserType.Comp);
 		addNonTerminal(tags, head, initialHead, ParserType.LogicExpr);

@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
@@ -20,7 +21,7 @@ import dataStructures.Tag;
  */
 public class StmtNode extends Node {
 
-	public StmtNode(List<Tag> tags, IntWrap head) throws Exception {
+	public StmtNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		Tag first = tags.get(head.integer);
 		if(first.symbol.equals("{")){

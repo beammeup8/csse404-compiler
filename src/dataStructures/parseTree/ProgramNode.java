@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -14,7 +15,7 @@ import dataStructures.Tag;
  */
 public class ProgramNode extends Node {
 
-	public ProgramNode(List<Tag> tags, IntWrap head) throws Exception {
+	public ProgramNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
 			addNonTerminal(tags, head, initialHead, ParserType.MainClassDecl);
@@ -23,7 +24,7 @@ public class ProgramNode extends Node {
 				System.err.println("End of File Not Reached\n" + "Remaining tags are: "
 						+ tags.subList(head.integer, tags.size()).toString());
 			}
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			System.err.println(e.getMessage());
 		}
 	}

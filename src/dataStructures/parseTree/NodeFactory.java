@@ -2,14 +2,14 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
 public class NodeFactory {
 
-	public static Node getNode(List<Tag> tags, IntWrap head, ParserType type) throws Exception {
-		System.out.println(type.toString() + ": " + tags.get(head.integer).symbol);
+	public static Node getNode(List<Tag> tags, IntWrap head, ParserType type) throws CustomException {
 		switch (type) {
 		case Program:
 			return new ProgramNode(tags, head);

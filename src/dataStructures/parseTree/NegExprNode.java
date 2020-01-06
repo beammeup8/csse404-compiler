@@ -2,13 +2,14 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
 public class NegExprNode extends Node {
 
-	public NegExprNode(List<Tag> tags, IntWrap head) throws Exception {
+	public NegExprNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		String symbol = tags.get(head.integer).symbol;
 		if (symbol.equals("!") || symbol.equals("-")) {

@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -14,7 +15,7 @@ public class CompExprNode extends Node {
 			addNonTerminal(tags, head, initialHead, ParserType.Comparator);
 			addNonTerminal(tags, head, initialHead, ParserType.AddSub);
 			addNonTerminal(tags, head, initialHead, ParserType.CompExpr);
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			setToEpsilon(head, initialHead);
 		}
 	}

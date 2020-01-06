@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -14,7 +15,7 @@ public class ParamLstNode extends Node {
 			addTerminal(tags, head, initialHead, ",");
 			addNonTerminal(tags, head, initialHead, ParserType.Expr);
 			addNonTerminal(tags, head, initialHead, ParserType.ParamLst);
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			setToEpsilon(head, initialHead);
 		}
 	}

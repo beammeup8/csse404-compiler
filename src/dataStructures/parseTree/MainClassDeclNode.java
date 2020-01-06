@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -14,7 +15,7 @@ import dataStructures.Tag;
  */
 public class MainClassDeclNode extends Node {
 
-	public MainClassDeclNode(List<Tag> tags, IntWrap head) throws Exception {
+	public MainClassDeclNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		addTerminal(tags, head, initialHead, "class");
 		addID(tags, head, initialHead);

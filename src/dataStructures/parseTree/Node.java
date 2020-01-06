@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import Exceptions.CustomException;
+import Exceptions.DefaultException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
@@ -36,46 +38,48 @@ public abstract class Node implements Iterable<Node> {
 		return builder.toString();
 	}
 	
-	protected void addInteger(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
+	protected void addInteger(List<Tag> tags, IntWrap head, int initialHead) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.Integer) {
 			head.integer = initialHead;
-			throw new Exception("Integer not found: " + tag.toString());
+			throw new DefaultException("Integer not found: " + tag.toString());
 		}
 		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
 		head.integer++;
 	}
 
-	protected void addID(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
+	protected void addID(List<Tag> tags, IntWrap head, int initialHead) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.ID) {
 			head.integer = initialHead;
-			throw new Exception("ID not found: " + tag.toString());
+			throw new DefaultException("ID not found: " + tag.toString());
 		}
 		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
 		head.integer++;
 	}
 
-	protected void addTerminal(List<Tag> tags, IntWrap head, int initialHead, String symbol) throws Exception {
+	protected void addTerminal(List<Tag> tags, IntWrap head, int initialHead, String symbol) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (!tag.symbol.equals(symbol)) {
 			head.integer = initialHead;
-			throw new Exception("Bad Symbol: \"" + tag.symbol + "\",  Expected Symbol: \"" + symbol + "\"");
+			throw new DefaultException("Bad Symbol: \"" + tag.symbol + "\",  Expected Symbol: \"" + symbol + "\"");
 		}
 		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
 		children.add(node);
 		head.integer++;
 	}
 	
-	protected void addNonTerminal(List<Tag> tags, IntWrap head, int initialHead, ParserType type) throws Exception {
-		Node node = NodeFactory.getNode(tags, head, type);
-		if(node == null){
+	protected void addNonTerminal(List<Tag> tags, IntWrap head, int initialHead, ParserType type) throws CustomException {
+		Node node;
+		try {
+			node = NodeFactory.getNode(tags, head, type);
+			children.add(node);
+		} catch (CustomException e) {
 			head.integer = initialHead;
-			throw new Exception("Failed to find proper form of " + type.name());
+			throw new DefaultException("Failed to find proper form of " + type.name() + "\n\t" + e.getStackTrace());
 		}
-		children.add(node);
 	}
 	
 	protected void setToEpsilon(IntWrap head, int initialHead){

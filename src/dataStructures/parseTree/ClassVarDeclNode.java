@@ -2,13 +2,14 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
 public class ClassVarDeclNode extends Node {
 
-	public ClassVarDeclNode(List<Tag> tags, IntWrap head) throws Exception {
+	public ClassVarDeclNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		addNonTerminal(tags, head, initialHead , ParserType.Decl);
 		addTerminal(tags, head, initialHead, ";");

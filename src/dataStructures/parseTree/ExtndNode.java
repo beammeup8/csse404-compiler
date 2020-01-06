@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -19,7 +20,7 @@ public class ExtndNode extends Node {
 		try {
 			addTerminal(tags, head, initialHead, "extends");
 			addID(tags, head, initialHead);
-		} catch (Exception exception) {
+		} catch (CustomException exception) {
 			setToEpsilon(head, initialHead);
 		}
 	}

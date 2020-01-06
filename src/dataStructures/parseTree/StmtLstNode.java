@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -19,7 +20,7 @@ public class StmtLstNode extends Node {
 		try {
 			addNonTerminal(tags, head, initialHead, ParserType.Stmt);
 			addNonTerminal(tags, head, initialHead, ParserType.StmtLst);
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			setToEpsilon(head, initialHead);
 		}
 	}

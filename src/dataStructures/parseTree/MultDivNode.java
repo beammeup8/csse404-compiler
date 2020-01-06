@@ -2,13 +2,14 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 
 public class MultDivNode extends Node {
 
-	public MultDivNode(List<Tag> tags, IntWrap head) throws Exception {
+	public MultDivNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		addNonTerminal(tags, head, initialHead, ParserType.NegExpr);
 		addNonTerminal(tags, head, initialHead, ParserType.MultDivExpr);

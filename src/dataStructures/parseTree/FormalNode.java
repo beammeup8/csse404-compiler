@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
@@ -13,7 +14,7 @@ public class FormalNode extends Node {
 		try {
 			addNonTerminal(tags, head, initialHead, ParserType.Decl);
 			addNonTerminal(tags, head, initialHead, ParserType.FormLst);
-		} catch (Exception exception) {
+		} catch (CustomException exception) {
 			setToEpsilon(head, initialHead);
 		}
 		
