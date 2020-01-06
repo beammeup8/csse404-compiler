@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
 import dataStructures.Tag;

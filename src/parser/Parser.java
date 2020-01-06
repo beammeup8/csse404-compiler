@@ -1,11 +1,11 @@
 package parser;
 
-import dataStructures.parseTree.IntWrap;
 import dataStructures.parseTree.Node;
 import dataStructures.parseTree.NodeFactory;
 
 import java.util.List;
 
+import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 

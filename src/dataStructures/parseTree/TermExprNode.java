@@ -2,6 +2,7 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
 import dataStructures.Tag;

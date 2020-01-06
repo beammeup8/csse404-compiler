@@ -1,4 +1,4 @@
-package dataStructures.parseTree;
+package dataStructures;
 
 public class IntWrap {
  public int integer = 0;
