@@ -34,6 +34,17 @@ public abstract class Node implements Iterable<Node> {
 		builder.append(")");
 		return builder.toString();
 	}
+	
+	protected void addInteger(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
+		Tag tag = tags.get(head.integer);
+		if (tag.type != LexerType.Integer) {
+			head.integer = initialHead;
+			throw new Exception("Integer not found: " + tag.toString());
+		}
+		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
+		children.add(node);
+		head.integer++;
+	}
 
 	protected void addID(List<Tag> tags, IntWrap head, int initialHead) throws Exception {
 		Tag tag = tags.get(head.integer);
