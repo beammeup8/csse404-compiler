@@ -9,12 +9,8 @@ import dataStructures.ParserType;
 import dataStructures.Tag;
 
 /**
- * Stmt -> 	Decl = Expr ; 
- * 			| { StmtLst } 
- * 			| if ( Expr ) Stmt else Stmt 
- * 			| while ( Expr ) Stmt 
- * 			| System.out.println ( Expr ) ; 
- * 			| ID = Expr ;
+ * Stmt -> Decl = Expr ; | { StmtLst } | if ( Expr ) Stmt else Stmt | while (
+ * Expr ) Stmt | System.out.println ( Expr ) ; | ID = Expr ;
  * 
  * @author mastermk beemanla
  *
@@ -24,13 +20,13 @@ public class StmtNode extends Node {
 	public StmtNode(List<Tag> tags, IntWrap head) throws CustomException {
 		int initialHead = head.integer;
 		Tag first = tags.get(head.integer);
-		if(first.symbol.equals("{")){
+		if (first.symbol.equals("{")) {
 			addTerminal(tags, head, initialHead, "{");
 			addNonTerminal(tags, head, initialHead, ParserType.StmtLst);
 			addTerminal(tags, head, initialHead, "}");
 			return;
 		}
-		if(first.symbol.equals("if")){
+		if (first.symbol.equals("if")) {
 			addTerminal(tags, head, initialHead, "if");
 			addTerminal(tags, head, initialHead, "(");
 			addNonTerminal(tags, head, initialHead, ParserType.Expr);
@@ -40,7 +36,7 @@ public class StmtNode extends Node {
 			addNonTerminal(tags, head, initialHead, ParserType.Stmt);
 			return;
 		}
-		if(first.symbol.equals("while")){
+		if (first.symbol.equals("while")) {
 			addTerminal(tags, head, initialHead, "while");
 			addTerminal(tags, head, initialHead, "(");
 			addNonTerminal(tags, head, initialHead, ParserType.Expr);
@@ -48,7 +44,7 @@ public class StmtNode extends Node {
 			addNonTerminal(tags, head, initialHead, ParserType.Stmt);
 			return;
 		}
-		if(first.symbol.equals("System.out.println")){
+		if (first.symbol.equals("System.out.println")) {
 			addTerminal(tags, head, initialHead, "System.out.println");
 			addTerminal(tags, head, initialHead, "(");
 			addNonTerminal(tags, head, initialHead, ParserType.Expr);
@@ -56,16 +52,28 @@ public class StmtNode extends Node {
 			addTerminal(tags, head, initialHead, ";");
 			return;
 		}
-		if(first.type == LexerType.ID){
+		if (first.type == LexerType.ID && tags.get(head.integer + 1).symbol.equals("=")) {
 			addID(tags, head, initialHead);
 			addTerminal(tags, head, initialHead, "=");
 			addNonTerminal(tags, head, initialHead, ParserType.Expr);
 			addTerminal(tags, head, initialHead, ";");
 			return;
 		}
+		if (first.type == LexerType.ID && tags.get(head.integer + 1).symbol.equals("[")) {
+			addID(tags, head, initialHead);
+			addTerminal(tags, head, initialHead, "[");
+			addNonTerminal(tags, head, initialHead, ParserType.Expr);
+			addTerminal(tags, head, initialHead, "]");
+			addTerminal(tags, head, initialHead, "=");
+			addNonTerminal(tags, head, initialHead, ParserType.Expr);
+			addTerminal(tags, head, initialHead, ";");
+			return;
+		}
 		addNonTerminal(tags, head, initialHead, ParserType.Decl);
-		addTerminal(tags, head, initialHead, "=");
-		addNonTerminal(tags, head, initialHead, ParserType.Expr);
+		if (tags.get(head.integer).symbol.equals("=")) {
+			addTerminal(tags, head, initialHead, "=");
+			addNonTerminal(tags, head, initialHead, ParserType.Expr);
+		}
 		addTerminal(tags, head, initialHead, ";");
 	}
 
