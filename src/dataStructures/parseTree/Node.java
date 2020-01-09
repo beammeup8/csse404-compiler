@@ -23,6 +23,22 @@ public abstract class Node implements Iterable<Node> {
 	public abstract ParserType getType();
 
 	public abstract AbstractStructure convertToInternal();
+	
+	public void optimize(){
+		for(Node child: children){
+			child.optimize();
+		}
+		removeEmpty();
+	}
+	
+	public void removeEmpty(){
+		removeEpsilon();
+		children.removeIf(n -> (n.children.isEmpty() && n.getType() != ParserType.Terminal));
+	}
+	
+	private void removeEpsilon(){
+		children.removeIf(n -> (n == EpsilonNode.getEpsilonNode()));
+	}
 
 	@Override
 	public String toString() {

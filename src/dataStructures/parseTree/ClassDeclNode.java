@@ -7,6 +7,7 @@ import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
+import dataStructures.internalStructure.CodeBlockStructure;
 
 /**
  * ClassDecl -> class ID Extnd { ClassVarDecLst MethodDeclLst } ClassDecl |
@@ -19,7 +20,7 @@ public class ClassDeclNode extends Node {
 
 	public ClassDeclNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
-		if(head.integer == tags.size()){
+		if (head.integer == tags.size()) {
 			setToEpsilon(head, initialHead);
 			return;
 		}

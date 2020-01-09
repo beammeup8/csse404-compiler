@@ -22,6 +22,7 @@ public class Compiler {
 	public void compile(String filename){
 		List<Tag> tags = lexer.analyze(filename);
 		Node parseTree = parser.parse(tags);
+		parseTree.optimize();
 		outputter.output(filename, parseTree);
 	}
 	public void compile(List<String> filenames){

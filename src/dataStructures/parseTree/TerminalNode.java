@@ -15,6 +15,11 @@ public class TerminalNode extends Node {
 	}
 	
 	@Override
+	public void optimize() {
+		return;
+	}
+	
+	@Override
 	public String toString() {
 		return "( Terminal: " + lexerType.name() + " " + symbol + " )";
 	}
