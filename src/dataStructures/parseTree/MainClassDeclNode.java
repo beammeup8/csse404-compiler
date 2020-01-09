@@ -6,6 +6,7 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * MainClassDecl -> class ID { public static void main ( String [ ] ID ) { StmtLst } }
@@ -37,9 +38,8 @@ public class MainClassDeclNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 	@Override

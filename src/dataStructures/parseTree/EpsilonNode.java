@@ -1,6 +1,7 @@
 package dataStructures.parseTree;
 
 import dataStructures.ParserType;
+import dataStructures.internalStructure.AbstractStructure;
 
 public class EpsilonNode extends Node{
 	private static Node node = new EpsilonNode();
@@ -23,8 +24,7 @@ public class EpsilonNode extends Node{
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 }

@@ -11,6 +11,7 @@ import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 public abstract class Node implements Iterable<Node> {
 	protected List<Node> children;
@@ -21,7 +22,7 @@ public abstract class Node implements Iterable<Node> {
 
 	public abstract ParserType getType();
 
-	public abstract void optimize();
+	public abstract AbstractStructure convertToInternal();
 
 	@Override
 	public String toString() {

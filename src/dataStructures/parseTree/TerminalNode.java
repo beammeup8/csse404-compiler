@@ -3,6 +3,7 @@ package dataStructures.parseTree;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 public class TerminalNode extends Node {
 	private String symbol;
@@ -24,9 +25,8 @@ public class TerminalNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 }

@@ -7,6 +7,7 @@ import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * Stmt -> Decl = Expr ; | { StmtLst } | if ( Expr ) Stmt else Stmt | while (
@@ -83,9 +84,8 @@ public class StmtNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub.
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 }

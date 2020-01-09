@@ -7,6 +7,7 @@ import Exceptions.DefaultException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 public class ComparatorNode extends Node {
 
@@ -27,9 +28,8 @@ public class ComparatorNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 }

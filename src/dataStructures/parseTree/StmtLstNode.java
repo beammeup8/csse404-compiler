@@ -6,6 +6,7 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * StmtLst -> Stmt StmtLst | EPSILON
@@ -31,9 +32,8 @@ public class StmtLstNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub.
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 }

@@ -7,6 +7,7 @@ import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 public class TermExprNode extends Node {
 
@@ -44,9 +45,8 @@ public class TermExprNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub.
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 }

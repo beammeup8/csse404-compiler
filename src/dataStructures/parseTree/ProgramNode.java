@@ -6,6 +6,7 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.ParserType;
 import dataStructures.Tag;
+import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * Program -> MainClassDecl ClassDecl
@@ -30,9 +31,8 @@ public class ProgramNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 	@Override
