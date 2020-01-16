@@ -4,7 +4,6 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
@@ -15,26 +14,40 @@ import dataStructures.internalStructure.AbstractStructure;
  *
  */
 public class MainClassDeclNode extends Node {
+	private TerminalNode className, argName;
+	private List<StmtNode> statmentList;
 
 	public MainClassDeclNode(List<Tag> tags, IntWrap head) throws CustomException {
-		int initialHead = head.integer;
-		addTerminal(tags, head, initialHead, "class");
-		addID(tags, head, initialHead);
-		addTerminal(tags, head, initialHead, "{");
-		addTerminal(tags, head, initialHead, "public");
-		addTerminal(tags, head, initialHead, "static");
-		addTerminal(tags, head, initialHead, "void");
-		addTerminal(tags, head, initialHead, "main");
-		addTerminal(tags, head, initialHead, "(");
-		addTerminal(tags, head, initialHead, "String");
-		addTerminal(tags, head, initialHead, "[");
-		addTerminal(tags, head, initialHead, "]");
-		addID(tags, head, initialHead);
-		addTerminal(tags, head, initialHead, ")");
-		addTerminal(tags, head, initialHead, "{");
-		addNonTerminal(tags, head, initialHead, ParserType.StmtLst);
-		addTerminal(tags, head, initialHead, "}");
-		addTerminal(tags, head, initialHead, "}");
+		validateTerminal(tags, head, "class");
+		className = addID(tags, head);
+		validateTerminal(tags, head, "{");
+		validateTerminal(tags, head, "public");
+		validateTerminal(tags, head, "static");
+		validateTerminal(tags, head, "void");
+		validateTerminal(tags, head, "main");
+		validateTerminal(tags, head, "(");
+		validateTerminal(tags, head, "String");
+		validateTerminal(tags, head, "[");
+		validateTerminal(tags, head, "]");
+		argName = addID(tags, head);
+		validateTerminal(tags, head, ")");
+		validateTerminal(tags, head, "{");
+		statmentList = new StmtLstNode(tags, head).getStatements();
+		validateTerminal(tags, head, "}");
+		validateTerminal(tags, head, "}");
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("(Main Class Declaration: class ");
+		builder.append(className.toString());
+		builder.append("{ public static void main(String[] ");
+		builder.append(argName.toString());
+		builder.append("){");
+		builder.append(statmentList.toString());
+		builder.append("}})");
+		return builder.toString();
 	}
 
 	@Override
@@ -43,8 +56,9 @@ public class MainClassDeclNode extends Node {
 	}
 
 	@Override
-	public ParserType getType() {
-		return ParserType.MainClassDecl;
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

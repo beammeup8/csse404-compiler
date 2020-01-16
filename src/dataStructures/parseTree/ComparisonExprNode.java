@@ -4,23 +4,23 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
+import dataStructures.OpType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
-public class FormalNode extends Node {
+public class ComparisonExprNode extends Node {
 	private boolean isEpsilon;
-	private TypeNode type;
-	private TerminalNode id;
-	private FormLstNode next;
+	private  TerminalNode op;
+	private ComparisonNode comparison;
+	
 
-	public FormalNode(List<Tag> tags, IntWrap head) {
+	public ComparisonExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			type = new TypeNode(tags, head);
-			id = addID(tags, head);
-			next = new FormLstNode(tags, head);
+			op = addOp(tags, head, OpType.COMPARISON);
+			comparison = new ComparisonNode(tags, head);
 			isEpsilon = false;
-		} catch (CustomException exception) {
+		} catch (CustomException e) {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
@@ -28,6 +28,7 @@ public class FormalNode extends Node {
 
 	@Override
 	public AbstractStructure convertToInternal() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -39,10 +40,10 @@ public class FormalNode extends Node {
 
 	@Override
 	public String toString() {
-		if (isEpsilon) {
+		if(isEpsilon){
 			return "";
 		}
-		return type.toString() + " " + id.toString() + " " + next.toString();
+		return op.toString() + " " + comparison.toString();
 	}
 
 }

@@ -7,18 +7,21 @@ import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
-public class FormalNode extends Node {
+/**
+ * Extnd -> extends ID | EPSILON
+ * 
+ * @author mastermk beemanla
+ *
+ */
+public class ExtendNode extends Node {
 	private boolean isEpsilon;
-	private TypeNode type;
-	private TerminalNode id;
-	private FormLstNode next;
+	private TerminalNode superClass;
 
-	public FormalNode(List<Tag> tags, IntWrap head) {
+	public ExtendNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			type = new TypeNode(tags, head);
-			id = addID(tags, head);
-			next = new FormLstNode(tags, head);
+			validateTerminal(tags, head, "extends");
+			superClass = addID(tags, head);
 			isEpsilon = false;
 		} catch (CustomException exception) {
 			head.integer = initialHead;
@@ -34,15 +37,15 @@ public class FormalNode extends Node {
 	@Override
 	public void optimize() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public String toString() {
-		if (isEpsilon) {
+		if(isEpsilon){
 			return "";
 		}
-		return type.toString() + " " + id.toString() + " " + next.toString();
+		return " extends " + superClass.toString();
 	}
 
 }

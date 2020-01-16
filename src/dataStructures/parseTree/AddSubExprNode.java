@@ -2,38 +2,47 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
+import dataStructures.OpType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
 public class AddSubExprNode extends Node {
+	private boolean isEpsilon;
+	private TerminalNode symbol;
+	private AddSubNode addSub;
 
 	public AddSubExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			if (tags.get(head.integer).symbol.equals("+")) {
-				addTerminal(tags, head, initialHead, "+");
-			}
-			else {
-				addTerminal(tags, head, initialHead, "-");
-			}
-			addNonTerminal(tags, head, initialHead, ParserType.MultDiv);
-			addNonTerminal(tags, head, initialHead, ParserType.AddSubExpr);
+			symbol = addOp(tags, head, OpType.ADDITIVE);
+			addSub = new AddSubNode(tags, head);
+			isEpsilon = false;
 		} catch (CustomException e) {
-			setToEpsilon(head, initialHead);
+			head.integer = initialHead;
+			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public ParserType getType() {
-		return ParserType.AddSubExpr;
 	}
 
 	@Override
 	public AbstractStructure convertToInternal() {
 		return null;
+	}
+
+	@Override
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String toString() {
+		if(isEpsilon){
+			return "";
+		}
+		return "( " +  symbol.toString() + " " + addSub.toString() + " )";
 	}
 
 }

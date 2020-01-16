@@ -4,36 +4,44 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
+import dataStructures.OpType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
 public class MultDivExprNode extends Node {
+	private boolean isEpsilon;
+	private TerminalNode symbol;
+	private MultDivNode multDiv;
 
 	public MultDivExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			if (tags.get(head.integer).symbol.equals("*")) {
-				addTerminal(tags, head, initialHead, "*");
-			}
-			else {
-				addTerminal(tags, head, initialHead, "/");
-			}
-			addNonTerminal(tags, head, initialHead, ParserType.NegExpr);
-			addNonTerminal(tags, head, initialHead , ParserType.MultDivExpr);
+			symbol = addOp(tags, head, OpType.MULTIPLICATIVE);
+			multDiv = new MultDivNode(tags, head);
+			isEpsilon = false;
 		} catch (CustomException e) {
-			setToEpsilon(head, initialHead);
+			head.integer = initialHead;
+			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public ParserType getType() {
-		return ParserType.MultDivExpr;
 	}
 
 	@Override
 	public AbstractStructure convertToInternal() {
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		if(isEpsilon){
+			return "";
+		}
+		return "( " +  symbol.toString() + " " + multDiv.toString() + " )";
+	}
+
+	@Override
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

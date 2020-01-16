@@ -1,10 +1,10 @@
 package dataStructures.parseTree;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
@@ -15,25 +15,41 @@ import dataStructures.internalStructure.AbstractStructure;
  *
  */
 public class StmtLstNode extends Node {
+	private boolean isEpsilon;
+	private StmtNode currentStatment;
+	private StmtLstNode furtherStatements;
 
 	public StmtLstNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			addNonTerminal(tags, head, initialHead, ParserType.Stmt);
-			addNonTerminal(tags, head, initialHead, ParserType.StmtLst);
+			currentStatment = new StmtNode(tags, head);
+			furtherStatements = new StmtLstNode(tags, head);
+			isEpsilon = false;
 		} catch (CustomException e) {
-			setToEpsilon(head, initialHead);
+			head.integer = initialHead;
+			isEpsilon = true;
 		}
 	}
-
-	@Override
-	public ParserType getType() {
-		return ParserType.StmtLst;
+	
+	public List<StmtNode> getStatements(){
+		if(isEpsilon){
+			return new LinkedList<>();
+		}
+		LinkedList<StmtNode> statements = new LinkedList<StmtNode>();
+		statements.addFirst(currentStatment);
+		statements.addAll(furtherStatements.getStatements());
+		return statements;
 	}
 
 	@Override
 	public AbstractStructure convertToInternal() {
 		return null;
+	}
+
+	@Override
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

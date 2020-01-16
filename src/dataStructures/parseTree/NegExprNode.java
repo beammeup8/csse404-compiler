@@ -4,31 +4,48 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
+import dataStructures.OpType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
 public class NegExprNode extends Node {
+	private TerminalNode symbol;
+	private MethodExpNode method;
+	
 
 	public NegExprNode(List<Tag> tags, IntWrap head) throws CustomException {
-		int initialHead = head.integer;
-		String symbol = tags.get(head.integer).symbol;
-		if (symbol.equals("!") || symbol.equals("-")) {
-			addTerminal(tags, head, initialHead, symbol);
-			addNonTerminal(tags, head, initialHead, ParserType.NegExpr);
-		}else{
-			addNonTerminal(tags, head, initialHead, ParserType.MethodExpr);
+		boolean isEven = true;
+		try {
+			while(true){
+				symbol = addOp(tags, head, OpType.NEGATION);
+				isEven = !isEven;
+			}
+		} catch (CustomException e) {
+			if(isEven){
+				symbol = null;
+			}
+			method = new MethodExpNode(tags, head);
 		}
 	}
 
-	@Override
-	public ParserType getType() {
-		return ParserType.NegExpr;
-	}
 
 	@Override
 	public AbstractStructure convertToInternal() {
 		return null;
+	}
+
+	@Override
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String toString() {
+		if(symbol == null){
+			return method.toString();
+		}
+		return "( " + symbol.toString() + " " + method.toString() + " )";
 	}
 
 }

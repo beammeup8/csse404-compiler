@@ -4,7 +4,6 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
@@ -15,12 +14,13 @@ import dataStructures.internalStructure.AbstractStructure;
  *
  */
 public class ProgramNode extends Node {
+	private MainClassDeclNode mainClass;
+	private List<ClassDeclNode> otherClasses;
 
 	public ProgramNode(List<Tag> tags, IntWrap head) {
-		int initialHead = head.integer;
 		try {
-			addNonTerminal(tags, head, initialHead, ParserType.MainClassDecl);
-			addNonTerminal(tags, head, initialHead, ParserType.ClassDecl);
+			mainClass = new MainClassDeclNode(tags, head);
+			otherClasses = new ClassDeclListNode(tags, head).getClasses();
 			if (head.integer < tags.size()) {
 				System.err.println("End of File Not Reached\n" + "Remaining tags are: "
 						+ tags.subList(head.integer, tags.size()).toString());
@@ -29,6 +29,11 @@ public class ProgramNode extends Node {
 			System.err.println(e.getMessage());
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "( Program: " + mainClass.toString() + " " +  otherClasses.toString() + " )";
+	}
 
 	@Override
 	public AbstractStructure convertToInternal() {
@@ -36,8 +41,9 @@ public class ProgramNode extends Node {
 	}
 
 	@Override
-	public ParserType getType() {
-		return ParserType.Program;
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

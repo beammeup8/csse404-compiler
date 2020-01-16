@@ -4,26 +4,34 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
 public class AddSubNode extends Node {
+	private MultDivNode multDiv;
+	private AddSubExprNode addSubExpr;
 
 	public AddSubNode(List<Tag> tags, IntWrap head) throws CustomException {
-		int initialHead = head.integer;
-		addNonTerminal(tags, head, initialHead, ParserType.MultDiv);
-		addNonTerminal(tags, head, initialHead, ParserType.AddSubExpr);
+		multDiv = new MultDivNode(tags, head);
+		addSubExpr = new AddSubExprNode(tags, head);
+	}
+	
+	@Override
+	public String toString() {
+		return "( AddSub: " + multDiv.toString() + " " + addSubExpr.toString() + " )";
 	}
 
-	@Override
-	public ParserType getType() {
-		return ParserType.AddSub;
-	}
 
 	@Override
 	public AbstractStructure convertToInternal() {
 		return null;
+	}
+
+
+	@Override
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

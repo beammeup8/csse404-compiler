@@ -1,149 +1,107 @@
 package dataStructures.parseTree;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import Exceptions.CustomException;
 import Exceptions.DefaultException;
+import Exceptions.IncorrectOperatorFound;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
-import dataStructures.ParserType;
+import dataStructures.OpType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
-public abstract class Node implements Iterable<Node> {
-	protected List<Node> children;
-
-	public Node() {
-		this.children = new ArrayList<Node>();
-	}
-
-	public abstract ParserType getType();
+public abstract class Node {
 
 	public abstract AbstractStructure convertToInternal();
-	
-	public void optimize(){
-		for(Node child: children){
-			child.optimize();
-		}
-		removeEmpty();
-	}
-	
-	public void removeEmpty(){
-		removeEpsilon();
-		children.removeIf(n -> (n.children.isEmpty() && n.getType() != ParserType.Terminal));
-	}
-	
-	private void removeEpsilon(){
-		children.removeIf(n -> (n == EpsilonNode.getEpsilonNode()));
-	}
+
+	public abstract void optimize();
 
 	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("( ");
-		builder.append(getType().name());
-		builder.append(" ");
-
-		for (int i = 0; i < children.size(); i++) {
-			builder.append(children.get(i).toString());
-		}
-
-		builder.append(")");
-		return builder.toString();
+	public String toString(){
+		System.err.println("This toString should never be called.");
+		return null;
 	}
-	
-	protected void addInteger(List<Tag> tags, IntWrap head, int initialHead) throws CustomException {
+
+	protected TerminalNode addInteger(List<Tag> tags, IntWrap head) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.Integer) {
-			head.integer = initialHead;
 			throw new DefaultException("Integer not found: " + tag.toString());
 		}
-		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
-		children.add(node);
+		TerminalNode node = new TerminalNode(tag);
 		head.integer++;
+		return node;
 	}
 
-	protected void addID(List<Tag> tags, IntWrap head, int initialHead) throws CustomException {
+	protected TerminalNode addOp(List<Tag> tags, IntWrap head, OpType op) throws CustomException {
+		Tag tag = tags.get(head.integer);
+		if (tag.type != LexerType.Operator) {
+			throw new DefaultException("Operator not found: " + tag.toString());
+		}
+		String symbol = tag.symbol;
+		switch (op) {
+		case ADDITIVE:
+			if (!symbol.equals("+") && !symbol.equals("-")) {
+				throw new IncorrectOperatorFound(symbol);
+			}
+			break;
+		case COMPARISON:
+			if (!symbol.equals("<") && !symbol.equals(">") && !symbol.equals("<=") && !symbol.equals("=>")) {
+				throw new IncorrectOperatorFound(symbol);
+			}
+			break;
+		case EQUALITY:
+			if (!symbol.equals("==") && !symbol.equals("!=")) {
+				throw new IncorrectOperatorFound(symbol);
+			}
+			break;
+		case LOGIC:
+			if (!symbol.equals("&&") && !symbol.equals("||")) {
+				throw new IncorrectOperatorFound(symbol);
+			}
+			break;
+		case MULTIPLICATIVE:
+			if (!symbol.equals("*") && !symbol.equals("/")) {
+				throw new IncorrectOperatorFound(symbol);
+			}
+			break;
+		case NEGATION:
+			if (!symbol.equals("!") && !symbol.equals("-")) {
+				throw new IncorrectOperatorFound(symbol);
+			}
+			break;
+		}
+
+		TerminalNode node = new TerminalNode(tag);
+		head.integer++;
+		return node;
+	}
+
+	protected TerminalNode addID(List<Tag> tags, IntWrap head) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.ID) {
-			head.integer = initialHead;
 			throw new DefaultException("ID not found: " + tag.toString());
 		}
-		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
-		children.add(node);
+		TerminalNode node = new TerminalNode(tag);
 		head.integer++;
+		return node;
 	}
 
-	protected void addTerminal(List<Tag> tags, IntWrap head, int initialHead, String symbol) throws CustomException {
+	protected TerminalNode addTerminal(List<Tag> tags, IntWrap head, String symbol) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (!tag.symbol.equals(symbol)) {
-			head.integer = initialHead;
 			throw new DefaultException("Bad Symbol: \"" + tag.symbol + "\",  Expected Symbol: \"" + symbol + "\"");
 		}
-		Node node = NodeFactory.getNode(tags, head, ParserType.Terminal);
-		children.add(node);
+		TerminalNode node = new TerminalNode(tag);
 		head.integer++;
+		return node;
 	}
-	
-	protected void addNonTerminal(List<Tag> tags, IntWrap head, int initialHead, ParserType type) throws CustomException {
-		Node node;
-		try {
-			node = NodeFactory.getNode(tags, head, type);
-			children.add(node);
-		} catch (CustomException e) {
-			head.integer = initialHead;
-			throw new DefaultException("Failed to find proper form of " + type.name() + "\n\t" + e.getStackTrace());
+
+	protected void validateTerminal(List<Tag> tags, IntWrap head, String symbol) throws CustomException {
+		Tag tag = tags.get(head.integer);
+		if (!tag.symbol.equals(symbol)) {
+			throw new DefaultException("Bad Symbol: \"" + tag.symbol + "\",  Expected Symbol: \"" + symbol + "\"");
 		}
-	}
-	
-	protected void setToEpsilon(IntWrap head, int initialHead){
-		children.clear();
-		children.add(EpsilonNode.getEpsilonNode());
-		head.integer = initialHead;
-	}
-
-	public Iterator<Node> iterator() {
-		return new Iterator<Node>() {
-			int childIndex = -1;
-			Iterator<Node> childIter;
-
-			@Override
-			public boolean hasNext() {
-				if (childIndex == -1) {
-					return true;
-				}
-				if (childIndex > children.size() || children.isEmpty()) {
-					return false;
-				}
-				return true;
-			}
-
-			@Override
-			public Node next() {
-				if (childIndex == -1) {
-					updateChildIter();
-					return Node.this;
-				}
-				if (childIter.hasNext()) {
-					return childIter.next();
-				}
-				updateChildIter();
-				if (childIndex >= children.size()) {
-					throw new NoSuchElementException();
-				}
-				return childIter.next();
-			}
-
-			private void updateChildIter() {
-				childIndex++;
-				if (childIndex < children.size()) {
-					childIter = children.get(childIndex).iterator();
-				}
-			}
-
-		};
+		head.integer++;
 	}
 }

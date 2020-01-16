@@ -8,16 +8,20 @@ import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
-public class FirstParamNode extends Node {
+public class ClassDeclListNode extends Node {
 	private boolean isEpsilon;
-	private ExprNode expression;
-	private List<ExprNode> otherParams;
+	private ClassDeclNode currentClass;
+	private ClassDeclListNode nextClass;
 
-	public FirstParamNode(List<Tag> tags, IntWrap head) {
+	public ClassDeclListNode(List<Tag> tags, IntWrap head) {
+		if (head.integer == tags.size()) {
+			isEpsilon = true;
+			return;
+		}
 		int initialHead = head.integer;
 		try {
-			expression = new ExprNode(tags, head);
-			otherParams = new ParamLstNode(tags, head).getParams();
+			currentClass = new ClassDeclNode(tags, head);
+			nextClass = new ClassDeclListNode(tags, head);
 			isEpsilon = false;
 		} catch (CustomException e) {
 			head.integer = initialHead;
@@ -25,16 +29,16 @@ public class FirstParamNode extends Node {
 		}
 	}
 	
-	public List<ExprNode> getParams(){
+	public List<ClassDeclNode> getClasses() {
 		if(isEpsilon){
-			return new LinkedList<ExprNode>();
+			return new LinkedList<>();
 		}
-		LinkedList<ExprNode> params = new LinkedList<>();
-		params.add(expression);
-		params.addAll(otherParams);
-		return params;
+		LinkedList<ClassDeclNode> classes = new LinkedList<ClassDeclNode>();
+		classes.addFirst(currentClass);
+		classes.addAll(nextClass.getClasses());
+		return classes;
 	}
-	
+
 	@Override
 	public AbstractStructure convertToInternal() {
 		return null;
@@ -44,12 +48,6 @@ public class FirstParamNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

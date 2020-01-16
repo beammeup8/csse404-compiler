@@ -4,45 +4,71 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
 public class MethodCallNode extends Node {
+	private enum MethodCallType {
+		EPSILON, METHOD_CALL, ARRAY_ACCESS, LENGTH
+	}
+	private MethodCallType type;
+	private TerminalNode id;
+	private List<ExprNode> params;
+	private ExprNode expression;
+	private MethodCallNode nextCall;
 
 	public MethodCallNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		String symbol = tags.get(head.integer).symbol;
 		try {
 			if (symbol.equals("[")) {
-				addTerminal(tags, head, initialHead, "[");
-				addNonTerminal(tags, head, initialHead, ParserType.Expr);
-				addTerminal(tags, head, initialHead, "]");
-				addNonTerminal(tags, head, initialHead, ParserType.MethodCall);
+				validateTerminal(tags, head, "[");
+				expression = new ExprNode(tags, head);
+				validateTerminal(tags, head, "]");
+				type = MethodCallType.ARRAY_ACCESS;
 			} else {
-				addTerminal(tags, head, initialHead, ".");
+				validateTerminal(tags, head, ".");
 				if (tags.get(head.integer).symbol.equals("length") && !tags.get(head.integer + 1).symbol.equals("(")) {
-					addTerminal(tags, head, initialHead, "length");
+					validateTerminal(tags, head,  "length");
+					type = MethodCallType.LENGTH;
 				} else {
-					addID(tags, head, initialHead);
-					addTerminal(tags, head, initialHead, "(");
-					addNonTerminal(tags, head, initialHead, ParserType.FirstParam);
-					addTerminal(tags, head, initialHead, ")");
+					id = addID(tags, head);
+					validateTerminal(tags, head, "(");
+					params = new FirstParamNode(tags, head).getParams();
+					validateTerminal(tags, head, ")");
+					type = MethodCallType.METHOD_CALL;
 				}
 			}
-			addNonTerminal(tags, head, initialHead, ParserType.MethodCall);
+			nextCall = new MethodCallNode(tags, head);
 		} catch (CustomException e) {
-			setToEpsilon(head, initialHead);
+			head.integer = initialHead;
+			type = MethodCallType.EPSILON;
 		}
 	}
 
 	@Override
-	public ParserType getType() {
-		return ParserType.MethodCall;
+	public AbstractStructure convertToInternal() {
+		return null;
 	}
 
 	@Override
-	public AbstractStructure convertToInternal() {
+	public void optimize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String toString() {
+		switch(type){
+		case ARRAY_ACCESS:
+			return "[" + expression.toString() + "] ";
+		case EPSILON:
+			return "";
+		case LENGTH:
+			return ".length " + nextCall.toString();
+		case METHOD_CALL:
+			return "." + id.toString() + "(" + params.toString() + ")" + nextCall.toString();
+		}
 		return null;
 	}
 

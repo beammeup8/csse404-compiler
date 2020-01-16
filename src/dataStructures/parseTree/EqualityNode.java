@@ -7,18 +7,13 @@ import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
 
-/**
- * Expr ->	Comp LogicExpr
- * @author mastermk beemanla
- *
- */
-public class ExprNode extends Node {
-	private EqualityNode equality;
-	private LogicExprNode logicExpr; 
+public class EqualityNode extends Node {
+	private ComparisonNode comparison;
+	private EqualityExprNode equalityExpr;
 
-	public ExprNode(List<Tag> tags, IntWrap head) throws CustomException {
-		equality = new EqualityNode(tags, head);
-		logicExpr = new LogicExprNode(tags, head);
+	public EqualityNode(List<Tag> tags, IntWrap head) throws CustomException {
+		comparison = new ComparisonNode(tags, head);
+		equalityExpr = new EqualityExprNode(tags, head);
 	}
 
 	@Override
@@ -34,7 +29,7 @@ public class ExprNode extends Node {
 
 	@Override
 	public String toString() {
-		return "Expression: " + equality.toString() + " " + logicExpr.toString(); 
+		return "( Equality: " + comparison.toString() + " " + equalityExpr.toString();
 	}
 
 }

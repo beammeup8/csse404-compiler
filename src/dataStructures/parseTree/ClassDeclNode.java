@@ -4,38 +4,41 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.ParserType;
 import dataStructures.Tag;
 import dataStructures.internalStructure.AbstractStructure;
-import dataStructures.internalStructure.CodeBlockStructure;
 
 /**
- * ClassDecl -> class ID Extnd { ClassVarDecLst MethodDeclLst } ClassDecl |
- * EPSILON
  * 
  * @author mastermk beemanla
  *
  */
 public class ClassDeclNode extends Node {
+	private TerminalNode className;
+	private ExtendNode extension;
+	private List<ClassVarDeclNode> classVars;
+	private List<MethodDeclNode> methods;
 
-	public ClassDeclNode(List<Tag> tags, IntWrap head) {
-		int initialHead = head.integer;
-		if (head.integer == tags.size()) {
-			setToEpsilon(head, initialHead);
-			return;
-		}
-		try {
-			addTerminal(tags, head, initialHead, "class");
-			addID(tags, head, initialHead);
-			addNonTerminal(tags, head, initialHead, ParserType.Extnd);
-			addTerminal(tags, head, initialHead, "{");
-			addNonTerminal(tags, head, initialHead, ParserType.ClassVarDeclLst);
-			addNonTerminal(tags, head, initialHead, ParserType.MethodDeclLst);
-			addTerminal(tags, head, initialHead, "}");
-			addNonTerminal(tags, head, initialHead, ParserType.ClassDecl);
-		} catch (CustomException e) {
-			setToEpsilon(head, initialHead);
-		}
+	public ClassDeclNode(List<Tag> tags, IntWrap head) throws CustomException {
+		validateTerminal(tags, head, "class");
+		className = addID(tags, head);
+		extension = new ExtendNode(tags, head);
+		validateTerminal(tags, head, "{");
+		classVars = new ClassVarDeclLstNode(tags, head).getClassVars();
+		methods = new MethodDeclLstNode(tags, head).getMethods();
+		validateTerminal(tags, head, "}");
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("(Class Declaration: class ");
+		builder.append(className.toString());
+		builder.append(extension.toString());
+		builder.append("{");
+		builder.append(classVars.toString());
+		builder.append(methods.toString());
+		builder.append(")");
+		return builder.toString();
 	}
 
 	@Override
@@ -44,8 +47,9 @@ public class ClassDeclNode extends Node {
 	}
 
 	@Override
-	public ParserType getType() {
-		return ParserType.ClassDecl;
+	public void optimize() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
