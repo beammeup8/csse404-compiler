@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class MultDivNode extends Node {
 	private NegExprNode negExpr;
@@ -14,11 +13,6 @@ public class MultDivNode extends Node {
 	public MultDivNode(List<Tag> tags, IntWrap head) throws CustomException {
 		negExpr = new NegExprNode(tags, head);
 		multDivExpr = new MultDivExprNode(tags, head);
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

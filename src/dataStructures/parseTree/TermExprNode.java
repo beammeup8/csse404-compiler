@@ -6,7 +6,6 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class TermExprNode extends Node {
 	private enum TermType {
@@ -58,11 +57,6 @@ public class TermExprNode extends Node {
 			id = addID(tags, head);
 			type = TermType.ID;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

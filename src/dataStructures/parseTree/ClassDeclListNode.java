@@ -6,7 +6,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class ClassDeclListNode extends Node {
 	private boolean isEpsilon;
@@ -37,11 +36,6 @@ public class ClassDeclListNode extends Node {
 		classes.addFirst(currentClass);
 		classes.addAll(nextClass.getClasses());
 		return classes;
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

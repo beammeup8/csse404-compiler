@@ -6,7 +6,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class ClassVarDeclLstNode extends Node {
 	private boolean isEpsilon;
@@ -22,11 +21,6 @@ public class ClassVarDeclLstNode extends Node {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	public List<ClassVarDeclNode> getClassVars() {

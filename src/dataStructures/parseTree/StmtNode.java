@@ -6,7 +6,6 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * 
@@ -85,11 +84,6 @@ public class StmtNode extends Node {
 			stmtType = StmtType.DECLARATION;
 		}
 		validateTerminal(tags, head, ";");
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

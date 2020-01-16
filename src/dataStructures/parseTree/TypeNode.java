@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class TypeNode extends Node {
 	private TerminalNode type;
@@ -23,11 +22,6 @@ public class TypeNode extends Node {
 		} else {
 			type = addID(tags, head);
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

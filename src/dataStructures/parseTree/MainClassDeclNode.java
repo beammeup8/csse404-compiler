@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * MainClassDecl -> class ID { public static void main ( String [ ] ID ) { StmtLst } }
@@ -48,11 +47,6 @@ public class MainClassDeclNode extends Node {
 		builder.append(statmentList.toString());
 		builder.append("}})");
 		return builder.toString();
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

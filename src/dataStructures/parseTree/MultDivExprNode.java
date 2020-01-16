@@ -6,7 +6,6 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class MultDivExprNode extends Node {
 	private boolean isEpsilon;
@@ -23,11 +22,6 @@ public class MultDivExprNode extends Node {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 	
 	@Override

@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * Program -> MainClassDecl ClassDecl
@@ -33,11 +32,6 @@ public class ProgramNode extends Node {
 	@Override
 	public String toString() {
 		return "( Program: " + mainClass.toString() + " " +  otherClasses.toString() + " )";
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

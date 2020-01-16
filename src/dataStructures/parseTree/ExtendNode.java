@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * Extnd -> extends ID | EPSILON
@@ -27,11 +26,6 @@ public class ExtendNode extends Node {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

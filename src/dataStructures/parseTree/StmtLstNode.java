@@ -6,7 +6,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * StmtLst -> Stmt StmtLst | EPSILON
@@ -39,11 +38,6 @@ public class StmtLstNode extends Node {
 		statements.addFirst(currentStatment);
 		statements.addAll(furtherStatements.getStatements());
 		return statements;
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

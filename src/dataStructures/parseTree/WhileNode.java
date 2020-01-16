@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class WhileNode extends Node {
 	private ExprNode conditional;
@@ -28,12 +27,6 @@ public class WhileNode extends Node {
 		builder.append(body.toString());
 		builder.append(")");
 		return builder.toString();
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

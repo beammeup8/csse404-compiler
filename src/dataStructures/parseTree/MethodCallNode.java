@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class MethodCallNode extends Node {
 	private enum MethodCallType {
@@ -44,11 +43,6 @@ public class MethodCallNode extends Node {
 			head.integer = initialHead;
 			type = MethodCallType.EPSILON;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

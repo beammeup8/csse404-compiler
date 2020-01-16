@@ -6,7 +6,6 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class EqualityExprNode extends Node {
 	private boolean isEpsilon;
@@ -23,12 +22,6 @@ public class EqualityExprNode extends Node {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
-	}
-	
-	@Override
-	public AbstractStructure convertToInternal() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

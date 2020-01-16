@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class IfNode extends Node {
 	private ExprNode conditional; 
@@ -32,12 +31,6 @@ public class IfNode extends Node {
 		builder.append(elseBody.toString());
 		builder.append(")");
 		return builder.toString();
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

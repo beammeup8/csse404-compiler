@@ -6,7 +6,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class ParamLstNode extends Node {
 	private boolean isEpsilon;
@@ -34,11 +33,6 @@ public class ParamLstNode extends Node {
 		params.add(expression);
 		params.addAll(furtherParams.getParams());
 		return params;
-	}
- 
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

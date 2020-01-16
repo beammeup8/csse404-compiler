@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class ComparisonNode extends Node {
 	private AddSubNode addSub;
@@ -14,11 +13,6 @@ public class ComparisonNode extends Node {
 	public ComparisonNode(List<Tag> tags, IntWrap head) throws CustomException {
 		addSub = new AddSubNode(tags, head);
 		comparisonExpr = new ComparisonExprNode(tags, head);
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

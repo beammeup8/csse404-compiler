@@ -6,7 +6,6 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class NegExprNode extends Node {
 	private TerminalNode symbol;
@@ -26,12 +25,6 @@ public class NegExprNode extends Node {
 			}
 			method = new MethodExpNode(tags, head);
 		}
-	}
-
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

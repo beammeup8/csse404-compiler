@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class AddSubNode extends Node {
 	private MultDivNode multDiv;
@@ -20,13 +19,6 @@ public class AddSubNode extends Node {
 	public String toString() {
 		return "( AddSub: " + multDiv.toString() + " " + addSubExpr.toString() + " )";
 	}
-
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
-	}
-
 
 	@Override
 	public void optimize() {

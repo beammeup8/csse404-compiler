@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class MethodDeclNode extends Node {
 	private TypeNode type;
@@ -27,11 +26,6 @@ public class MethodDeclNode extends Node {
 		returnExpression = new ExprNode(tags, head);
 		validateTerminal(tags, head , ";");
 		validateTerminal(tags, head , "}");
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

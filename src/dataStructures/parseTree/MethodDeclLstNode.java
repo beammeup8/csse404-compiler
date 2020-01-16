@@ -6,7 +6,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class MethodDeclLstNode extends Node {
 	private boolean isEpsilon;
@@ -23,11 +22,6 @@ public class MethodDeclLstNode extends Node {
 			isEpsilon = true;
 			head.integer = initialHead;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	public List<MethodDeclNode> getMethods() {

@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class EqualityNode extends Node {
 	private ComparisonNode comparison;
@@ -14,11 +13,6 @@ public class EqualityNode extends Node {
 	public EqualityNode(List<Tag> tags, IntWrap head) throws CustomException {
 		comparison = new ComparisonNode(tags, head);
 		equalityExpr = new EqualityExprNode(tags, head);
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

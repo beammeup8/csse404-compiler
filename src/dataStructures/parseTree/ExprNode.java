@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * Expr ->	Comp LogicExpr
@@ -19,11 +18,6 @@ public class ExprNode extends Node {
 	public ExprNode(List<Tag> tags, IntWrap head) throws CustomException {
 		equality = new EqualityNode(tags, head);
 		logicExpr = new LogicExprNode(tags, head);
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

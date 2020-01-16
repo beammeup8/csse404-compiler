@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class ClassVarDeclNode extends Node {
 	private TypeNode type;
@@ -15,11 +14,6 @@ public class ClassVarDeclNode extends Node {
 		type = new TypeNode(tags, head);
 		id = addID(tags, head);
 		validateTerminal(tags, head, ";");
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

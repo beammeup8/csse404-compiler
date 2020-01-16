@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 /**
  * 
@@ -39,11 +38,6 @@ public class ClassDeclNode extends Node {
 		builder.append(methods.toString());
 		builder.append(")");
 		return builder.toString();
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

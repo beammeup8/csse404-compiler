@@ -5,7 +5,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class FormalNode extends Node {
 	private boolean isEpsilon;
@@ -24,11 +23,6 @@ public class FormalNode extends Node {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

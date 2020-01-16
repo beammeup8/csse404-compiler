@@ -6,7 +6,6 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class FirstParamNode extends Node {
 	private boolean isEpsilon;
@@ -33,11 +32,6 @@ public class FirstParamNode extends Node {
 		params.add(expression);
 		params.addAll(otherParams);
 		return params;
-	}
-	
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 	@Override

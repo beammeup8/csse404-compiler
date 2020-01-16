@@ -2,7 +2,6 @@ package dataStructures.parseTree;
 
 import dataStructures.LexerType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public class TerminalNode extends Node {
 	public String symbol;
@@ -21,11 +20,6 @@ public class TerminalNode extends Node {
 	@Override
 	public String toString() {
 		return "( Terminal: " + lexerType.name() + " " + symbol + " )";
-	}
-
-	@Override
-	public AbstractStructure convertToInternal() {
-		return null;
 	}
 
 }

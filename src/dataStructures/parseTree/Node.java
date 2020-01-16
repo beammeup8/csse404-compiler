@@ -9,11 +9,8 @@ import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.OpType;
 import dataStructures.Tag;
-import dataStructures.internalStructure.AbstractStructure;
 
 public abstract class Node {
-
-	public abstract AbstractStructure convertToInternal();
 
 	public abstract void optimize();
 
