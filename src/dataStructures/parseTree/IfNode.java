@@ -5,6 +5,8 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.InterIf1;
+import dataStructures.inter1.IInterStatement1;
 
 public class IfNode extends Node {
 	private ExprNode conditional; 
@@ -37,6 +39,10 @@ public class IfNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public IInterStatement1 convertToInter1() {
+		return new InterIf1(conditional.convertToInter1(), thenBody.convertToInter1(), elseBody.convertToInter1());
 	}
 
 }

@@ -6,6 +6,7 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
 
 public class TermExprNode extends Node {
 	private enum TermType {
@@ -87,6 +88,11 @@ public class TermExprNode extends Node {
 		case TRUE:
 			return " true ";
 		}
+		return null;
+	}
+
+	public IInterExpression1 convertToInter1() {
+		// TODO Auto-generated method stub.
 		return null;
 	}
 

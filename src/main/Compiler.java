@@ -3,7 +3,8 @@ package main;
 import java.util.List;
 
 import dataStructures.Tag;
-import dataStructures.parseTree.Node;
+import dataStructures.inter1.InterProgram1;
+import dataStructures.parseTree.ProgramNode;
 import lexer.Lexer;
 import output.Outputter;
 import parser.Parser;
@@ -11,19 +12,19 @@ import parser.Parser;
 public class Compiler {
 	private Lexer lexer;
 	private Parser parser;
-	private Outputter<Node> outputter;
+	private Outputter<InterProgram1> outputter;
 	
 	public Compiler() {
 		lexer = new Lexer();
 		parser = new Parser();
-		outputter = new Outputter<Node>();
+		outputter = new Outputter<>();
 	}
 	
 	public void compile(String filename){
 		List<Tag> tags = lexer.analyze(filename);
-		Node parseTree = parser.parse(tags);
-		parseTree.optimize();
-		outputter.output(filename, parseTree);
+		ProgramNode parseTree = parser.parse(tags);
+		InterProgram1 interProgram1 = parseTree.convertToInter1();
+		outputter.output(filename, interProgram1);
 	}
 	public void compile(List<String> filenames){
 		for(String s: filenames){

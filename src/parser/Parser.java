@@ -1,15 +1,13 @@
 package parser;
 
-import dataStructures.parseTree.Node;
-import dataStructures.parseTree.ProgramNode;
-
 import java.util.List;
 
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.parseTree.ProgramNode;
 
 public class Parser {
-	public Node parse(List<Tag> tags){
+	public ProgramNode parse(List<Tag> tags){
 		try {
 			return new ProgramNode(tags, new IntWrap());
 		} catch (Exception e) {

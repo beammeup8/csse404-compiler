@@ -6,10 +6,11 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
 
 public class ComparisonExprNode extends Node {
-	private boolean isEpsilon;
-	private  TerminalNode op;
+	boolean isEpsilon;
+	TerminalNode op;
 	private ComparisonNode comparison;
 	
 
@@ -37,6 +38,13 @@ public class ComparisonExprNode extends Node {
 			return "";
 		}
 		return op.toString() + " " + comparison.toString();
+	}
+
+	public IInterExpression1 convertToInter1() {
+		if (isEpsilon) {
+			return null;
+		}
+		return comparison.convertToInter1();
 	}
 
 }

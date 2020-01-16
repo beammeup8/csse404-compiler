@@ -6,16 +6,17 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
 
 public class AddSubExprNode extends Node {
-	private boolean isEpsilon;
-	private TerminalNode symbol;
+	boolean isEpsilon;
+	TerminalNode op;
 	private AddSubNode addSub;
 
 	public AddSubExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			symbol = addOp(tags, head, OpType.ADDITIVE);
+			op = addOp(tags, head, OpType.ADDITIVE);
 			addSub = new AddSubNode(tags, head);
 			isEpsilon = false;
 		} catch (CustomException e) {
@@ -35,7 +36,14 @@ public class AddSubExprNode extends Node {
 		if(isEpsilon){
 			return "";
 		}
-		return "( " +  symbol.toString() + " " + addSub.toString() + " )";
+		return "( " +  op.toString() + " " + addSub.toString() + " )";
+	}
+
+	public IInterExpression1 convertToInter1() {
+		if (isEpsilon) {
+			return null;
+		}
+		return addSub.convertToInter1();
 	}
 
 }

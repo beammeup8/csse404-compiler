@@ -1,10 +1,14 @@
 package dataStructures.parseTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.InterClass1;
+import dataStructures.inter1.InterDeclaration1;
+import dataStructures.inter1.InterMethod1;
 
 /**
  * 
@@ -44,6 +48,14 @@ public class ClassDeclNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public InterClass1 convertToInter1() {
+		List<InterDeclaration1> declarations = new ArrayList<>();
+		classVars.forEach(x -> declarations.add(x.convertToInter1()));
+		List<InterMethod1> interMethods = new ArrayList<>();
+		methods.forEach(x -> interMethods.add(x.convertToInter1()));
+		return new InterClass1(className.symbol, false, extension.getSuper(), declarations, interMethods);
 	}
 
 }

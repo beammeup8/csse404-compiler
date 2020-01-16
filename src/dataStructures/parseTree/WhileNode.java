@@ -5,6 +5,7 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterStatement1;
 
 public class WhileNode extends Node {
 	private ExprNode conditional;
@@ -33,6 +34,10 @@ public class WhileNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public IInterStatement1 convertToInter1() {
+		return null;
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
+import dataStructures.inter1.InterExpression1;
 
 /**
  * Expr ->	Comp LogicExpr
@@ -13,7 +15,7 @@ import dataStructures.Tag;
  */
 public class ExprNode extends Node {
 	private EqualityNode equality;
-	private LogicExprNode logicExpr; 
+	private LogicExprNode logicExpr;
 
 	public ExprNode(List<Tag> tags, IntWrap head) throws CustomException {
 		equality = new EqualityNode(tags, head);
@@ -29,6 +31,13 @@ public class ExprNode extends Node {
 	@Override
 	public String toString() {
 		return "Expression: " + equality.toString() + " " + logicExpr.toString(); 
+	}
+
+	public IInterExpression1 convertToInter1() {
+		if (logicExpr.isEpsilon) {
+			return equality.convertToInter1();
+		}
+		return new InterExpression1(equality.convertToInter1(), logicExpr.op.symbol, logicExpr.convertToInter1());
 	}
 
 }

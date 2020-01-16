@@ -1,11 +1,18 @@
 package dataStructures.parseTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
+import dataStructures.inter1.InterArrayAssign1;
+import dataStructures.inter1.InterAssign1;
+import dataStructures.inter1.InterDeclaration1;
+import dataStructures.inter1.InterMultiStatement1;
+import dataStructures.inter1.InterPrintStatement1;
+import dataStructures.inter1.IInterStatement1;
 
 /**
  * 
@@ -111,6 +118,38 @@ public class StmtNode extends Node {
 			return "{ " + statements.toString() + " }";
 		case WHILE:
 			return whileNode.toString();
+		}
+		return null;
+	}
+
+	public IInterStatement1 convertToInter1() {
+		switch (stmtType) {
+		case ARRAY_ASSIGN:
+			return new InterArrayAssign1(id.symbol, arrayIndex.convertToInter1(), expression.convertToInter1());
+		case ASSIGNMENT:
+			return new InterAssign1(id.symbol, expression.convertToInter1());
+		case DECLARATION:
+			return new InterDeclaration1(type.getType(), id.symbol);
+		case DECLARE_ASSIGN:
+			List<IInterStatement1> interStatements = new ArrayList<>();
+			interStatements.add(new InterAssign1(id.symbol, expression.convertToInter1()));
+			interStatements.add(new InterDeclaration1(type.getType(), id.symbol));
+			return new InterMultiStatement1(interStatements);
+		case IF:
+			return ifNode.convertToInter1();
+		case PRINT:
+			return new InterPrintStatement1(expression.convertToInter1());
+		case STATEMENTLIST:
+			interStatements = new ArrayList<>();
+			for (int i = 0; i < statements.size(); i++) {
+				interStatements.add(statements.get(i).convertToInter1());
+			}
+			return new InterMultiStatement1(interStatements);
+		case WHILE:
+			return whileNode.convertToInter1();
+		default:
+			break;
+
 		}
 		return null;
 	}

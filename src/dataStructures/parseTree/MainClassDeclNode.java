@@ -1,10 +1,15 @@
 package dataStructures.parseTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.InterClass1;
+import dataStructures.inter1.InterDeclaration1;
+import dataStructures.inter1.InterMethod1;
+import dataStructures.inter1.IInterStatement1;
 
 /**
  * MainClassDecl -> class ID { public static void main ( String [ ] ID ) { StmtLst } }
@@ -14,7 +19,7 @@ import dataStructures.Tag;
  */
 public class MainClassDeclNode extends Node {
 	private TerminalNode className, argName;
-	private List<StmtNode> statmentList;
+	private List<StmtNode> statementList;
 
 	public MainClassDeclNode(List<Tag> tags, IntWrap head) throws CustomException {
 		validateTerminal(tags, head, "class");
@@ -31,7 +36,7 @@ public class MainClassDeclNode extends Node {
 		argName = addID(tags, head);
 		validateTerminal(tags, head, ")");
 		validateTerminal(tags, head, "{");
-		statmentList = new StmtLstNode(tags, head).getStatements();
+		statementList = new StmtLstNode(tags, head).getStatements();
 		validateTerminal(tags, head, "}");
 		validateTerminal(tags, head, "}");
 	}
@@ -44,7 +49,7 @@ public class MainClassDeclNode extends Node {
 		builder.append("{ public static void main(String[] ");
 		builder.append(argName.toString());
 		builder.append("){");
-		builder.append(statmentList.toString());
+		builder.append(statementList.toString());
 		builder.append("}})");
 		return builder.toString();
 	}
@@ -53,6 +58,16 @@ public class MainClassDeclNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public InterClass1 convertToInter1() {
+		List<IInterStatement1> statements = new ArrayList<>();
+		for (int i = 0; i < statementList.size(); i++) {
+			statements.add(statementList.get(i).convertToInter1());
+		}
+		List<InterMethod1> methods = new ArrayList<>();
+		methods.add(new InterMethod1(null, "main", new ArrayList<InterDeclaration1>(), statements));
+		return new InterClass1(className.symbol, true, null, new ArrayList<InterDeclaration1>(), methods);
 	}
 
 }

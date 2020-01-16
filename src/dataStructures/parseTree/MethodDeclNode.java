@@ -1,10 +1,13 @@
 package dataStructures.parseTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.InterMethod1;
+import dataStructures.inter1.IInterStatement1;
 
 public class MethodDeclNode extends Node {
 	private TypeNode type;
@@ -48,6 +51,14 @@ public class MethodDeclNode extends Node {
 		builder.append(returnExpression.toString());
 		builder.append(";}");
 		return builder.toString();
+	}
+
+	public InterMethod1 convertToInter1() {
+		List<IInterStatement1> interStatements = new ArrayList<>();
+		for (int i = 0; i < statements.size(); i++) {
+			interStatements.add(statements.get(i).convertToInter1());
+		}
+		return new InterMethod1(type.getType(), id.symbol, params.convertToInter1(), interStatements);
 	}
 
 }

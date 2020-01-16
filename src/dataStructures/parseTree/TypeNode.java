@@ -34,5 +34,9 @@ public class TypeNode extends Node {
 	public String toString() {
 		return type.toString();
 	}
+	
+	public String getType() {
+		return this.type.symbol;
+	}
 
 }

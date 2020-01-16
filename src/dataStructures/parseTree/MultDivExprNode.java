@@ -6,16 +6,17 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
 
 public class MultDivExprNode extends Node {
-	private boolean isEpsilon;
-	private TerminalNode symbol;
+	boolean isEpsilon;
+	TerminalNode op;
 	private MultDivNode multDiv;
 
 	public MultDivExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			symbol = addOp(tags, head, OpType.MULTIPLICATIVE);
+			op = addOp(tags, head, OpType.MULTIPLICATIVE);
 			multDiv = new MultDivNode(tags, head);
 			isEpsilon = false;
 		} catch (CustomException e) {
@@ -29,13 +30,20 @@ public class MultDivExprNode extends Node {
 		if(isEpsilon){
 			return "";
 		}
-		return "( " +  symbol.toString() + " " + multDiv.toString() + " )";
+		return "( " +  op.toString() + " " + multDiv.toString() + " )";
 	}
 
 	@Override
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public IInterExpression1 convertToInter1() {
+		if (isEpsilon) {
+			return null;
+		}
+		return multDiv.convertToInter1();
 	}
 
 }

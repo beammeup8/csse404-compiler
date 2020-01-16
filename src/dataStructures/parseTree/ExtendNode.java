@@ -42,4 +42,11 @@ public class ExtendNode extends Node {
 		return " extends " + superClass.toString();
 	}
 
+	public String getSuper() {
+		if (isEpsilon) {
+			return null;
+		}
+		return superClass.symbol;
+	}
+
 }

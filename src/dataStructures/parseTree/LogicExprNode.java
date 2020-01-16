@@ -6,10 +6,11 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.OpType;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
 
 public class LogicExprNode extends Node {
-	private boolean isEpsilon;
-	private TerminalNode op;
+	boolean isEpsilon;
+	TerminalNode op;
 	private ExprNode expression;
 
 	public LogicExprNode(List<Tag> tags, IntWrap head) {
@@ -36,6 +37,13 @@ public class LogicExprNode extends Node {
 			return "";
 		}
 		return op.toString() + " " + expression.toString();
+	}
+
+	public IInterExpression1 convertToInter1() {
+		if (isEpsilon) {
+			return null;
+		}
+		return expression.convertToInter1();
 	}
 
 }

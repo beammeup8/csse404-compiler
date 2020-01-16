@@ -1,10 +1,13 @@
 package dataStructures.parseTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.InterClass1;
+import dataStructures.inter1.InterProgram1;
 
 /**
  * Program -> MainClassDecl ClassDecl
@@ -38,6 +41,13 @@ public class ProgramNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public InterProgram1 convertToInter1() {
+		List<InterClass1> classes = new ArrayList<>();
+		classes.add(mainClass.convertToInter1());
+		otherClasses.forEach(x -> classes.add(x.convertToInter1()));
+		return new InterProgram1(classes);
 	}
 
 }

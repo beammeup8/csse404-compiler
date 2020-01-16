@@ -5,6 +5,8 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
+import dataStructures.inter1.InterExpression1;
 
 public class AddSubNode extends Node {
 	private MultDivNode multDiv;
@@ -24,6 +26,13 @@ public class AddSubNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public IInterExpression1 convertToInter1() {
+		if (addSubExpr.isEpsilon) {
+			return multDiv.convertToInter1();
+		}
+		return new InterExpression1(multDiv.convertToInter1(), addSubExpr.op.symbol, addSubExpr.convertToInter1());
 	}
 
 }

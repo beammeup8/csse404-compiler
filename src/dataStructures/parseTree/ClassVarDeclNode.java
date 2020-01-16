@@ -5,6 +5,7 @@ import java.util.List;
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.InterDeclaration1;
 
 public class ClassVarDeclNode extends Node {
 	private TypeNode type;
@@ -25,6 +26,11 @@ public class ClassVarDeclNode extends Node {
 	@Override
 	public String toString() {
 		return "( Field: " + type.toString() + " " + id.toString() + " ; )"; 
+	}
+
+	public InterDeclaration1 convertToInter1() {
+		// TODO Auto-generated method stub.
+		return null;
 	}
 
 }

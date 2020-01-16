@@ -7,11 +7,11 @@ import dataStructures.IntWrap;
 import dataStructures.Tag;
 
 public class MethodCallNode extends Node {
-	private enum MethodCallType {
+	enum MethodCallType {
 		EPSILON, METHOD_CALL, ARRAY_ACCESS, LENGTH
 	}
-	private MethodCallType type;
-	private TerminalNode id;
+	MethodCallType type;
+	TerminalNode id;
 	private List<ExprNode> params;
 	private ExprNode expression;
 	private MethodCallNode nextCall;
