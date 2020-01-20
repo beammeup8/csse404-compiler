@@ -29,8 +29,7 @@ public class ClassVarDeclNode extends Node {
 	}
 
 	public InterDeclaration1 convertToInter1() {
-		// TODO Auto-generated method stub.
-		return null;
+		return new InterDeclaration1(type.getType(), id.symbol);
 	}
 
 }

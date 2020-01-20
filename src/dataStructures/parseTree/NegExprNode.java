@@ -47,7 +47,7 @@ public class NegExprNode extends Node {
 		if (op == null) {
 			return method.convertToInter1();
 		}
-		return new InterExpression1(null, op.symbol, method.convertToInter1());
+		return new InterExpression1(op.symbol, method.convertToInter1());
 	}
 
 }

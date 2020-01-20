@@ -1,17 +1,22 @@
 package dataStructures.parseTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterExpression1;
+import dataStructures.inter1.InterArrayAccess1;
+import dataStructures.inter1.InterLength1;
+import dataStructures.inter1.InterMethodCall1;
 
 public class MethodCallNode extends Node {
-	enum MethodCallType {
+	private enum MethodCallType {
 		EPSILON, METHOD_CALL, ARRAY_ACCESS, LENGTH
 	}
-	MethodCallType type;
-	TerminalNode id;
+	private MethodCallType type;
+	private TerminalNode id;
 	private List<ExprNode> params;
 	private ExprNode expression;
 	private MethodCallNode nextCall;
@@ -49,6 +54,32 @@ public class MethodCallNode extends Node {
 	public void optimize() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public List<IInterExpression1> getParameters(){
+		List<IInterExpression1> converted = new ArrayList<IInterExpression1>();
+		for (int i = 0; i < params.size(); i++){
+			converted.add(params.get(i).convertToInter1());
+		}
+		return converted;
+	}
+	
+	public IInterExpression1 convertToInter1(IInterExpression1 calledOn){
+		IInterExpression1 currentCall = null;
+		switch (type) {
+		case EPSILON:
+			return calledOn;
+		case ARRAY_ACCESS:
+			currentCall =  new InterArrayAccess1(calledOn, expression.convertToInter1());
+			break;
+		case LENGTH:
+			currentCall = new InterLength1(calledOn);
+			break;
+		case METHOD_CALL:
+			currentCall = new InterMethodCall1(calledOn, id.symbol, getParameters());
+			break;
+		}
+		return nextCall.convertToInter1(currentCall);
 	}
 
 	@Override

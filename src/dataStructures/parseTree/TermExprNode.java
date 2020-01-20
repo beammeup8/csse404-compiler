@@ -6,13 +6,13 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
+import dataStructures.TermType;
 import dataStructures.inter1.IInterExpression1;
+import dataStructures.inter1.InterNewArrayInstance;
+import dataStructures.inter1.InterNewClassInstance;
+import dataStructures.inter1.InterValueExpression1;
 
 public class TermExprNode extends Node {
-	private enum TermType {
-		NEW_CLASS_INSTANCE, ID, THIS, INTEGER, NULL, TRUE, FALSE, EXPRESSION, NEW_ARRAY
-	}
-
 	private TermType type;
 	private TerminalNode id;
 	private ExprNode expression;
@@ -92,7 +92,24 @@ public class TermExprNode extends Node {
 	}
 
 	public IInterExpression1 convertToInter1() {
-		// TODO Auto-generated method stub.
+		switch (type) {
+		case EXPRESSION:
+			return expression.convertToInter1(); 
+		case NEW_ARRAY:
+			return new InterNewArrayInstance(expression.convertToInter1()); 
+		case NEW_CLASS_INSTANCE:
+			return new InterNewClassInstance(id.symbol);
+		case ID:
+			return new InterValueExpression1(type, id.symbol);
+		case INTEGER:
+			return new InterValueExpression1(type, integerVal.symbol);
+		case NULL:
+		case THIS:
+		case TRUE:
+		case FALSE:
+			return new InterValueExpression1(type);
+		}
+		System.err.println("Invalid enum: Terminal Expression");
 		return null;
 	}
 

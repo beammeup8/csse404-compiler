@@ -151,6 +151,7 @@ public class StmtNode extends Node {
 			break;
 
 		}
+		System.err.println("Invalid enum: Statement Node");
 		return null;
 	}
 

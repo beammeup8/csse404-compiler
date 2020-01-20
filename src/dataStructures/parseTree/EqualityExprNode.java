@@ -41,6 +41,7 @@ public class EqualityExprNode extends Node {
 
 	public IInterExpression1 convertToInter1() {
 		if (isEpsilon) {
+			System.err.println("Can not convert epsilon to Internal Expression 1: Equality Expression");
 			return null;
 		}
 		return equality.convertToInter1();

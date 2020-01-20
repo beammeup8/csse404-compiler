@@ -1,6 +1,4 @@
-package dataStructures.parseTree;
-
-import dataStructures.inter1.IInterExpression1;
+package dataStructures.inter1;
 
 public class DummyInterExpression1 implements IInterExpression1 {
 

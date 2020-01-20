@@ -28,17 +28,7 @@ public class MethodExpNode extends Node {
 	}
 
 	public IInterExpression1 convertToInter1() {
-		switch (methodCall.type) {
-		case ARRAY_ACCESS:
-			//return new InterArrayAccess1(terminalExpression.convertToInter1(), methodCall.convertToInter1());
-		case EPSILON:
-			// return terminalExpression.convertToInter1();
-		case LENGTH:
-			//return new InterLength1(terminalExpression.convertToInter1());
-		case METHOD_CALL:
-			//return new InterMethodCall1(terminalExpression.convertToInter1(), methodCall.convertToInter1());
-		}
-		return new DummyInterExpression1();
+		return methodCall.convertToInter1(terminalExpression.convertToInter1());
 	}
 
 }

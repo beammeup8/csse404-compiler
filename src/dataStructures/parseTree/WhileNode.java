@@ -6,6 +6,7 @@ import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterStatement1;
+import dataStructures.inter1.InterWhile;
 
 public class WhileNode extends Node {
 	private ExprNode conditional;
@@ -37,7 +38,7 @@ public class WhileNode extends Node {
 	}
 
 	public IInterStatement1 convertToInter1() {
-		return null;
+		return new InterWhile(conditional.convertToInter1(), body.convertToInter1());
 	}
 
 }
