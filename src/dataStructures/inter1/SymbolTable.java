@@ -23,20 +23,27 @@ public class SymbolTable {
 	}
 
 	public boolean checkType(String symbol, String type) {
-		return type.equals(table.get(symbol).type) || (parent != null && parent.checkType(symbol, type));
+		SymbolEntry entry = table.get(symbol);
+		if (entry == null) {
+			if (parent != null) {
+				return parent.checkType(symbol, type);
+			}
+			return false;
+		}
+		return type.equals(entry.type);
 	}
-	
-	public String getType(String symbol){
-		SymbolEntry entry = table.get(symbol); 
-		if(entry != null){
+
+	public String getType(String symbol) {
+		SymbolEntry entry = table.get(symbol);
+		if (entry != null) {
 			return entry.type;
 		}
 		return parent.getType(symbol);
 	}
-	
+
 	public String getLocalName(String symbol) {
-		SymbolEntry entry = table.get(symbol); 
-		if(entry != null){
+		SymbolEntry entry = table.get(symbol);
+		if (entry != null) {
 			return entry.localName;
 		}
 		return parent.getLocalName(symbol);

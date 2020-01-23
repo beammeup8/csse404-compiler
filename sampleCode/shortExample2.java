@@ -6,9 +6,10 @@
     }
   }
   class T {
-	  //int a;
-	  /*public int helloWorld () {
+	  int a;
+	  public int helloWorld () {
 	      int a; // cool
-	  }*/
+	      return 0;
+	  }
   }
   

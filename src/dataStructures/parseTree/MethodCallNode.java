@@ -15,6 +15,7 @@ public class MethodCallNode extends Node {
 	private enum MethodCallType {
 		EPSILON, METHOD_CALL, ARRAY_ACCESS, LENGTH
 	}
+
 	private MethodCallType type;
 	private TerminalNode id;
 	private List<ExprNode> params;
@@ -33,7 +34,7 @@ public class MethodCallNode extends Node {
 			} else {
 				validateTerminal(tags, head, ".");
 				if (tags.get(head.integer).symbol.equals("length") && !tags.get(head.integer + 1).symbol.equals("(")) {
-					validateTerminal(tags, head,  "length");
+					validateTerminal(tags, head, "length");
 					type = MethodCallType.LENGTH;
 				} else {
 					id = addID(tags, head);
@@ -53,24 +54,24 @@ public class MethodCallNode extends Node {
 	@Override
 	public void optimize() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	public List<IInterExpression1> getParameters(){
+
+	private List<IInterExpression1> getParameters() {
 		List<IInterExpression1> converted = new ArrayList<IInterExpression1>();
-		for (int i = 0; i < params.size(); i++){
+		for (int i = 0; i < params.size(); i++) {
 			converted.add(params.get(i).convertToInter1());
 		}
 		return converted;
 	}
-	
-	public IInterExpression1 convertToInter1(IInterExpression1 calledOn){
+
+	public IInterExpression1 convertToInter1(IInterExpression1 calledOn) {
 		IInterExpression1 currentCall = null;
 		switch (type) {
 		case EPSILON:
 			return calledOn;
 		case ARRAY_ACCESS:
-			currentCall =  new InterArrayAccess1(calledOn, expression.convertToInter1());
+			currentCall = new InterArrayAccess1(calledOn, expression.convertToInter1());
 			break;
 		case LENGTH:
 			currentCall = new InterLength1(calledOn);
@@ -84,7 +85,7 @@ public class MethodCallNode extends Node {
 
 	@Override
 	public String toString() {
-		switch(type){
+		switch (type) {
 		case ARRAY_ACCESS:
 			return "[" + expression.toString() + "] ";
 		case EPSILON:

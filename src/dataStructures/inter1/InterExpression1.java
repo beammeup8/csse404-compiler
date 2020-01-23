@@ -47,7 +47,7 @@ public class InterExpression1 implements IInterExpression1 {
 		case '/':
 			return OpType.DIV;
 		case '!':
-			return OpType.NEG;
+			return OpType.NOT;
 		case '<':
 			return OpType.LST;
 		case '>':
@@ -77,7 +77,7 @@ public class InterExpression1 implements IInterExpression1 {
 		builder.append("}");
 		return builder.toString();
 	}
-	
+
 	@Override
 	public String getId() {
 		return id;
@@ -85,31 +85,31 @@ public class InterExpression1 implements IInterExpression1 {
 
 	@Override
 	public void populateSymbolTable(SymbolTable parent) {
-		if(a != null){
+		if (a != null) {
 			a.populateSymbolTable(parent);
 		}
 		b.populateSymbolTable(parent);
 		String aType = null;
-		if(a != null){
+		if (a != null) {
 			aType = a.getType();
 		}
 		String bType = b.getType();
-		switch(op){
+		switch (op) {
 		case EQ:
 		case NEQ:
-			if(!aType.equals(bType)){
+			if (!aType.equals(bType)) {
 				System.err.println("Incompatible type equality: " + aType + " and " + bType);
 				System.exit(0);
 			}
 			break;
 		case AND:
 		case OR:
-			if(!aType.equals(bType)){
+			if (!aType.equals(bType)) {
 				System.err.println("Incompatible types: " + aType + " and " + bType);
 				System.exit(0);
 			}
 		case NOT:
-			if(!bType.equals("boolean")){
+			if (!bType.equals("boolean")) {
 				System.err.println("Incompatible types: operand not boolean");
 				System.exit(0);
 			}
@@ -122,23 +122,23 @@ public class InterExpression1 implements IInterExpression1 {
 		case SUB:
 		case DIV:
 		case MULT:
-			if(!aType.equals(bType)){
+			if (!aType.equals(bType)) {
 				System.err.println("Incompatible type equality: " + aType + " and " + bType);
 				System.exit(0);
 			}
 		case NEG:
-			if(!bType.equals("int")){
+			if (!bType.equals("int")) {
 				System.err.println("Incompatible types: operand not integer");
 				System.exit(0);
 			}
 			break;
 		}
-		
+
 	}
-	
+
 	@Override
 	public String getType() {
-		switch(op){
+		switch (op) {
 		case AND:
 		case EQ:
 		case GRE:

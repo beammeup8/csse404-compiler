@@ -15,12 +15,12 @@ public class InterMethodCall1 implements IInterExpression1 {
 		this.methodId = methodId;
 		this.parameters = parameters;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Method Call: {toPrint:}";
+		return "Method Call: {calledOn: " + calledOn.toString() + ", methodId: " + methodId + ", parameters: " + parameters.toString() + "}";
 	}
-	
+
 	@Override
 	public String getId() {
 		return id;
@@ -35,7 +35,8 @@ public class InterMethodCall1 implements IInterExpression1 {
 
 	@Override
 	public String getType() {
-		return table.getType(calledOn.getType() + "." + methodId);
+		String methodType = table.getType(calledOn.getType() + "." + methodId).substring(7);
+		return methodType;
 	}
 
 }

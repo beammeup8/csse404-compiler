@@ -9,6 +9,7 @@ public class InterClass1 implements IInter1 {
 	private String superClass;
 	private List<InterDeclaration1> fields;
 	private List<InterMethod1> methods;
+	private SymbolTable table;
 
 	public InterClass1(String className, boolean isMain, String superClass, List<InterDeclaration1> fields,
 			List<InterMethod1> methods) {
@@ -18,7 +19,7 @@ public class InterClass1 implements IInter1 {
 		this.fields = fields;
 		this.methods = methods;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -34,13 +35,39 @@ public class InterClass1 implements IInter1 {
 
 	@Override
 	public void populateSymbolTable(SymbolTable parent) {
-		SymbolTable table = new SymbolTable(parent);
-		fields.forEach(x -> x.populateSymbolTable(table));
+		table.addEntry("this", className);
 		methods.forEach(x -> x.populateSymbolTable(table));
 	}
-	
-	public void addMethodsToSymbolTable(SymbolTable table){
+
+	public void addMethodsToSymbolTable(SymbolTable table) {
 		methods.forEach(x -> table.addEntry(className + "." + x.getName(), x.getType()));
 	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public String getSuperClassName() {
+		return superClass;
+	}
 	
+	public SymbolTable getTable() {
+		return table;
+	}
+	
+	public List<InterDeclaration1> getFields() {
+		return fields;
+	}
+	
+	public List<InterMethod1> getMethods() {
+		return methods;
+	}
+	
+	public SymbolTable prepareSymbolTable(SymbolTable parent) {
+		table = new SymbolTable(parent);
+		addMethodsToSymbolTable(table);
+		fields.forEach(x -> x.populateSymbolTable(table));
+		return table;
+	}
+
 }

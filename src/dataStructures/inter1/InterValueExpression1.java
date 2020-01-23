@@ -6,6 +6,7 @@ public class InterValueExpression1 implements IInterExpression1 {
 
 	private String id, symbol;
 	private TermType type;
+	private SymbolTable table;
 
 	public InterValueExpression1(TermType type) {
 		this(type, null);
@@ -24,7 +25,7 @@ public class InterValueExpression1 implements IInterExpression1 {
 
 	@Override
 	public void populateSymbolTable(SymbolTable parent) {
-		
+		table = parent;
 	}
 
 	@Override
@@ -39,13 +40,13 @@ public class InterValueExpression1 implements IInterExpression1 {
 		case FALSE:
 			return "boolean";
 		case ID:
-			return symbol;
+			return table.getType(symbol);
 		case INTEGER:
 			return "int";
 		case NULL:
 			return "null";
 		case THIS:
-			break;
+			return table.getType("this");
 		default:
 			break;
 		}

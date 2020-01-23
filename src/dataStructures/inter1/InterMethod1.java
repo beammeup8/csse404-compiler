@@ -34,12 +34,12 @@ public class InterMethod1 implements IInter1 {
 		parameters.forEach(x -> x.populateSymbolTable(table));
 		statements.forEach(x -> x.populateSymbolTable(table));
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return id;
 	}
-	
-	public String getType(){
+
+	public String getType() {
 		return "method:" + typeID;
 	}
 

@@ -13,6 +13,8 @@ public class InterArrayAssign1 implements IInterStatement1 {
 
 	@Override
 	public void populateSymbolTable(SymbolTable parent) {
+		arrayIndex.populateSymbolTable(parent);
+		value.populateSymbolTable(parent);
 		parent.checkType(arrayID, "int[]");		
 		arrayID = parent.getLocalName(arrayID);
 	}
