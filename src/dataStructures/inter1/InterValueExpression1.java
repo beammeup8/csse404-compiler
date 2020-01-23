@@ -4,12 +4,19 @@ import dataStructures.TermType;
 
 public class InterValueExpression1 implements IInterExpression1 {
 
+	private String id;
+
 	public InterValueExpression1(TermType type) {
-		// TODO Auto-generated constructor stub
+		this(type, null);
 	}
 
 	public InterValueExpression1(TermType type, String symbol) {
-		// TODO Auto-generated constructor stub
+		id = IdGenerator.getUniqueId();
+	}
+	
+	@Override
+	public String getId() {
+		return id;
 	}
 
 }

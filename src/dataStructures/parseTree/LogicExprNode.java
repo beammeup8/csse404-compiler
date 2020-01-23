@@ -4,7 +4,7 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.OpType;
+import dataStructures.GenericOpType;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
 
@@ -16,7 +16,7 @@ public class LogicExprNode extends Node {
 	public LogicExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			op = addOp(tags, head, OpType.LOGIC);
+			op = addOp(tags, head, GenericOpType.LOGIC);
 			expression = new ExprNode(tags, head);
 			isEpsilon = false;
 		} catch (CustomException e) {

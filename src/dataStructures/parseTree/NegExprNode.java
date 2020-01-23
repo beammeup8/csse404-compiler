@@ -4,7 +4,7 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.OpType;
+import dataStructures.GenericOpType;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
 import dataStructures.inter1.InterExpression1;
@@ -18,7 +18,7 @@ public class NegExprNode extends Node {
 		boolean isEven = true;
 		try {
 			while(true){
-				op = addOp(tags, head, OpType.NEGATION);
+				op = addOp(tags, head, GenericOpType.NEGATION);
 				isEven = !isEven;
 			}
 		} catch (CustomException e) {

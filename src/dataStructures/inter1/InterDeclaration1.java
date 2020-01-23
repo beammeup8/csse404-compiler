@@ -31,7 +31,7 @@ public class InterDeclaration1 implements IInterStatement1 {
 		if (type == DeclarationType.ID) {
 			builder.append("typeID: " + typeID + ", ");
 		}
-		builder.append("id: " + id + ", ");
+		builder.append("id: " + id + "}");
 		return builder.toString();
 	}
 

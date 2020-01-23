@@ -4,7 +4,7 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.OpType;
+import dataStructures.GenericOpType;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
 
@@ -17,7 +17,7 @@ public class ComparisonExprNode extends Node {
 	public ComparisonExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			op = addOp(tags, head, OpType.COMPARISON);
+			op = addOp(tags, head, GenericOpType.COMPARISON);
 			comparison = new ComparisonNode(tags, head);
 			isEpsilon = false;
 		} catch (CustomException e) {

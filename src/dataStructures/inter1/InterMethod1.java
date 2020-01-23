@@ -44,6 +44,7 @@ public class InterMethod1 implements IInter1 {
 		builder.append("id: " + id + ", ");
 		builder.append("parameters: " + parameters.toString() + ", ");
 		builder.append("statements: " + statements.toString());
+		builder.append("}");
 		return builder.toString();
 	}
 	

@@ -6,5 +6,10 @@ public class DummyInterExpression1 implements IInterExpression1 {
 	public String toString() {
 		return "WIP";
 	}
+
+	@Override
+	public String getId() {
+		return null;
+	}
 	
 }

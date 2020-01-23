@@ -1,5 +1,5 @@
 package dataStructures;
 
-public enum OpType {
+public enum GenericOpType {
 	LOGIC, EQUALITY, COMPARISON, ADDITIVE, MULTIPLICATIVE, NEGATION
 }

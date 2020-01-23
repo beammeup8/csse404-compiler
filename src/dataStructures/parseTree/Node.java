@@ -7,7 +7,7 @@ import Exceptions.DefaultException;
 import Exceptions.IncorrectOperatorFound;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
-import dataStructures.OpType;
+import dataStructures.GenericOpType;
 import dataStructures.Tag;
 
 public abstract class Node {
@@ -30,7 +30,7 @@ public abstract class Node {
 		return node;
 	}
 
-	protected TerminalNode addOp(List<Tag> tags, IntWrap head, OpType op) throws CustomException {
+	protected TerminalNode addOp(List<Tag> tags, IntWrap head, GenericOpType op) throws CustomException {
 		Tag tag = tags.get(head.integer);
 		if (tag.type != LexerType.Operator) {
 			throw new DefaultException("Operator not found: " + tag.toString());

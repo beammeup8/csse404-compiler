@@ -4,7 +4,7 @@ import java.util.List;
 
 import Exceptions.CustomException;
 import dataStructures.IntWrap;
-import dataStructures.OpType;
+import dataStructures.GenericOpType;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
 
@@ -16,7 +16,7 @@ public class AddSubExprNode extends Node {
 	public AddSubExprNode(List<Tag> tags, IntWrap head) {
 		int initialHead = head.integer;
 		try {
-			op = addOp(tags, head, OpType.ADDITIVE);
+			op = addOp(tags, head, GenericOpType.ADDITIVE);
 			addSub = new AddSubNode(tags, head);
 			isEpsilon = false;
 		} catch (CustomException e) {
