@@ -16,5 +16,12 @@ public class InterIf1 implements IInterStatement1 {
 	public String toString() {
 		return "If: {expression: " + expression.toString() + ", then: " + thenStatement.toString() + ", else: " + elseStatement.toString() + "}";
 	}
+
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+		expression.populateSymbolTable(parent);
+		thenStatement.populateSymbolTable(new SymbolTable(parent));
+		elseStatement.populateSymbolTable(new SymbolTable(parent));
+	}
 	
 }

@@ -13,4 +13,13 @@ public class InterPrintStatement1 implements IInterStatement1 {
 		return "Print: {toPrint: " + toPrint.toString() + "}";
 	}
 
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+		toPrint.populateSymbolTable(parent);
+		if(!toPrint.getType().equals("int")){
+			System.err.println("Print can only print integers");
+			System.exit(0);
+		}
+	}
+
 }

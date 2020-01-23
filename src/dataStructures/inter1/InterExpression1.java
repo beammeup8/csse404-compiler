@@ -83,4 +83,80 @@ public class InterExpression1 implements IInterExpression1 {
 		return id;
 	}
 
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+		if(a != null){
+			a.populateSymbolTable(parent);
+		}
+		b.populateSymbolTable(parent);
+		String aType = null;
+		if(a != null){
+			aType = a.getType();
+		}
+		String bType = b.getType();
+		switch(op){
+		case EQ:
+		case NEQ:
+			if(!aType.equals(bType)){
+				System.err.println("Incompatible type equality: " + aType + " and " + bType);
+				System.exit(0);
+			}
+			break;
+		case AND:
+		case OR:
+			if(!aType.equals(bType)){
+				System.err.println("Incompatible types: " + aType + " and " + bType);
+				System.exit(0);
+			}
+		case NOT:
+			if(!bType.equals("boolean")){
+				System.err.println("Incompatible types: operand not boolean");
+				System.exit(0);
+			}
+			break;
+		case GRE:
+		case GRT:
+		case LSE:
+		case LST:
+		case ADD:
+		case SUB:
+		case DIV:
+		case MULT:
+			if(!aType.equals(bType)){
+				System.err.println("Incompatible type equality: " + aType + " and " + bType);
+				System.exit(0);
+			}
+		case NEG:
+			if(!bType.equals("int")){
+				System.err.println("Incompatible types: operand not integer");
+				System.exit(0);
+			}
+			break;
+		}
+		
+	}
+	
+	@Override
+	public String getType() {
+		switch(op){
+		case AND:
+		case EQ:
+		case GRE:
+		case GRT:
+		case LSE:
+		case LST:
+		case NEQ:
+		case NOT:
+		case OR:
+			return "boolean";
+		case ADD:
+		case SUB:
+		case DIV:
+		case MULT:
+		case NEG:
+			return "int";
+		}
+		return null;
+	}
+
 }

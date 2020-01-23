@@ -24,6 +24,7 @@ public class Compiler {
 		List<Tag> tags = lexer.analyze(filename);
 		ProgramNode parseTree = parser.parse(tags);
 		InterProgram1 interProgram1 = parseTree.convertToInter1();
+		interProgram1.createSymbolTable();
 		outputter.output(filename, interProgram1);
 	}
 	public void compile(List<String> filenames){

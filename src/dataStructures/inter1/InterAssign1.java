@@ -15,4 +15,10 @@ public class InterAssign1 implements IInterStatement1 {
 		return "Assignment: {id: " + id + ", value: " + value.toString() + "}";
 	}
 
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+		parent.checkType(id, value.getType());		
+		id = parent.getLocalName(id);
+	}
+
 }

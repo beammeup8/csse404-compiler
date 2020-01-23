@@ -31,5 +31,16 @@ public class InterClass1 implements IInter1 {
 		builder.append("}\n");
 		return builder.toString();
 	}
+
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+		SymbolTable table = new SymbolTable(parent);
+		fields.forEach(x -> x.populateSymbolTable(table));
+		methods.forEach(x -> x.populateSymbolTable(table));
+	}
+	
+	public void addMethodsToSymbolTable(SymbolTable table){
+		methods.forEach(x -> table.addEntry(className + "." + x.getName(), x.getType()));
+	}
 	
 }

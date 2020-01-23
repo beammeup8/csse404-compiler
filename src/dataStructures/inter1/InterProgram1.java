@@ -14,4 +14,14 @@ public class InterProgram1 implements IInter1 {
 	public String toString() {
 		return classes.toString();
 	}
+	
+	public void createSymbolTable(){
+		populateSymbolTable(null);
+	}
+	
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+		SymbolTable table = new SymbolTable(parent);
+		classes.forEach(x -> x.populateSymbolTable(table));
+	}
 }

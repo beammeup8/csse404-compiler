@@ -11,5 +11,14 @@ public class DummyInterExpression1 implements IInterExpression1 {
 	public String getId() {
 		return null;
 	}
+
+	@Override
+	public void populateSymbolTable(SymbolTable parent) {
+	}
+
+	@Override
+	public String getType() {
+		return null;
+	}
 	
 }
