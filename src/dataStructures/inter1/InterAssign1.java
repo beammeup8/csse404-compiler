@@ -1,5 +1,6 @@
 package dataStructures.inter1;
 
+import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statements;
 
@@ -27,8 +28,13 @@ public class InterAssign1 implements IInterStatement1 {
 
 	@Override
 	public Statements toStatement() {
-		// TODO Auto-generated method stub
-		return new CodeBlock();
+		CodeBlock block = new CodeBlock();
+		block.statements.addAll(value.toStatementList());
+		Assignment assign = new Assignment();
+		assign.labelIn = value.getId();
+		assign.labelOut = localId;
+		block.statements.add(assign);
+		return block;
 	}
 
 }
