@@ -167,11 +167,13 @@ public class InterExpression1 implements IInterExpression1 {
 	@Override
 	public List<Statements> toStatementList() {
 		List<Statements> stmt = new ArrayList<>();
-		stmt.addAll(a.toStatementList());
+		Operation self = new Operation();
+		if(a != null){
+			stmt.addAll(a.toStatementList());
+			self.labelA = a.getId();
+		}
 		stmt.addAll(b.toStatementList());
 		//turn self into statement
-		Operation self = new Operation();
-		self.labelA = a.getId();
 		self.labelB = b.getId();
 		self.op = op;
 		self.labelOut = id;
