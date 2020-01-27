@@ -1,5 +1,8 @@
 package dataStructures.inter1;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Statements;
+
 public class InterPrintStatement1 implements IInterStatement1 {
 
 	private IInterExpression1 toPrint;
@@ -20,6 +23,12 @@ public class InterPrintStatement1 implements IInterStatement1 {
 			System.err.println("Print can only print integers");
 			System.exit(0);
 		}
+	}
+
+	@Override
+	public Statements toStatement() {
+		//TODO figure out the mess that is IO
+		return new CodeBlock();
 	}
 
 }

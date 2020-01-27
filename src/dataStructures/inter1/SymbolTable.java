@@ -51,6 +51,7 @@ public class SymbolTable {
 
 	private class SymbolEntry {
 		public String type, localName;
+		public InterClass1 classRef;
 	}
 
 }

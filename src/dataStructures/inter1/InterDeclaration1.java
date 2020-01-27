@@ -1,8 +1,11 @@
 package dataStructures.inter1;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.FunctionParameter;
+import dataStructures.simpleInter.Statements;
+
 public class InterDeclaration1 implements IInterStatement1 {
-	private String typeID;
-	private String id;
+	private String typeID, id, localID;
 
 	public InterDeclaration1(String type, String id) {
 		this.typeID = type;
@@ -20,6 +23,19 @@ public class InterDeclaration1 implements IInterStatement1 {
 	@Override
 	public void populateSymbolTable(SymbolTable parent) {
 		parent.addEntry(id, typeID);
+		localID = parent.getLocalName(id);
+	}
+
+	public FunctionParameter toFunctionParameter() {
+		FunctionParameter param = new FunctionParameter();
+		param.name = localID;
+		return param;
+	}
+
+	@Override
+	public Statements toStatement() {
+		// TODO Auto-generated method stub
+		return new CodeBlock();
 	}
 
 }

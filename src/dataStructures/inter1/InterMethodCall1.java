@@ -1,6 +1,10 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Statements;
 
 public class InterMethodCall1 implements IInterExpression1 {
 
@@ -37,6 +41,18 @@ public class InterMethodCall1 implements IInterExpression1 {
 	public String getType() {
 		String methodType = table.getType(calledOn.getType() + "." + methodId).substring(7);
 		return methodType;
+	}
+
+	@Override
+	public Statements toStatement() {
+		// TODO Auto-generated method stub
+		return new CodeBlock();
+	}
+
+	@Override
+	public List<Statements> toStatementList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<Statements>();
 	}
 
 }

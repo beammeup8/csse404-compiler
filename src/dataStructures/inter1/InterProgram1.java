@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dataStructures.simpleInter.CodeBlock;
+
 public class InterProgram1 implements IInter1 {
 
 	List<InterClass1> classes;
@@ -52,5 +54,11 @@ public class InterProgram1 implements IInter1 {
 		}
 		
 		classes.forEach(x -> x.populateSymbolTable(table));
+	}
+	
+	public CodeBlock toCodeBlock(){
+		CodeBlock progBlock =  new CodeBlock();
+		classes.forEach(x -> progBlock.statements.add(x.toCodeBlock()));
+		return progBlock;
 	}
 }

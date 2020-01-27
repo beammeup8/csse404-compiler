@@ -1,5 +1,12 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Statements;
+
 public class InterNewClassInstance implements IInterExpression1 {
 
 	private String id, className;
@@ -22,6 +29,18 @@ public class InterNewClassInstance implements IInterExpression1 {
 	@Override
 	public String getType() {
 		return className;
+	}
+
+	@Override
+	public Statements toStatement() {
+		// TODO Auto-generated method stub
+		return new CodeBlock();
+	}
+
+	@Override
+	public List<Statements> toStatementList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<Statements>();
 	}
 
 }

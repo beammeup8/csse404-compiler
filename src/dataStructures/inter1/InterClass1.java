@@ -2,6 +2,10 @@ package dataStructures.inter1;
 
 import java.util.List;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Label;
+import dataStructures.simpleInter.Statements;
+
 public class InterClass1 implements IInter1 {
 
 	private String className;
@@ -68,6 +72,19 @@ public class InterClass1 implements IInter1 {
 		addMethodsToSymbolTable(table);
 		fields.forEach(x -> x.populateSymbolTable(table));
 		return table;
+	}
+
+	public Statements toCodeBlock() {
+		CodeBlock classCodeBlock = new CodeBlock();
+		if(isMain){
+			Label mainLabel = new Label();
+			mainLabel.label = "_MAIN";
+			classCodeBlock.statements.add(mainLabel);
+			classCodeBlock.statements.add(methods.get(0).toCodeBlock());
+			return classCodeBlock;
+		}
+		methods.forEach(x -> classCodeBlock.statements.add(x.toCodeBlock()));
+		return classCodeBlock;
 	}
 
 }

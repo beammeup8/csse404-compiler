@@ -1,5 +1,8 @@
 package dataStructures.inter1;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Statements;
+
 public class InterAssign1 implements IInterStatement1 {
 
 	private String id, localId;
@@ -20,6 +23,12 @@ public class InterAssign1 implements IInterStatement1 {
 		value.populateSymbolTable(parent);
 		parent.checkType(id, value.getType());
 		localId = parent.getLocalName(id);
+	}
+
+	@Override
+	public Statements toStatement() {
+		// TODO Auto-generated method stub
+		return new CodeBlock();
 	}
 
 }

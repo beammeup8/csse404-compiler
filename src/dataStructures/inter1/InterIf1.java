@@ -1,5 +1,9 @@
 package dataStructures.inter1;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Compare;
+import dataStructures.simpleInter.Statements;
+
 public class InterIf1 implements IInterStatement1 {
 
 	private IInterExpression1 expression;
@@ -27,6 +31,15 @@ public class InterIf1 implements IInterStatement1 {
 		}
 		thenStatement.populateSymbolTable(new SymbolTable(parent));
 		elseStatement.populateSymbolTable(new SymbolTable(parent));
+	}
+
+	@Override
+	public Statements toStatement() {
+		CodeBlock block = new CodeBlock();
+		block.statements.addAll(expression.toStatementList());
+		String expressionId = expression.getId();
+		Compare cond = new Compare();
+		return block;
 	}
 
 }

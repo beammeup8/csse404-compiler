@@ -1,5 +1,5 @@
 package dataStructures.simpleInter;
 
-public class Assignment {
+public class Assignment implements Statements{
 
 }

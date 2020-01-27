@@ -1,6 +1,11 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dataStructures.simpleInter.OpType;
+import dataStructures.simpleInter.Operation;
+import dataStructures.simpleInter.Statements;
 
 public class InterExpression1 implements IInterExpression1 {
 	private IInterExpression1 a, b;
@@ -157,6 +162,21 @@ public class InterExpression1 implements IInterExpression1 {
 			return "int";
 		}
 		return null;
+	}
+
+	@Override
+	public List<Statements> toStatementList() {
+		List<Statements> stmt = new ArrayList<>();
+		stmt.addAll(a.toStatementList());
+		stmt.addAll(b.toStatementList());
+		//turn self into statement
+		Operation self = new Operation();
+		self.labelA = a.getId();
+		self.labelB = b.getId();
+		self.op = op;
+		self.labelOut = id;
+		stmt.add(self);
+		return stmt;
 	}
 
 }

@@ -1,5 +1,8 @@
 package dataStructures.inter1;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Statements;
+
 public class InterWhile implements IInterStatement1 {
 	private IInterExpression1 conditional;
 	private IInterStatement1 body;
@@ -17,6 +20,12 @@ public class InterWhile implements IInterStatement1 {
 			System.err.println("While loops can only have boolean conditionals");
 			System.exit(0);
 		}
+	}
+
+	@Override
+	public Statements toStatement() {
+		// TODO Auto-generated method stub
+		return new CodeBlock();
 	}
 
 }

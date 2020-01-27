@@ -1,5 +1,5 @@
 package dataStructures.simpleInter;
 
-public class Conditional {
+public class Compare implements Statements{
 	
 }

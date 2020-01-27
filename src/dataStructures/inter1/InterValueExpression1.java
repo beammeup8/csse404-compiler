@@ -1,6 +1,11 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import dataStructures.TermType;
+import dataStructures.simpleInter.Statements;
 
 public class InterValueExpression1 implements IInterExpression1 {
 
@@ -51,6 +56,12 @@ public class InterValueExpression1 implements IInterExpression1 {
 			break;
 		}
 		return null;
+	}
+
+	@Override
+	public List<Statements> toStatementList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<Statements>();
 	}
 
 }
