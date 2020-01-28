@@ -50,12 +50,12 @@ public class InterMethod1 implements IInter1 {
 	public Statements toCodeBlock() {
 		CodeBlock block = new CodeBlock();
 		Label label = new Label(localId);
-		block.statements.add(label);
+		block.add(label);
 		for (int i = 0; i < parameters.size() ; i++) {
-			block.statements.add(parameters.get(i).toFunctionParameter());
+			block.add(parameters.get(i).toFunctionParameter());
 		}
 		for (int i = 0; i < statements.size() ; i++) {
-			block.statements.add(statements.get(i).toStatement());
+			block.add(statements.get(i).toStatement());
 		}
 		return block;
 	}

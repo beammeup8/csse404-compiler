@@ -58,7 +58,7 @@ public class InterProgram1 implements IInter1 {
 	
 	public CodeBlock toCodeBlock(){
 		CodeBlock progBlock =  new CodeBlock();
-		classes.forEach(x -> progBlock.statements.add(x.toCodeBlock()));
+		classes.forEach(x -> progBlock.add(x.toCodeBlock()));
 		return progBlock;
 	}
 }

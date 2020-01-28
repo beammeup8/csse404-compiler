@@ -29,11 +29,11 @@ public class InterAssign1 implements IInterStatement1 {
 	@Override
 	public Statements toStatement() {
 		CodeBlock block = new CodeBlock();
-		block.statements.addAll(value.toStatementList());
+		block.addAll(value.toStatementList());
 		Assignment assign = new Assignment();
 		assign.labelIn = value.getId();
 		assign.labelOut = localId;
-		block.statements.add(assign);
+		block.add(assign);
 		return block;
 	}
 

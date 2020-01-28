@@ -78,11 +78,11 @@ public class InterClass1 implements IInter1 {
 		CodeBlock classCodeBlock = new CodeBlock();
 		if(isMain){
 			Label mainLabel = new Label("_MAIN");
-			classCodeBlock.statements.add(mainLabel);
-			classCodeBlock.statements.add(methods.get(0).toCodeBlock());
+			classCodeBlock.add(mainLabel);
+			classCodeBlock.add(methods.get(0).toCodeBlock());
 			return classCodeBlock;
 		}
-		methods.forEach(x -> classCodeBlock.statements.add(x.toCodeBlock()));
+		methods.forEach(x -> classCodeBlock.add(x.toCodeBlock()));
 		return classCodeBlock;
 	}
 

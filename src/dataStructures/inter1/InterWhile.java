@@ -32,26 +32,21 @@ public class InterWhile implements IInterStatement1 {
 		
 		String loopLabel = IdGenerator.getUniqueLabel();
 		
-		block.statements.add(new Label(loopLabel));
+		block.add(new Label(loopLabel));
 		
-		block.statements.addAll(conditional.toStatementList());
+		block.addAll(conditional.toStatementList());
 		Compare cond = new Compare();
 		cond.labelA = conditional.getId();
 		cond.labelB = "_ZERO";
 		
-		Jump failJump = new Jump();
-		failJump.jumpType = JumpType.EQUAL;
 		String failLabel = IdGenerator.getUniqueLabel();
-		failJump.label = failLabel;
-		block.statements.add(failJump);
+		block.add(new Jump(failLabel, JumpType.EQUAL));
 		
-		block.statements.add(body.toStatement());
-		Jump loopJump = new Jump();
-		loopJump.jumpType = JumpType.NONE;
-		loopJump.label = loopLabel;
-		block.statements.add(loopJump);
+		block.add(body.toStatement());
+
+		block.add(new Jump(loopLabel, JumpType.NONE));
 		
-		block.statements.add(new Label(failLabel));
+		block.add(new Label(failLabel));
 		
 		return block;
 	}

@@ -1,8 +1,13 @@
 package dataStructures.simpleInter;
 
 public class Jump implements Statements {
-	public String label = "";
+	public String label;
 	public JumpType jumpType;
+	
+	public Jump(String label, JumpType jumpType) {
+		this.label = label;
+		this.jumpType = jumpType;
+	}
 	
 	@Override
 	public String toString() {

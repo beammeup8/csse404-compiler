@@ -39,28 +39,22 @@ public class InterIf1 implements IInterStatement1 {
 	@Override
 	public Statements toStatement() {
 		CodeBlock block = new CodeBlock();
-		block.statements.addAll(expression.toStatementList());
+		block.addAll(expression.toStatementList());
 		Compare cond = new Compare();
 		cond.labelA = expression.getId();
 		cond.labelB = "_ZERO";
 		
-		Jump elseJump = new Jump();
-		elseJump.jumpType = JumpType.EQUAL;
 		String elseLabel = IdGenerator.getUniqueLabel();
-		elseJump.label = elseLabel;
-		block.statements.add(elseJump);
+		block.add(new Jump(elseLabel, JumpType.EQUAL));
 		
-		block.statements.add(thenStatement.toStatement());
+		block.add(thenStatement.toStatement());
 		
-		Jump finishJump = new Jump();
 		String finishLabel = IdGenerator.getUniqueLabel();
-		finishJump.jumpType = JumpType.NONE;
-		finishJump.label = finishLabel;
-		block.statements.add(finishJump);
+		block.add(new Jump(finishLabel, JumpType.NONE));
 		
-		block.statements.add(new Label(elseLabel));
-		block.statements.add(elseStatement.toStatement());
-		block.statements.add(new Label(finishLabel));
+		block.add(new Label(elseLabel));
+		block.add(elseStatement.toStatement());
+		block.add(new Label(finishLabel));
 		return block;
 	}
 

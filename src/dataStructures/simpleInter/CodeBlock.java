@@ -15,4 +15,12 @@ public class CodeBlock implements Statements{
 		builder.append("\n");
 		return builder.toString();
 	}
+	
+	public void add(Statements s){
+		statements.add(s);
+	}
+	
+	public void addAll(List<Statements> s){
+		statements.addAll(s);
+	}
 }
