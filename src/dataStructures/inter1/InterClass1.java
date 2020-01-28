@@ -77,8 +77,7 @@ public class InterClass1 implements IInter1 {
 	public Statements toCodeBlock() {
 		CodeBlock classCodeBlock = new CodeBlock();
 		if(isMain){
-			Label mainLabel = new Label();
-			mainLabel.label = "_MAIN";
+			Label mainLabel = new Label("_MAIN");
 			classCodeBlock.statements.add(mainLabel);
 			classCodeBlock.statements.add(methods.get(0).toCodeBlock());
 			return classCodeBlock;

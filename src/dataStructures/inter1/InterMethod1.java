@@ -49,8 +49,7 @@ public class InterMethod1 implements IInter1 {
 
 	public Statements toCodeBlock() {
 		CodeBlock block = new CodeBlock();
-		Label label = new Label();
-		label.label = localId;
+		Label label = new Label(localId);
 		block.statements.add(label);
 		for (int i = 0; i < parameters.size() ; i++) {
 			block.statements.add(parameters.get(i).toFunctionParameter());

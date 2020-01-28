@@ -1,6 +1,10 @@
 package dataStructures.inter1;
 
 import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Compare;
+import dataStructures.simpleInter.Jump;
+import dataStructures.simpleInter.JumpType;
+import dataStructures.simpleInter.Label;
 import dataStructures.simpleInter.Statements;
 
 public class InterWhile implements IInterStatement1 {
@@ -24,8 +28,32 @@ public class InterWhile implements IInterStatement1 {
 
 	@Override
 	public Statements toStatement() {
-		// TODO Auto-generated method stub
-		return new CodeBlock();
+		CodeBlock block = new CodeBlock();
+		
+		String loopLabel = IdGenerator.getUniqueLabel();
+		
+		block.statements.add(new Label(loopLabel));
+		
+		block.statements.addAll(conditional.toStatementList());
+		Compare cond = new Compare();
+		cond.labelA = conditional.getId();
+		cond.labelB = "_ZERO";
+		
+		Jump failJump = new Jump();
+		failJump.jumpType = JumpType.EQUAL;
+		String failLabel = IdGenerator.getUniqueLabel();
+		failJump.label = failLabel;
+		block.statements.add(failJump);
+		
+		block.statements.add(body.toStatement());
+		Jump loopJump = new Jump();
+		loopJump.jumpType = JumpType.NONE;
+		loopJump.label = loopLabel;
+		block.statements.add(loopJump);
+		
+		block.statements.add(new Label(failLabel));
+		
+		return block;
 	}
 
 }

@@ -2,6 +2,9 @@ package dataStructures.inter1;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Compare;
+import dataStructures.simpleInter.Jump;
+import dataStructures.simpleInter.JumpType;
+import dataStructures.simpleInter.Label;
 import dataStructures.simpleInter.Statements;
 
 public class InterIf1 implements IInterStatement1 {
@@ -37,8 +40,27 @@ public class InterIf1 implements IInterStatement1 {
 	public Statements toStatement() {
 		CodeBlock block = new CodeBlock();
 		block.statements.addAll(expression.toStatementList());
-		String expressionId = expression.getId();
 		Compare cond = new Compare();
+		cond.labelA = expression.getId();
+		cond.labelB = "_ZERO";
+		
+		Jump elseJump = new Jump();
+		elseJump.jumpType = JumpType.EQUAL;
+		String elseLabel = IdGenerator.getUniqueLabel();
+		elseJump.label = elseLabel;
+		block.statements.add(elseJump);
+		
+		block.statements.add(thenStatement.toStatement());
+		
+		Jump finishJump = new Jump();
+		String finishLabel = IdGenerator.getUniqueLabel();
+		finishJump.jumpType = JumpType.NONE;
+		finishJump.label = finishLabel;
+		block.statements.add(finishJump);
+		
+		block.statements.add(new Label(elseLabel));
+		block.statements.add(elseStatement.toStatement());
+		block.statements.add(new Label(finishLabel));
 		return block;
 	}
 

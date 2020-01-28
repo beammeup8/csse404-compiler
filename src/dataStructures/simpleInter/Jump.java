@@ -27,6 +27,9 @@ public class Jump implements Statements {
 		case LESS_EQUAL:
 			jumpName = "jle";
 			break;
+		case NONE:
+			jumpName = "jmp";
+			break;
 		case NOT_EQUAL:
 			jumpName = "jne";
 			break;
