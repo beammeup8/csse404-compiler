@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterLength1 implements IInterExpression1 {
 
@@ -36,15 +36,15 @@ public class InterLength1 implements IInterExpression1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Statements> toStatementList() {
+	public List<Statement> toStatementList() {
 		// TODO Auto-generated method stub
-		return new ArrayList<Statements>();
+		return new ArrayList<Statement>();
 	}
 
 }

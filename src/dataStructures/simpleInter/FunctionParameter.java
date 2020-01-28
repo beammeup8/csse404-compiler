@@ -1,6 +1,6 @@
 package dataStructures.simpleInter;
 
-public class FunctionParameter implements Statements {
+public class FunctionParameter implements Statement {
 	public String name;
 	
 	@Override

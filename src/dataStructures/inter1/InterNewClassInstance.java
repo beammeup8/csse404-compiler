@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterNewClassInstance implements IInterExpression1 {
 
@@ -32,15 +32,15 @@ public class InterNewClassInstance implements IInterExpression1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		// TODO Auto-generated method stub
 		return new CodeBlock();
 	}
 
 	@Override
-	public List<Statements> toStatementList() {
+	public List<Statement> toStatementList() {
 		// TODO Auto-generated method stub
-		return new ArrayList<Statements>();
+		return new ArrayList<Statement>();
 	}
 
 }

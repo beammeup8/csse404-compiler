@@ -3,8 +3,8 @@ package dataStructures.simpleInter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CodeBlock implements Statements{
-	public List<Statements> statements = new ArrayList<Statements>();
+public class CodeBlock implements Statement{
+	public List<Statement> statements = new ArrayList<Statement>();
 	
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
@@ -16,11 +16,11 @@ public class CodeBlock implements Statements{
 		return builder.toString();
 	}
 	
-	public void add(Statements s){
+	public void add(Statement s){
 		statements.add(s);
 	}
 	
-	public void addAll(List<Statements> s){
+	public void addAll(List<Statement> s){
 		statements.addAll(s);
 	}
 }

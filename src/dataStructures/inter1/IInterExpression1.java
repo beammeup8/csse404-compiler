@@ -3,16 +3,16 @@ package dataStructures.inter1;
 import java.util.List;
 
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public interface IInterExpression1 extends IInterStatement1 {
 	public String getId();
 	public String getType();
 	
-	public List<Statements> toStatementList();
+	public List<Statement> toStatementList();
 	
 	@Override
-	public default Statements toStatement() {
+	public default Statement toStatement() {
 		return new CodeBlock();
 	}
 }

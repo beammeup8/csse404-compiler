@@ -5,7 +5,7 @@ import dataStructures.simpleInter.Compare;
 import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
 import dataStructures.simpleInter.Label;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterIf1 implements IInterStatement1 {
 
@@ -37,7 +37,7 @@ public class InterIf1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		CodeBlock block = new CodeBlock();
 		block.addAll(expression.toStatementList());
 		Compare cond = new Compare();

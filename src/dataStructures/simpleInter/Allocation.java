@@ -1,7 +1,16 @@
 package dataStructures.simpleInter;
 
-public class Allocation {
+public class Allocation implements Statement {
 	public String localName;
-	public long memoryLocation;
-	public int size;
+	public String sizeLocation;
+	
+	public Allocation(String localName, String sizeLocation) {
+		this.localName = localName;
+		this.sizeLocation = sizeLocation;
+	}
+	
+	@Override
+	public String toString() {
+		return "\t" + localName + " = " + "malloc(" + sizeLocation + ")";
+	}
 }

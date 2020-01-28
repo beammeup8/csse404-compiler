@@ -4,7 +4,7 @@ import java.util.List;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Label;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterMethod1 implements IInter1 {
 	private String typeID, id, localId;
@@ -47,7 +47,7 @@ public class InterMethod1 implements IInter1 {
 		return "method:" + typeID;
 	}
 
-	public Statements toCodeBlock() {
+	public Statement toCodeBlock() {
 		CodeBlock block = new CodeBlock();
 		Label label = new Label(localId);
 		block.add(label);

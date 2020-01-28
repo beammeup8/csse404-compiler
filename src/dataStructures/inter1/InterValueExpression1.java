@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import dataStructures.TermType;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterValueExpression1 implements IInterExpression1 {
 
@@ -59,9 +59,9 @@ public class InterValueExpression1 implements IInterExpression1 {
 	}
 
 	@Override
-	public List<Statements> toStatementList() {
+	public List<Statement> toStatementList() {
 		// TODO Auto-generated method stub
-		return new ArrayList<Statements>();
+		return new ArrayList<Statement>();
 	}
 
 }

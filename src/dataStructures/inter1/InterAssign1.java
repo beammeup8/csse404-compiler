@@ -2,7 +2,7 @@ package dataStructures.inter1;
 
 import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterAssign1 implements IInterStatement1 {
 
@@ -27,13 +27,10 @@ public class InterAssign1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		CodeBlock block = new CodeBlock();
 		block.addAll(value.toStatementList());
-		Assignment assign = new Assignment();
-		assign.labelIn = value.getId();
-		assign.labelOut = localId;
-		block.add(assign);
+		block.add(new Assignment(value.getId(), localId));
 		return block;
 	}
 

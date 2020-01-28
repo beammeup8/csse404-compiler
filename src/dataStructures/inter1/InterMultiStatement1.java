@@ -3,7 +3,7 @@ package dataStructures.inter1;
 import java.util.List;
 
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterMultiStatement1 implements IInterStatement1 {
 	private List<IInterStatement1> statements;
@@ -19,7 +19,7 @@ public class InterMultiStatement1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		// TODO Auto-generated method stub
 		return new CodeBlock();
 	}

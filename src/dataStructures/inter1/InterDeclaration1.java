@@ -2,7 +2,7 @@ package dataStructures.inter1;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.FunctionParameter;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterDeclaration1 implements IInterStatement1 {
 	private String typeID, id, localID;
@@ -33,7 +33,7 @@ public class InterDeclaration1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		// TODO Auto-generated method stub
 		return new CodeBlock();
 	}

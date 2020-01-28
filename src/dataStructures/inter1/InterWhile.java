@@ -5,7 +5,7 @@ import dataStructures.simpleInter.Compare;
 import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
 import dataStructures.simpleInter.Label;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterWhile implements IInterStatement1 {
 	private IInterExpression1 conditional;
@@ -27,7 +27,7 @@ public class InterWhile implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		CodeBlock block = new CodeBlock();
 		
 		String loopLabel = IdGenerator.getUniqueLabel();

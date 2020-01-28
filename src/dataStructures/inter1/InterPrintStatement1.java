@@ -1,7 +1,7 @@
 package dataStructures.inter1;
 
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterPrintStatement1 implements IInterStatement1 {
 
@@ -26,7 +26,7 @@ public class InterPrintStatement1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		//TODO figure out the mess that is IO
 		return new CodeBlock();
 	}

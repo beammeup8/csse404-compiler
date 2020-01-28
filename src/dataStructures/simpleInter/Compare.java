@@ -1,6 +1,6 @@
 package dataStructures.simpleInter;
 
-public class Compare implements Statements{
+public class Compare implements Statement{
 	public String labelA, labelB;
 	
 	@Override

@@ -1,7 +1,7 @@
 package dataStructures.inter1;
 
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterArrayAssign1 implements IInterStatement1 {
 	private String arrayID;
@@ -22,7 +22,7 @@ public class InterArrayAssign1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statements toStatement() {
+	public Statement toStatement() {
 		// TODO Auto-generated method stub
 		return new CodeBlock();
 	}

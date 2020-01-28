@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataStructures.simpleInter.OpType;
 import dataStructures.simpleInter.Operation;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.Statement;
 
 public class InterExpression1 implements IInterExpression1 {
 	private IInterExpression1 a, b;
@@ -165,19 +165,15 @@ public class InterExpression1 implements IInterExpression1 {
 	}
 
 	@Override
-	public List<Statements> toStatementList() {
-		List<Statements> stmt = new ArrayList<>();
-		Operation self = new Operation();
+	public List<Statement> toStatementList() {
+		List<Statement> stmt = new ArrayList<>();
+		String labelA = "";
 		if(a != null){
 			stmt.addAll(a.toStatementList());
-			self.labelA = a.getId();
+			labelA = a.getId();
 		}
 		stmt.addAll(b.toStatementList());
-		//turn self into statement
-		self.labelB = b.getId();
-		self.op = op;
-		self.labelOut = id;
-		stmt.add(self);
+		stmt.add(new Operation(labelA, b.getId(), id, op));
 		return stmt;
 	}
 

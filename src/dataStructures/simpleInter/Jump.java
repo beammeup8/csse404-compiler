@@ -1,6 +1,6 @@
 package dataStructures.simpleInter;
 
-public class Jump implements Statements {
+public class Jump implements Statement {
 	public String label;
 	public JumpType jumpType;
 	

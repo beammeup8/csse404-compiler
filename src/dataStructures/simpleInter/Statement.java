@@ -1,5 +1,5 @@
 package dataStructures.simpleInter;
 
-public interface Statements {
+public interface Statement {
 
 }

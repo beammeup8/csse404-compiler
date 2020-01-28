@@ -1,11 +1,14 @@
 package dataStructures.inter1;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import dataStructures.simpleInter.Allocation;
 import dataStructures.simpleInter.CodeBlock;
-import dataStructures.simpleInter.Statements;
+import dataStructures.simpleInter.IntegerOperation;
+import dataStructures.simpleInter.MemoryAccess;
+import dataStructures.simpleInter.OpType;
+import dataStructures.simpleInter.Statement;
 
 public class InterNewArrayInstance implements IInterExpression1 {
 
@@ -38,14 +41,24 @@ public class InterNewArrayInstance implements IInterExpression1 {
 	}
 
 	@Override
-	public Statements toStatement() {
-		// TODO Auto-generated method stub
-		return new CodeBlock();
+	public Statement toStatement() {
+		CodeBlock block = new CodeBlock();
+		block.addAll(toStatementList());
+		return block;
 	}
 
 	@Override
-	public List<Statements> toStatementList() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Statements>();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
+		block.addAll(length.toStatementList());
+		String addId = IdGenerator.getUniqueId();
+		Statement add1 = new IntegerOperation(length.getId(), 1, addId, OpType.ADD);
+		block.add(add1);
+		String multId = IdGenerator.getUniqueId();
+		Statement mult4 = new IntegerOperation(addId, 4, multId, OpType.MULT);
+		block.add(mult4);
+		block.add(new Allocation(id, multId));
+		block.add(new MemoryAccess(length.getId(), id, "_ZERO", false));
+		return block;
 	}
 }
