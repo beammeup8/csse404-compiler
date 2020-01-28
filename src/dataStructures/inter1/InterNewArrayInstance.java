@@ -1,16 +1,14 @@
 package dataStructures.inter1;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dataStructures.simpleInter.Allocation;
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.IntegerOperation;
 import dataStructures.simpleInter.MemoryAccess;
-import dataStructures.simpleInter.OpType;
 import dataStructures.simpleInter.Statement;
 
-public class InterNewArrayInstance implements IInterExpression1 {
+public class InterNewArrayInstance extends InterArray1 implements IInterExpression1 {
 
 	private String id;
 	private IInterExpression1 length;
@@ -39,26 +37,21 @@ public class InterNewArrayInstance implements IInterExpression1 {
 	public String getType() {
 		return "int[]";
 	}
-
+	
 	@Override
 	public Statement toStatement() {
 		CodeBlock block = new CodeBlock();
-		block.addAll(toStatementList());
+		block.addAll(length.toStatementList());
+		List<IntegerOperation> offsetCalc = offsetCalc(length.getId());
+		block.addAll(offsetCalc);
+		String multId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
+		block.add(new Allocation(id, multId));
+		block.add(new MemoryAccess(length.getId(), id, "{0}", false));
 		return block;
 	}
 
 	@Override
 	public List<Statement> toStatementList() {
-		List<Statement> block = new ArrayList<Statement>();
-		block.addAll(length.toStatementList());
-		String addId = IdGenerator.getUniqueId();
-		Statement add1 = new IntegerOperation(length.getId(), 1, addId, OpType.ADD);
-		block.add(add1);
-		String multId = IdGenerator.getUniqueId();
-		Statement mult4 = new IntegerOperation(addId, 4, multId, OpType.MULT);
-		block.add(mult4);
-		block.add(new Allocation(id, multId));
-		block.add(new MemoryAccess(length.getId(), id, "_ZERO", false));
-		return block;
+		return ((CodeBlock) toStatement()).statements;
 	}
 }

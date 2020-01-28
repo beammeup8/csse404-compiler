@@ -1,12 +1,12 @@
 package dataStructures.inter1;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Statement;
 
-public class InterLength1 implements IInterExpression1 {
+public class InterLength1 extends InterArray1 implements IInterExpression1 {
 
 	private String id;
 	private IInterExpression1 arrayExpression;
@@ -37,14 +37,15 @@ public class InterLength1 implements IInterExpression1 {
 
 	@Override
 	public Statement toStatement() {
-		// TODO Auto-generated method stub
-		return null;
+		CodeBlock block = new CodeBlock();
+		block.addAll(arrayExpression.toStatementList());
+		block.add(new MemoryAccess(id, arrayExpression.getId(), "{0}", true));
+		return block;
 	}
 
 	@Override
 	public List<Statement> toStatementList() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Statement>();
+		return ((CodeBlock) toStatement()).statements;
 	}
 
 }

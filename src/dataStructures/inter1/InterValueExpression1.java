@@ -1,7 +1,6 @@
 package dataStructures.inter1;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import dataStructures.TermType;
@@ -20,7 +19,15 @@ public class InterValueExpression1 implements IInterExpression1 {
 	public InterValueExpression1(TermType type, String symbol) {
 		id = IdGenerator.getUniqueId();
 		this.type = type;
-		this.symbol = symbol;
+		if (type == TermType.INTEGER) {
+			this.symbol = "{" + symbol + "}";
+		} else if (type == TermType.TRUE) {
+			this.symbol = "{1}";
+		} else if (type == TermType.FALSE) {
+			this.symbol = "{0}";
+		} else{
+			this.symbol = symbol;
+		}
 	}
 	
 	@Override

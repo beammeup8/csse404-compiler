@@ -20,7 +20,7 @@ public class CodeBlock implements Statement{
 		statements.add(s);
 	}
 	
-	public void addAll(List<Statement> s){
+	public void addAll(List<? extends Statement> s){
 		statements.addAll(s);
 	}
 }

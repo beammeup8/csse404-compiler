@@ -37,7 +37,7 @@ public class InterWhile implements IInterStatement1 {
 		block.addAll(conditional.toStatementList());
 		Compare cond = new Compare();
 		cond.labelA = conditional.getId();
-		cond.labelB = "_ZERO";
+		cond.labelB = "{0}";
 		
 		String failLabel = IdGenerator.getUniqueLabel();
 		block.add(new Jump(failLabel, JumpType.EQUAL));

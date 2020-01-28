@@ -42,7 +42,7 @@ public class InterIf1 implements IInterStatement1 {
 		block.addAll(expression.toStatementList());
 		Compare cond = new Compare();
 		cond.labelA = expression.getId();
-		cond.labelB = "_ZERO";
+		cond.labelB = "{0}";
 		
 		String elseLabel = IdGenerator.getUniqueLabel();
 		block.add(new Jump(elseLabel, JumpType.EQUAL));
