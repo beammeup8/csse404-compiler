@@ -43,6 +43,9 @@ public class InterValueExpression1 implements IInterExpression1 {
 		if(type == TermType.ID){
 			localId = parent.getLocalName(symbol);
 		}
+		else{
+			localId = symbol;
+		}
 	}
 
 	@Override

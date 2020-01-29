@@ -11,12 +11,14 @@ public class InterMethod1 implements IInter1 {
 	private String typeID, id, localId;
 	private List<InterDeclaration1> parameters;
 	private List<IInterStatement1> statements;
+	private IInterExpression1 returnExpr;
 
-	public InterMethod1(String type, String id, List<InterDeclaration1> parameters, List<IInterStatement1> statements) {
+	public InterMethod1(String type, String id, List<InterDeclaration1> parameters, List<IInterStatement1> statements, IInterExpression1 returnExpr) {
 		this.id = id;
 		this.typeID = type;
 		this.parameters = parameters;
 		this.statements = statements;
+		this.returnExpr = returnExpr;
 	}
 
 	@Override

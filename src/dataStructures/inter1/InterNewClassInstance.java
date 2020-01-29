@@ -36,15 +36,7 @@ public class InterNewClassInstance implements IInterExpression1 {
 	public Statement toStatement() {
 		CodeBlock block = new CodeBlock();
 		List<InterDeclaration1> fields = classMap.get(className).getFields();
-		int sizeOfObj = 0;
-		for (InterDeclaration1 x : fields) {
-			String type = x.getType();
-			if (type.equals("boolean")) {
-				sizeOfObj += 1;
-			} else {
-				sizeOfObj += 4;
-			}
-		}
+		int sizeOfObj = fields.size() * 4;
 		block.add(new Allocation(id, "{" + sizeOfObj + "}"));
 		return block;
 	}

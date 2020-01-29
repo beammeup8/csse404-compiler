@@ -66,7 +66,7 @@ public class MainClassDeclNode extends Node {
 			statements.add(statementList.get(i).convertToInter1());
 		}
 		List<InterMethod1> methods = new ArrayList<>();
-		methods.add(new InterMethod1(null, "main", new ArrayList<InterDeclaration1>(), statements));
+		methods.add(new InterMethod1(null, "main", new ArrayList<InterDeclaration1>(), statements, null));
 		return new InterClass1(className.symbol, true, null, new ArrayList<InterDeclaration1>(), methods);
 	}
 

@@ -58,7 +58,7 @@ public class MethodDeclNode extends Node {
 		for (int i = 0; i < statements.size(); i++) {
 			interStatements.add(statements.get(i).convertToInter1());
 		}
-		return new InterMethod1(type.getType(), id.symbol, params.convertToInter1(), interStatements);
+		return new InterMethod1(type.getType(), id.symbol, params.convertToInter1(), interStatements, returnExpression.convertToInter1());
 	}
 
 }

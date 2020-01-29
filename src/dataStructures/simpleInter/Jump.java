@@ -41,6 +41,11 @@ public class Jump implements Statement {
 		case ZERO:
 			jumpName = "jz";
 			break;
+		case CALL:
+			jumpName = "call";
+			break;
+		default:
+			break;
 		}
 		return "\t" + jumpName + " " + label + ";";
 	}
