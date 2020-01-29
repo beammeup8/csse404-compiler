@@ -1,6 +1,7 @@
 package dataStructures.inter1;
 
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.Allocation;
 import dataStructures.simpleInter.CodeBlock;
@@ -24,8 +25,8 @@ public class InterNewArrayInstance extends InterArray1 implements IInterExpressi
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		length.populateSymbolTable(parent);
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		length.populateSymbolTable(parent, classMap);
 		if(!length.getType().equals("int")){
 			System.err.println("Arrays must have a numeric length");
 			System.exit(0);

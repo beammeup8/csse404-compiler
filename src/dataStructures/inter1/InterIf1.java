@@ -1,5 +1,7 @@
 package dataStructures.inter1;
 
+import java.util.Map;
+
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Compare;
 import dataStructures.simpleInter.Jump;
@@ -26,14 +28,14 @@ public class InterIf1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		expression.populateSymbolTable(parent);
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		expression.populateSymbolTable(parent, classMap);
 		if (!expression.getType().equals("boolean")) {
 			System.err.println("Conditionals must be boolean expressions");
 			System.exit(0);
 		}
-		thenStatement.populateSymbolTable(new SymbolTable(parent));
-		elseStatement.populateSymbolTable(new SymbolTable(parent));
+		thenStatement.populateSymbolTable(new SymbolTable(parent), classMap);
+		elseStatement.populateSymbolTable(new SymbolTable(parent), classMap);
 	}
 
 	@Override

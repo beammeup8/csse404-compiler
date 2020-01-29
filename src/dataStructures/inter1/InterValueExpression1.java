@@ -2,13 +2,15 @@ package dataStructures.inter1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.TermType;
+import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.Statement;
 
 public class InterValueExpression1 implements IInterExpression1 {
 
-	private String id, symbol;
+	private String id, symbol, localId;
 	private TermType type;
 	private SymbolTable table;
 
@@ -36,8 +38,11 @@ public class InterValueExpression1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		table = parent;
+		if(type == TermType.ID){
+			localId = parent.getLocalName(symbol);
+		}
 	}
 
 	@Override
@@ -67,8 +72,9 @@ public class InterValueExpression1 implements IInterExpression1 {
 
 	@Override
 	public List<Statement> toStatementList() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Statement>();
+		List<Statement> stmt = new ArrayList<>();
+		stmt.add(new Assignment(localId, id));
+		return stmt;
 	}
 
 }

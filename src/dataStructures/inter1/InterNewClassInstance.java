@@ -1,29 +1,30 @@
 package dataStructures.inter1;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import dataStructures.simpleInter.Allocation;
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statement;
 
 public class InterNewClassInstance implements IInterExpression1 {
 
 	private String id, className;
-	
+	private Map<String, InterClass1> classMap;
+
 	public InterNewClassInstance(String className) {
 		id = IdGenerator.getUniqueId();
 		this.className = className;
 	}
-	
+
 	@Override
 	public String getId() {
 		return id;
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		//TODO check class name later
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		this.classMap = classMap;
 	}
 
 	@Override
@@ -33,14 +34,24 @@ public class InterNewClassInstance implements IInterExpression1 {
 
 	@Override
 	public Statement toStatement() {
-		// TODO Auto-generated method stub
-		return new CodeBlock();
+		CodeBlock block = new CodeBlock();
+		List<InterDeclaration1> fields = classMap.get(className).getFields();
+		int sizeOfObj = 0;
+		for (InterDeclaration1 x : fields) {
+			String type = x.getType();
+			if (type.equals("boolean")) {
+				sizeOfObj += 1;
+			} else {
+				sizeOfObj += 4;
+			}
+		}
+		block.add(new Allocation(id, "{" + sizeOfObj + "}"));
+		return block;
 	}
 
 	@Override
 	public List<Statement> toStatementList() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Statement>();
+		return ((CodeBlock) toStatement()).statements;
 	}
 
 }

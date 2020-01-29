@@ -1,5 +1,7 @@
 package dataStructures.inter1;
 
+import java.util.Map;
+
 import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statement;
@@ -20,8 +22,8 @@ public class InterAssign1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		value.populateSymbolTable(parent);
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		value.populateSymbolTable(parent, classMap);
 		parent.checkType(id, value.getType());
 		localId = parent.getLocalName(id);
 	}

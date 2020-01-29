@@ -2,6 +2,7 @@ package dataStructures.inter1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statement;
@@ -31,10 +32,10 @@ public class InterMethodCall1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		table = parent;
-		calledOn.populateSymbolTable(parent);
-		parameters.forEach(x -> x.populateSymbolTable(parent));
+		calledOn.populateSymbolTable(parent, classMap);
+		parameters.forEach(x -> x.populateSymbolTable(parent, classMap));
 	}
 
 	@Override

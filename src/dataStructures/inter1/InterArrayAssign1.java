@@ -1,6 +1,7 @@
 package dataStructures.inter1;
 
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.IntegerOperation;
@@ -18,9 +19,9 @@ public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		arrayIndex.populateSymbolTable(parent);
-		value.populateSymbolTable(parent);
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		arrayIndex.populateSymbolTable(parent, classMap);
+		value.populateSymbolTable(parent, classMap);
 		parent.checkType(arrayID, "int[]");		
 		arrayID = parent.getLocalName(arrayID);
 	}

@@ -1,6 +1,7 @@
 package dataStructures.inter1;
 
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Label;
@@ -31,12 +32,12 @@ public class InterMethod1 implements IInter1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		parent.addEntry(id, getType());
 		localId = parent.getLocalName(id);
 		SymbolTable table = new SymbolTable(parent);
-		parameters.forEach(x -> x.populateSymbolTable(table));
-		statements.forEach(x -> x.populateSymbolTable(table));
+		parameters.forEach(x -> x.populateSymbolTable(table, classMap));
+		statements.forEach(x -> x.populateSymbolTable(table, classMap));
 	}
 
 	public String getName() {

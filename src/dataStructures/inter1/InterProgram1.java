@@ -20,11 +20,11 @@ public class InterProgram1 implements IInter1 {
 	}
 	
 	public void createSymbolTable(){
-		populateSymbolTable(null);
+		populateSymbolTable(null, null);
 	}
 	
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		SymbolTable table = new SymbolTable(parent);
 		Map<String, InterClass1> namesToClasses = new HashMap<>();
 		Map<InterClass1, InterClass1> superClasses = new HashMap<>();
@@ -33,7 +33,7 @@ public class InterProgram1 implements IInter1 {
 			x.addMethodsToSymbolTable(table);
 			namesToClasses.put(x.getClassName(), x);
 			if (x.getSuperClassName() == null) {
-				classTables.put(x, x.prepareSymbolTable(table));
+				classTables.put(x, x.prepareSymbolTable(table, namesToClasses));
 			}
 		});
 		classes.forEach(x -> {
@@ -47,13 +47,13 @@ public class InterProgram1 implements IInter1 {
 				if (!classTables.containsKey(x)) {
 					InterClass1 superClass = superClasses.get(x);
 					if (superClass != null && classTables.containsKey(superClass)) {
-						classTables.put(x, x.prepareSymbolTable(classTables.get(superClass)));
+						classTables.put(x, x.prepareSymbolTable(classTables.get(superClass), namesToClasses));
 					}
 				}
 			});
 		}
 		
-		classes.forEach(x -> x.populateSymbolTable(table));
+		classes.forEach(x -> x.populateSymbolTable(table, namesToClasses));
 	}
 	
 	public CodeBlock toCodeBlock(){

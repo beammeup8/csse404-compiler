@@ -1,6 +1,8 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Label;
@@ -14,6 +16,7 @@ public class InterClass1 implements IInter1 {
 	private List<InterDeclaration1> fields;
 	private List<InterMethod1> methods;
 	private SymbolTable table;
+	private Map<String, InterClass1> classMap;
 
 	public InterClass1(String className, boolean isMain, String superClass, List<InterDeclaration1> fields,
 			List<InterMethod1> methods) {
@@ -38,9 +41,10 @@ public class InterClass1 implements IInter1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		this.classMap = classMap;
 		table.addEntry("this", className);
-		methods.forEach(x -> x.populateSymbolTable(table));
+		methods.forEach(x -> x.populateSymbolTable(table, classMap));
 	}
 
 	public void addMethodsToSymbolTable(SymbolTable table) {
@@ -54,29 +58,35 @@ public class InterClass1 implements IInter1 {
 	public String getSuperClassName() {
 		return superClass;
 	}
-	
+
 	public SymbolTable getTable() {
 		return table;
 	}
-	
+
 	public List<InterDeclaration1> getFields() {
-		return fields;
+		List<InterDeclaration1> toReturn = new ArrayList<InterDeclaration1>();
+		if (superClass != null) {
+			InterClass1 superClassObj = classMap.get(superClass);
+			toReturn = superClassObj.getFields();
+		}
+		toReturn.addAll(fields);
+		return toReturn;
 	}
-	
+
 	public List<InterMethod1> getMethods() {
 		return methods;
 	}
-	
-	public SymbolTable prepareSymbolTable(SymbolTable parent) {
+
+	public SymbolTable prepareSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		table = new SymbolTable(parent);
 		addMethodsToSymbolTable(table);
-		fields.forEach(x -> x.populateSymbolTable(table));
+		fields.forEach(x -> x.populateSymbolTable(table, classMap));
 		return table;
 	}
 
 	public Statement toCodeBlock() {
 		CodeBlock classCodeBlock = new CodeBlock();
-		if(isMain){
+		if (isMain) {
 			Label mainLabel = new Label("_MAIN");
 			classCodeBlock.add(mainLabel);
 			classCodeBlock.add(methods.get(0).toCodeBlock());

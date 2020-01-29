@@ -1,6 +1,7 @@
 package dataStructures.inter1;
 
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.IntegerOperation;
@@ -24,9 +25,9 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		arrayExpression.populateSymbolTable(parent);
-		arrayExpression.populateSymbolTable(parent);
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		arrayExpression.populateSymbolTable(parent, classMap);
+		arrayExpression.populateSymbolTable(parent, classMap);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package dataStructures.inter1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dataStructures.simpleInter.OpType;
 import dataStructures.simpleInter.Operation;
@@ -89,11 +90,11 @@ public class InterExpression1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		if (a != null) {
-			a.populateSymbolTable(parent);
+			a.populateSymbolTable(parent, classMap);
 		}
-		b.populateSymbolTable(parent);
+		b.populateSymbolTable(parent, classMap);
 		String aType = null;
 		if (a != null) {
 			aType = a.getType();

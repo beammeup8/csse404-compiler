@@ -1,5 +1,7 @@
 package dataStructures.inter1;
 
+import java.util.Map;
+
 import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Compare;
 import dataStructures.simpleInter.Jump;
@@ -17,9 +19,9 @@ public class InterWhile implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent) {
-		conditional.populateSymbolTable(parent);
-		body.populateSymbolTable(new SymbolTable(parent));
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+		conditional.populateSymbolTable(parent, classMap);
+		body.populateSymbolTable(new SymbolTable(parent), classMap);
 		if(!conditional.getType().equals("boolean")){
 			System.err.println("While loops can only have boolean conditionals");
 			System.exit(0);
