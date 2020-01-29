@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Label;
 import dataStructures.simpleInter.Statement;
 
@@ -84,16 +83,16 @@ public class InterClass1 implements IInter1 {
 		return table;
 	}
 
-	public Statement toCodeBlock() {
-		CodeBlock classCodeBlock = new CodeBlock();
+	public List<Statement> toCodeBlock() {
+		List<Statement> block = new ArrayList<>();
 		if (isMain) {
 			Label mainLabel = new Label("_MAIN");
-			classCodeBlock.add(mainLabel);
-			classCodeBlock.addAll(methods.get(0).toStatementList());
-			return classCodeBlock;
+			block.add(mainLabel);
+			block.addAll(methods.get(0).toStatementList());
+			return block;
 		}
-		methods.forEach(x -> classCodeBlock.addAll(x.toStatementList()));
-		return classCodeBlock;
+		methods.forEach(x -> block.addAll(x.toStatementList()));
+		return block;
 	}
 
 }

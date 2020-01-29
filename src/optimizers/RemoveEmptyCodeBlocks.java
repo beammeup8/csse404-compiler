@@ -1,11 +1,11 @@
 package optimizers;
 
-import dataStructures.simpleInter.Statement;
+import dataStructures.simpleInter.Program;
 
 public class RemoveEmptyCodeBlocks implements Optimizer {
 
 	@Override
-	public void optimize(Statement block) {
+	public void optimize(Program block) {
 		
 	}
 

@@ -1,7 +1,7 @@
 package optimizers;
 
-import dataStructures.simpleInter.Statement;
+import dataStructures.simpleInter.Program;
 
 public interface Optimizer {
-	void optimize(Statement block);
+	void optimize(Program prog);
 }
