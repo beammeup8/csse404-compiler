@@ -1,8 +1,9 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Print;
 import dataStructures.simpleInter.Statement;
 
@@ -29,8 +30,8 @@ public class InterPrintStatement1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		block.addAll(toPrint.toStatementList());
 		block.add(new Print(toPrint.getId()));
 		return block;

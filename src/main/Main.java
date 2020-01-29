@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import optimizers.RemoveEmptyCodeBlocks;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -21,6 +23,7 @@ public class Main {
 		
 		//run
 		Compiler compiler = new Compiler();
+		compiler.addOptimizer(new RemoveEmptyCodeBlocks());
 		compiler.compile(filesToCompile);
 	}
 

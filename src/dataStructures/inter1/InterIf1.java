@@ -1,8 +1,9 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Compare;
 import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
@@ -39,8 +40,8 @@ public class InterIf1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		block.addAll(expression.toStatementList());
 		Compare cond = new Compare();
 		cond.labelA = expression.getId();
@@ -49,13 +50,13 @@ public class InterIf1 implements IInterStatement1 {
 		String elseLabel = IdGenerator.getUniqueLabel();
 		block.add(new Jump(elseLabel, JumpType.EQUAL));
 		
-		block.add(thenStatement.toStatement());
+		block.addAll(thenStatement.toStatementList());
 		
 		String finishLabel = IdGenerator.getUniqueLabel();
 		block.add(new Jump(finishLabel, JumpType.NONE));
 		
 		block.add(new Label(elseLabel));
-		block.add(elseStatement.toStatement());
+		block.addAll(elseStatement.toStatementList());
 		block.add(new Label(finishLabel));
 		return block;
 	}

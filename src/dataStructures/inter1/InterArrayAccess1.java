@@ -1,9 +1,9 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.IntegerOperation;
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Statement;
@@ -36,8 +36,8 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<>();
 		block.addAll(arrayExpression.toStatementList());
 		block.addAll(arrayIndex.toStatementList());
 		List<IntegerOperation> offsetCalc = offsetCalc(arrayIndex.getId());
@@ -45,11 +45,6 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 		String offsetId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
 		block.add(new MemoryAccess(id, arrayExpression.getId(), offsetId, true));
 		return block;
-	}
-
-	@Override
-	public List<Statement> toStatementList() {
-		return ((CodeBlock) toStatement()).statements;
 	}
 
 }

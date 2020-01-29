@@ -1,8 +1,9 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Compare;
 import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
@@ -29,8 +30,8 @@ public class InterWhile implements IInterStatement1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		
 		String loopLabel = IdGenerator.getUniqueLabel();
 		
@@ -44,7 +45,7 @@ public class InterWhile implements IInterStatement1 {
 		String failLabel = IdGenerator.getUniqueLabel();
 		block.add(new Jump(failLabel, JumpType.EQUAL));
 		
-		block.add(body.toStatement());
+		block.addAll(body.toStatementList());
 
 		block.add(new Jump(loopLabel, JumpType.NONE));
 		

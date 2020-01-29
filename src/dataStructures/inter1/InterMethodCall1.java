@@ -1,11 +1,10 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import dataStructures.simpleInter.Assignment;
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
 import dataStructures.simpleInter.StackOperation;
@@ -27,7 +26,8 @@ public class InterMethodCall1 implements IInterExpression1 {
 
 	@Override
 	public String toString() {
-		return "Method Call: {calledOn: " + calledOn.toString() + ", methodId: " + methodId + ", parameters: " + parameters.toString() + "}";
+		return "Method Call: {calledOn: " + calledOn.toString() + ", methodId: " + methodId + ", parameters: "
+				+ parameters.toString() + "}";
 	}
 
 	@Override
@@ -50,22 +50,18 @@ public class InterMethodCall1 implements IInterExpression1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		block.addAll(calledOn.toStatementList());
-		
+
 		parameters.forEach(x -> block.addAll(x.toStatementList()));
-		
-		for(int i = parameters.size() - 1; i >= 0; i --){
+
+		for (int i = parameters.size() - 1; i >= 0; i--) {
 			block.add(new StackOperation(parameters.get(i).getId(), true));
 		}
 		block.add(new Jump(localMethodName, JumpType.CALL));
+		block.add(new Assignment("EAX", id));
 		return block;
-	}
-
-	@Override
-	public List<Statement> toStatementList() {
-		return ((CodeBlock) toStatement()).statements;
 	}
 
 }

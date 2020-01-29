@@ -1,10 +1,12 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
+import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.Label;
+import dataStructures.simpleInter.ReturnStatement;
 import dataStructures.simpleInter.Statement;
 
 public class InterMethod1 implements IInter1 {
@@ -50,16 +52,22 @@ public class InterMethod1 implements IInter1 {
 		return "method:" + typeID;
 	}
 
-	public Statement toCodeBlock() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		Label label = new Label(localId);
 		block.add(label);
 		for (int i = 0; i < parameters.size() ; i++) {
 			block.add(parameters.get(i).toFunctionParameter());
 		}
 		for (int i = 0; i < statements.size() ; i++) {
-			block.add(statements.get(i).toStatement());
+			block.addAll(statements.get(i).toStatementList());
 		}
+		
+		if(returnExpr != null){
+			block.addAll(returnExpr.toStatementList());
+			block.add(new Assignment(returnExpr.getId(), "EAX"));
+		}
+		block.add(new ReturnStatement());
 		return block;
 	}
 

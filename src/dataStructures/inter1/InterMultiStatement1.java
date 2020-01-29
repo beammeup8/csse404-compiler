@@ -1,9 +1,9 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statement;
 
 public class InterMultiStatement1 implements IInterStatement1 {
@@ -20,9 +20,12 @@ public class InterMultiStatement1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		// TODO Auto-generated method stub
-		return new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
+		for(int i = 0; i < statements.size(); i ++){
+			block.addAll(statements.get(i).toStatementList());
+		}
+		return block;
 	}
 
 }

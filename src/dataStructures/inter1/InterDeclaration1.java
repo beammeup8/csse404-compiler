@@ -1,8 +1,9 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.FunctionParameter;
 import dataStructures.simpleInter.Statement;
 
@@ -35,9 +36,10 @@ public class InterDeclaration1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statement toStatement() {
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		// TODO Auto-generated method stub
-		return new CodeBlock();
+		return block;
 	}
 
 	public String getType() {

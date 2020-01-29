@@ -1,9 +1,10 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Assignment;
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statement;
 
 public class InterAssign1 implements IInterStatement1 {
@@ -29,8 +30,8 @@ public class InterAssign1 implements IInterStatement1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<>();
 		block.addAll(value.toStatementList());
 		block.add(new Assignment(value.getId(), localId));
 		return block;

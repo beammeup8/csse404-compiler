@@ -1,10 +1,10 @@
 package dataStructures.inter1;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Allocation;
-import dataStructures.simpleInter.CodeBlock;
 import dataStructures.simpleInter.Statement;
 
 public class InterNewClassInstance implements IInterExpression1 {
@@ -33,17 +33,12 @@ public class InterNewClassInstance implements IInterExpression1 {
 	}
 
 	@Override
-	public Statement toStatement() {
-		CodeBlock block = new CodeBlock();
+	public List<Statement> toStatementList() {
+		List<Statement> block = new ArrayList<Statement>();
 		List<InterDeclaration1> fields = classMap.get(className).getFields();
 		int sizeOfObj = fields.size() * 4;
 		block.add(new Allocation(id, "{" + sizeOfObj + "}"));
 		return block;
-	}
-
-	@Override
-	public List<Statement> toStatementList() {
-		return ((CodeBlock) toStatement()).statements;
 	}
 
 }
