@@ -28,6 +28,15 @@ public class InterDeclaration1 implements IInterStatement1 {
 		parent.addEntry(id, typeID);
 		localID = parent.getLocalName(id);
 	}
+	
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap, int offset) {
+		if (offset >= 0) {
+			parent.addEntry(id, typeID, offset);
+			localID = parent.getLocalName(id);
+		} else {
+			populateSymbolTable(parent, classMap);
+		}
+	}
 
 	public FunctionParameter toFunctionParameter() {
 		FunctionParameter param = new FunctionParameter();

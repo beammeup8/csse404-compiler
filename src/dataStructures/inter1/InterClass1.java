@@ -79,7 +79,9 @@ public class InterClass1 implements IInter1 {
 	public SymbolTable prepareSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		table = new SymbolTable(parent);
 		addMethodsToSymbolTable(table);
-		fields.forEach(x -> x.populateSymbolTable(table, classMap));
+		for (int i = 0; i < fields.size(); i++) {
+			fields.get(i).populateSymbolTable(table, classMap, 4*i);
+		}
 		return table;
 	}
 

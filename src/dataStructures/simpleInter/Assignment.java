@@ -12,4 +12,8 @@ public class Assignment implements Statement{
 	public String toString() {
 		return "\t" + labelOut + " = " + labelIn;
 	}
+	
+	public String toX86() {
+		return null;
+	}
 }

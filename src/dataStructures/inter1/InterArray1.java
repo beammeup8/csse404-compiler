@@ -10,12 +10,9 @@ public abstract class InterArray1 implements IInterStatement1 {
 	
 	public List<IntegerOperation> offsetCalc(String indexLabel) {
 		List<IntegerOperation> block = new ArrayList<>();
-		String addId = IdGenerator.getUniqueId();
-		IntegerOperation add1 = new IntegerOperation(indexLabel, 1, addId, OpType.ADD);
-		block.add(add1);
-		String multId = IdGenerator.getUniqueId();
-		IntegerOperation mult4 = new IntegerOperation(addId, 4, multId, OpType.MULT);
-		block.add(mult4);
+		String offsetId = IdGenerator.getUniqueId();
+		block.add(new IntegerOperation(indexLabel, 1, offsetId, OpType.ADD));
+		block.add(new IntegerOperation(offsetId, 4, offsetId, OpType.MULT));
 		return block;
 	}
 

@@ -13,4 +13,5 @@ public class Allocation implements Statement {
 	public String toString() {
 		return "\t" + localName + " = " + "malloc(" + sizeLocation + ")";
 	}
+
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import dataStructures.TermType;
 import dataStructures.simpleInter.Assignment;
+import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Statement;
 
 public class InterValueExpression1 implements IInterExpression1 {
@@ -13,6 +14,7 @@ public class InterValueExpression1 implements IInterExpression1 {
 	private String id, symbol, localId;
 	private TermType type;
 	private SymbolTable table;
+	private int offset;
 
 	public InterValueExpression1(TermType type) {
 		this(type, null);
@@ -42,9 +44,11 @@ public class InterValueExpression1 implements IInterExpression1 {
 		table = parent;
 		if(type == TermType.ID){
 			localId = parent.getLocalName(symbol);
+			offset = parent.getOffset(symbol);
 		}
 		else{
 			localId = symbol;
+			offset = -1;
 		}
 	}
 
@@ -76,7 +80,12 @@ public class InterValueExpression1 implements IInterExpression1 {
 	@Override
 	public List<Statement> toStatementList() {
 		List<Statement> stmt = new ArrayList<>();
-		stmt.add(new Assignment(localId, id));
+		if (type == TermType.ID && offset > -1) {
+			stmt.add(new MemoryAccess(id, "EBP", "{8}", true));
+			stmt.add(new MemoryAccess(id, id, "{" + offset + "}", true));
+		} else {
+			stmt.add(new Assignment(localId, id));
+		}
 		return stmt;
 	}
 
