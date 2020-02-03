@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.FunctionParameter;
 import dataStructures.simpleInter.Statement;
 
 public class InterDeclaration1 implements IInterStatement1 {
@@ -25,23 +24,12 @@ public class InterDeclaration1 implements IInterStatement1 {
 
 	@Override
 	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
-		parent.addEntry(id, typeID);
-		localID = parent.getLocalName(id);
+		populateSymbolTable(parent, classMap, -1);
 	}
 	
 	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap, int offset) {
-		if (offset >= 0) {
-			parent.addEntry(id, typeID, offset);
-			localID = parent.getLocalName(id);
-		} else {
-			populateSymbolTable(parent, classMap);
-		}
-	}
-
-	public FunctionParameter toFunctionParameter() {
-		FunctionParameter param = new FunctionParameter();
-		param.name = localID;
-		return param;
+		parent.addEntry(id, typeID, offset);
+		localID = parent.getLocalName(id);
 	}
 
 	@Override
@@ -53,6 +41,10 @@ public class InterDeclaration1 implements IInterStatement1 {
 
 	public String getType() {
 		return typeID;
+	}
+	
+	public String getName(){
+		return localID;
 	}
 
 }

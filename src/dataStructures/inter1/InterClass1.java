@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.Label;
-import dataStructures.simpleInter.Statement;
+import dataStructures.simpleInter.Function;
 
 public class InterClass1 implements IInter1 {
 
@@ -84,17 +83,15 @@ public class InterClass1 implements IInter1 {
 		return table;
 	}
 
-	public List<Statement> toCodeBlock() {
-		List<Statement> block = new ArrayList<>();
+	public List<Function> toCodeBlock() {
+		List<Function> block = new ArrayList<>();
 		if (isMain) {
-			Label mainLabel = new Label("_MAIN");
-			block.add(mainLabel);
-			block.addAll(methods.get(0).toStatementList());
+			block.add(methods.get(0).toFunction("_MAIN"));
 			return block;
 		}
 		methods.forEach(x -> {
-			block.add(new Label(table.getLocalName(className + "." + x.getName())));
-			block.addAll(x.toStatementList());
+			String name = table.getLocalName(className + "." + x.getName());
+			block.add(methods.get(0).toFunction(name));
 		});
 		return block;
 	}

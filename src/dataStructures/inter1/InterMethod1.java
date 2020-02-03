@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Assignment;
-import dataStructures.simpleInter.ReturnStatement;
+import dataStructures.simpleInter.Function;
 import dataStructures.simpleInter.Statement;
 
 public class InterMethod1 implements IInter1 {
@@ -49,11 +49,13 @@ public class InterMethod1 implements IInter1 {
 		return "method:" + typeID;
 	}
 
-	public List<Statement> toStatementList() {
-		List<Statement> block = new ArrayList<Statement>();
+	public Function toFunction(String functionLabel) {
+		List<String> paramNames = new ArrayList<>();
 		for (int i = 0; i < parameters.size() ; i++) {
-			block.add(parameters.get(i).toFunctionParameter());
+			paramNames.add(parameters.get(i).getName());
 		}
+		
+		List<Statement> block = new ArrayList<Statement>();
 		for (int i = 0; i < statements.size() ; i++) {
 			block.addAll(statements.get(i).toStatementList());
 		}
@@ -62,8 +64,7 @@ public class InterMethod1 implements IInter1 {
 			block.addAll(returnExpr.toStatementList());
 			block.add(new Assignment(returnExpr.getId(), "EAX"));
 		}
-		block.add(new ReturnStatement());
-		return block;
+		return new Function(functionLabel, paramNames, block);
 	}
 
 }
