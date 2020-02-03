@@ -39,6 +39,9 @@ public class InterMethod1 implements IInter1 {
 		SymbolTable table = new SymbolTable(parent);
 		parameters.forEach(x -> x.populateSymbolTable(table, classMap));
 		statements.forEach(x -> x.populateSymbolTable(table, classMap));
+		if (returnExpr != null) {
+			returnExpr.populateSymbolTable(table, classMap);
+		}
 	}
 
 	public String getName() {
