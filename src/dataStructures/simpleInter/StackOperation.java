@@ -16,8 +16,8 @@ public class StackOperation implements Statement{
 
 	private String toX86() {
 		if(isPush){
-			return "\tpush" + label;
+			return "\tpush " + label;
 		}
-		return "\tpop" + label;
+		return "\tpop " + label;
 	}
 }

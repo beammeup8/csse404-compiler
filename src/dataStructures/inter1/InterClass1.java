@@ -78,9 +78,8 @@ public class InterClass1 implements IInter1 {
 
 	public SymbolTable prepareSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		table = new SymbolTable(parent);
-		addMethodsToSymbolTable(table);
 		for (int i = 0; i < fields.size(); i++) {
-			fields.get(i).populateSymbolTable(table, classMap, 4*i);
+			fields.get(i).populateSymbolTable(table, classMap, 4 * i);
 		}
 		return table;
 	}
@@ -93,7 +92,10 @@ public class InterClass1 implements IInter1 {
 			block.addAll(methods.get(0).toStatementList());
 			return block;
 		}
-		methods.forEach(x -> block.addAll(x.toStatementList()));
+		methods.forEach(x -> {
+			block.add(new Label(table.getLocalName(className + "." + x.getName())));
+			block.addAll(x.toStatementList());
+		});
 		return block;
 	}
 

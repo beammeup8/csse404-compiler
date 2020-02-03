@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Assignment;
-import dataStructures.simpleInter.Label;
 import dataStructures.simpleInter.ReturnStatement;
 import dataStructures.simpleInter.Statement;
 
 public class InterMethod1 implements IInter1 {
-	private String typeID, id, localId;
+	private String typeID, id;
 	private List<InterDeclaration1> parameters;
 	private List<IInterStatement1> statements;
 	private IInterExpression1 returnExpr;
@@ -37,8 +36,6 @@ public class InterMethod1 implements IInter1 {
 
 	@Override
 	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
-		parent.addEntry(id, getType());
-		localId = parent.getLocalName(id);
 		SymbolTable table = new SymbolTable(parent);
 		parameters.forEach(x -> x.populateSymbolTable(table, classMap));
 		statements.forEach(x -> x.populateSymbolTable(table, classMap));
@@ -54,8 +51,6 @@ public class InterMethod1 implements IInter1 {
 
 	public List<Statement> toStatementList() {
 		List<Statement> block = new ArrayList<Statement>();
-		Label label = new Label(localId);
-		block.add(label);
 		for (int i = 0; i < parameters.size() ; i++) {
 			block.add(parameters.get(i).toFunctionParameter());
 		}
