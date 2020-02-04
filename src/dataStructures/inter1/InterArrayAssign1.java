@@ -10,7 +10,8 @@ import dataStructures.simpleInter.Statement;
 
 public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 	private String arrayID;
-	IInterExpression1 arrayIndex, value;
+	private IInterExpression1 arrayIndex, value;
+	private int offset;
 
 	public InterArrayAssign1(String arrayID, IInterExpression1 arrayIndex, IInterExpression1 value) {
 		this.arrayID = arrayID;
@@ -22,7 +23,8 @@ public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		arrayIndex.populateSymbolTable(parent, classMap);
 		value.populateSymbolTable(parent, classMap);
-		parent.checkType(arrayID, "int[]");		
+		parent.checkType(arrayID, "int[]");
+		offset = parent.getOffset(arrayID);
 		arrayID = parent.getLocalName(arrayID);
 	}
 
@@ -34,6 +36,10 @@ public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 		List<IntegerOperation> offsetCalc = offsetCalc(arrayIndex.getId());
 		block.addAll(offsetCalc);
 		String offsetId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
+		if (offset > -1) {
+			block.add(new MemoryAccess(arrayID, "EBP", "{8}", true));
+			block.add(new MemoryAccess(arrayID, arrayID, "{" + offset + "}", true));
+		}
 		block.add(new MemoryAccess(value.getId(), arrayID, offsetId, false));
 		return block;
 	}

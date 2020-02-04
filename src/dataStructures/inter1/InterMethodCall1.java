@@ -7,6 +7,7 @@ import java.util.Map;
 import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
+import dataStructures.simpleInter.StackOpType;
 import dataStructures.simpleInter.StackOperation;
 import dataStructures.simpleInter.Statement;
 
@@ -57,8 +58,10 @@ public class InterMethodCall1 implements IInterExpression1 {
 		parameters.forEach(x -> block.addAll(x.toStatementList()));
 
 		for (int i = parameters.size() - 1; i >= 0; i--) {
-			block.add(new StackOperation(parameters.get(i).getId(), true));
+			block.add(new StackOperation(parameters.get(i).getId(), StackOpType.PUSH));
 		}
+		block.add(new StackOperation(calledOn.getId(), StackOpType.PUSH));
+		
 		block.add(new Jump(localMethodName, JumpType.CALL));
 		block.add(new Assignment("EAX", id));
 		return block;

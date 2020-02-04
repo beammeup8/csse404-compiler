@@ -91,7 +91,7 @@ public class InterClass1 implements IInter1 {
 		}
 		methods.forEach(x -> {
 			String name = table.getLocalName(className + "." + x.getName());
-			block.add(methods.get(0).toFunction(name));
+			block.add(x.toFunction(name));
 		});
 		return block;
 	}

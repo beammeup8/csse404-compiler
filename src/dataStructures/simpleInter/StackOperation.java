@@ -1,23 +1,31 @@
 package dataStructures.simpleInter;
 
-public class StackOperation implements Statement{
+public class StackOperation implements Statement {
 	private String label;
-	private boolean isPush;
+	private StackOpType opType;
 
-	public StackOperation(String label, boolean isPush) {
-		this.label = label;
-		this.isPush = isPush;
+	public StackOperation(StackOpType opType) {
+		this.opType = opType;
 	}
 	
-	@Override
-	public String toString() {
-		return toX86();
+	public StackOperation(String label, StackOpType opType) {
+		this.label = label;
+		this.opType = opType;
 	}
 
-	private String toX86() {
-		if(isPush){
+	@Override
+	public String toString() {
+		switch (opType) {
+		case POP:
+			return "\tpop " + label;
+		case POPAD:
+			return "\tpopad";
+		case PUSH:
 			return "\tpush " + label;
+		case PUSHAD:
+			return "\tpushad";
 		}
-		return "\tpop " + label;
+		return null;
 	}
+
 }
