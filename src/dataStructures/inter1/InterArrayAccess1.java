@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dataStructures.simpleInter.IntegerOperation;
 import dataStructures.simpleInter.MemoryAccess;
+import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.Statement;
 
 public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 {
@@ -27,7 +27,7 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 	@Override
 	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
 		arrayExpression.populateSymbolTable(parent, classMap);
-		arrayExpression.populateSymbolTable(parent, classMap);
+		arrayIndex.populateSymbolTable(parent, classMap);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 		List<Statement> block = new ArrayList<>();
 		block.addAll(arrayExpression.toStatementList());
 		block.addAll(arrayIndex.toStatementList());
-		List<IntegerOperation> offsetCalc = offsetCalc(arrayIndex.getId());
+		List<Operation> offsetCalc = offsetCalc(arrayIndex.getId());
 		block.addAll(offsetCalc);
 		String offsetId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
 		block.add(new MemoryAccess(id, arrayExpression.getId(), offsetId, true));

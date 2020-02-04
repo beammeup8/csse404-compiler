@@ -2,5 +2,8 @@
 #include <stdlib.h>
 void nothing()
 {
-  int *i = malloc(sizeof(int));
+  int *i = malloc(20);
+  *i = 20;
+  int k = *i + 70;
+  free(i);
 }

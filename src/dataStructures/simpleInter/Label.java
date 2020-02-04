@@ -1,6 +1,9 @@
 package dataStructures.simpleInter;
 
-public class Label implements Statement {
+import java.util.Arrays;
+import java.util.List;
+
+public class Label extends Statement {
 	public String label = "";
 	
 	public Label(String label) {
@@ -9,6 +12,11 @@ public class Label implements Statement {
 	
 	@Override
 	public String toString() {
-		return label;
+		return label + ":";
+	}
+
+	@Override
+	public List<Statement> convertToMemAccesses(List<String> localVariables) {
+		return Arrays.asList(this);
 	}
 }

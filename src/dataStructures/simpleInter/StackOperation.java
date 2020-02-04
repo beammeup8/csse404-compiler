@@ -1,6 +1,9 @@
 package dataStructures.simpleInter;
 
-public class StackOperation implements Statement {
+import java.util.Arrays;
+import java.util.List;
+
+public class StackOperation extends Statement {
 	private String label;
 	private StackOpType opType;
 
@@ -26,6 +29,14 @@ public class StackOperation implements Statement {
 			return "\tpushad";
 		}
 		return null;
+	}
+
+	@Override
+	public List<Statement> convertToMemAccesses(List<String> localVariables) {
+		if(label != null){
+			label = getMemLocation(localVariables, label);
+		}
+		return Arrays.asList(this);
 	}
 
 }

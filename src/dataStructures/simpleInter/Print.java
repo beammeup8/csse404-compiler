@@ -1,6 +1,9 @@
 package dataStructures.simpleInter;
 
-public class Print implements Statement {
+import java.util.Arrays;
+import java.util.List;
+
+public class Print extends Statement {
 	public String localName;
 	
 	public Print(String localName) {
@@ -10,5 +13,11 @@ public class Print implements Statement {
 	@Override
 	public String toString() {
 		return "\tprint(" + localName + ")";
+	}
+
+	@Override
+	public List<Statement> convertToMemAccesses(List<String> localVariables) {
+		// TODO Auto-generated method stub
+		return Arrays.asList(this);
 	}
 }

@@ -24,11 +24,11 @@ public class InterValueExpression1 implements IInterExpression1 {
 		id = IdGenerator.getUniqueId();
 		this.type = type;
 		if (type == TermType.INTEGER) {
-			this.symbol = "{" + symbol + "}";
+			this.symbol = "" + symbol;
 		} else if (type == TermType.TRUE) {
-			this.symbol = "{1}";
+			this.symbol = "1";
 		} else if (type == TermType.FALSE) {
-			this.symbol = "{0}";
+			this.symbol = "0";
 		} else{
 			this.symbol = symbol;
 		}
@@ -81,10 +81,10 @@ public class InterValueExpression1 implements IInterExpression1 {
 	public List<Statement> toStatementList() {
 		List<Statement> stmt = new ArrayList<>();
 		if (type == TermType.ID && offset > -1) {
-			stmt.add(new MemoryAccess(localId, "EBP", "{8}", true));
-			stmt.add(new MemoryAccess(id, localId, "{" + offset + "}", true));
+			stmt.add(new MemoryAccess(localId, "EBP", "8", true));
+			stmt.add(new MemoryAccess(id, localId, "" + offset, true));
 		} else if (type == TermType.THIS) {
-			stmt.add(new MemoryAccess(id, "EBP", "{8}", true));
+			stmt.add(new MemoryAccess(id, "EBP", "8", true));
 		} else {
 			stmt.add(new Assignment(localId, id));
 		}

@@ -18,13 +18,24 @@ public class Function {
 		extractLocalVariables();
 		addParametersToStatements();
 		addPrologueToStatements();
+		convertToMemAccesses();
 		addEpilogueToStatements();
+	}
+
+	private void convertToMemAccesses() {
+		for (int i = 0; i < statements.size(); i++) {
+			Statement s = statements.get(i);
+			List<Statement> toAdd = s.convertToMemAccesses(localVariables);
+			statements.remove(i);
+			statements.addAll(i, toAdd);
+			i += toAdd.size() - 1;
+		}
 	}
 
 	private void addPrologueToStatements() {
 		statements.add(0, new StackOperation(StackOpType.PUSHAD));
 		statements.add(1, new Assignment("ESP", "EBP"));
-		statements.add(2, new IntegerOperation("ESP", localVariables.size()*4, "ESP", OpType.SUB));
+		statements.add(2, new Operation("ESP", "" + localVariables.size()*4, "ESP", OpType.SUB));
 	}
 
 	private void addParametersToStatements() {
@@ -46,7 +57,7 @@ public class Function {
 		for (Statement s : statements) {
 			if (s.getClass().equals(Assignment.class)) {
 				Assignment a = (Assignment) s;
-				if (!localVariables.contains(a.labelOut)) {
+				if (a.labelOut.startsWith("_temp") && !localVariables.contains(a.labelOut)) {
 					localVariables.add(a.labelOut);
 				}
 			}

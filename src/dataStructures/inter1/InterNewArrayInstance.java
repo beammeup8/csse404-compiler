@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Allocation;
-import dataStructures.simpleInter.IntegerOperation;
 import dataStructures.simpleInter.MemoryAccess;
+import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.Statement;
 
 public class InterNewArrayInstance extends InterArray1 implements IInterExpression1 {
@@ -43,11 +43,11 @@ public class InterNewArrayInstance extends InterArray1 implements IInterExpressi
 	public List<Statement> toStatementList() {
 		List<Statement> block = new ArrayList<Statement>();
 		block.addAll(length.toStatementList());
-		List<IntegerOperation> offsetCalc = offsetCalc(length.getId());
+		List<Operation> offsetCalc = offsetCalc(length.getId());
 		block.addAll(offsetCalc);
 		String multId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
 		block.add(new Allocation(id, multId));
-		block.add(new MemoryAccess(length.getId(), id, "{0}", false));
+		block.add(new MemoryAccess(length.getId(), id, "0", false));
 		return block;
 	}
 }

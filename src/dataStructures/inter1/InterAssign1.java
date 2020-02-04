@@ -37,8 +37,8 @@ public class InterAssign1 implements IInterStatement1 {
 		List<Statement> block = new ArrayList<>();
 		block.addAll(value.toStatementList());
 		if (offset > -1) {
-			block.add(new MemoryAccess(localId, "EBP", "{8}", true));
-			block.add(new MemoryAccess(value.getId(), localId, "{" + offset + "}", false));
+			block.add(new MemoryAccess(localId, "EBP", "8", true));
+			block.add(new MemoryAccess(value.getId(), localId, "" + offset, false));
 		} else {
 			block.add(new Assignment(value.getId(), localId));
 		}

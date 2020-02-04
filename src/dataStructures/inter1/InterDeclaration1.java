@@ -1,6 +1,5 @@
 package dataStructures.inter1;
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +33,7 @@ public class InterDeclaration1 implements IInterStatement1 {
 
 	@Override
 	public List<Statement> toStatementList() {
-		List<Statement> block = new ArrayList<Statement>();
-		// TODO Auto-generated method stub
-		return block;
+		return Arrays.asList();
 	}
 
 	public String getType() {

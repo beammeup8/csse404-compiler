@@ -40,7 +40,7 @@ public class InterLength1 extends InterArray1 implements IInterExpression1 {
 	public List<Statement> toStatementList() {
 		List<Statement> block = new ArrayList<Statement>();
 		block.addAll(arrayExpression.toStatementList());
-		block.add(new MemoryAccess(id, arrayExpression.getId(), "{0}", true));
+		block.add(new MemoryAccess(id, arrayExpression.getId(), "0", true));
 		return block;
 	}
 

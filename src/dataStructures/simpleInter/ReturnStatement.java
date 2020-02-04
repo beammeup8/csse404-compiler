@@ -1,6 +1,9 @@
 package dataStructures.simpleInter;
 
-public class ReturnStatement implements Statement {
+import java.util.Arrays;
+import java.util.List;
+
+public class ReturnStatement extends Statement {
 
 	private int stackSize;
 
@@ -15,5 +18,10 @@ public class ReturnStatement implements Statement {
 
 	public String toX86() {
 		return "\tret " + stackSize;
+	}
+
+	@Override
+	public List<Statement> convertToMemAccesses(List<String> localVariables) {
+		return Arrays.asList(this);
 	}
 }

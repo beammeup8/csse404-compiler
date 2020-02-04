@@ -37,7 +37,7 @@ public class InterNewClassInstance implements IInterExpression1 {
 		List<Statement> block = new ArrayList<Statement>();
 		List<InterDeclaration1> fields = classMap.get(className).getFields();
 		int sizeOfObj = fields.size() * 4;
-		block.add(new Allocation(id, "{" + sizeOfObj + "}"));
+		block.add(new Allocation(id, "" + sizeOfObj));
 		return block;
 	}
 

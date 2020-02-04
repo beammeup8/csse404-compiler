@@ -1,6 +1,9 @@
 package dataStructures.simpleInter;
 
-public class Jump implements Statement {
+import java.util.Arrays;
+import java.util.List;
+
+public class Jump extends Statement {
 	public String label;
 	public JumpType jumpType;
 	
@@ -48,5 +51,10 @@ public class Jump implements Statement {
 			break;
 		}
 		return "\t" + jumpName + " " + label + ";";
+	}
+
+	@Override
+	public List<Statement> convertToMemAccesses(List<String> localVariables) {
+		return Arrays.asList(this);
 	}
 }
