@@ -3,8 +3,12 @@ package dataStructures.simpleInter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Program{
-	public List<Function> functions = new ArrayList<Function>();
+public class Program {
+	private List<Function> functions;
+	
+	public Program() {
+		functions = new ArrayList<Function>();
+	}
 	
 	public String toString(){
 		StringBuilder builder = new StringBuilder();

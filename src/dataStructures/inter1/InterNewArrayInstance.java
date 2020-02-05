@@ -45,7 +45,7 @@ public class InterNewArrayInstance extends InterArray1 implements IInterExpressi
 		block.addAll(length.toStatementList());
 		List<Operation> offsetCalc = offsetCalc(length.getId());
 		block.addAll(offsetCalc);
-		String multId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
+		String multId = offsetCalc.get(offsetCalc.size() - 1).localVariableAssigned();
 		block.add(new Allocation(id, multId));
 		block.add(new MemoryAccess(length.getId(), id, "0", false));
 		return block;

@@ -39,4 +39,9 @@ public class StackOperation extends Statement {
 		return Arrays.asList(this);
 	}
 
+	@Override
+	public String localVariableAssigned() {
+		return label;
+	}
+
 }

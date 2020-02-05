@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryAccess extends Statement {
-	public String registerLabel, memoryLabel, offsetLabel;
-	public boolean isRead;
+	private String registerLabel, memoryLabel, offsetLabel;
+	private boolean isRead;
 
 	public MemoryAccess(String registerLabel, String memoryLabel, String offsetLabel, boolean isRead) {
 		this.registerLabel = registerLabel;
@@ -39,5 +39,10 @@ public class MemoryAccess extends Statement {
 		}
 		toReturn.add(this);
 		return toReturn;
+	}
+
+	@Override
+	public String localVariableAssigned() {
+		return registerLabel;
 	}
 }

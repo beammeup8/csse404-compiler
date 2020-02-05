@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Allocation extends Statement {
-	public String localName;
-	public String sizeLocation;
-	
+	private String localName;
+	private String sizeLocation;
+
 	public Allocation(String localName, String sizeLocation) {
 		this.localName = localName;
 		this.sizeLocation = sizeLocation;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "\tcall _malloc";
@@ -20,13 +20,16 @@ public class Allocation extends Statement {
 	@Override
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		String memoryAddress = getMemLocation(localVariables, localName);
-		localName = "ECX";
-		MemoryAccess putInMem = new MemoryAccess(localName, memoryAddress, "{0}", false);
-		memoryAddress = getMemLocation(localVariables, sizeLocation);
-		sizeLocation = "EBX";
-		MemoryAccess putSizeInMem = new MemoryAccess("EBX", memoryAddress, "{0}", false);
-		Assignment sizeInCall = new Assignment(sizeLocation, "[esp]");
+		String sizeAddress = getMemLocation(localVariables, sizeLocation);
+		Assignment putSizeInMem = new Assignment(sizeAddress, "EBX");
+		Assignment sizeInCall = new Assignment("EBX", "DWORD PTR [ESP]");
+		Assignment putInMem = new Assignment("EAX", memoryAddress);
 		return Arrays.asList(putSizeInMem, sizeInCall, this, putInMem);
+	}
+
+	@Override
+	public String localVariableAssigned() {
+		return localName;
 	}
 
 }

@@ -42,7 +42,7 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 		block.addAll(arrayIndex.toStatementList());
 		List<Operation> offsetCalc = offsetCalc(arrayIndex.getId());
 		block.addAll(offsetCalc);
-		String offsetId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
+		String offsetId = offsetCalc.get(offsetCalc.size() - 1).localVariableAssigned();
 		block.add(new MemoryAccess(id, arrayExpression.getId(), offsetId, true));
 		return block;
 	}

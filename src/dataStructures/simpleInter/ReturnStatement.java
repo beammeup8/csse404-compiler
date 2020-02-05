@@ -24,4 +24,9 @@ public class ReturnStatement extends Statement {
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		return Arrays.asList(this);
 	}
+
+	@Override
+	public String localVariableAssigned() {
+		return null;
+	}
 }

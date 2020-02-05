@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Label extends Statement {
-	public String label = "";
+	private String label = "";
 	
 	public Label(String label) {
 		this.label = label;
@@ -18,5 +18,10 @@ public class Label extends Statement {
 	@Override
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		return Arrays.asList(this);
+	}
+
+	@Override
+	public String localVariableAssigned() {
+		return null;
 	}
 }

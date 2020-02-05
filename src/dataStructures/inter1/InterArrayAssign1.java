@@ -35,7 +35,7 @@ public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 		block.addAll(arrayIndex.toStatementList());
 		List<Operation> offsetCalc = offsetCalc(arrayIndex.getId());
 		block.addAll(offsetCalc);
-		String offsetId = offsetCalc.get(offsetCalc.size() - 1).labelOut;
+		String offsetId = offsetCalc.get(offsetCalc.size() - 1).localVariableAssigned();
 		if (offset > -1) {
 			block.add(new MemoryAccess(arrayID, "EBP", "8", true));
 			block.add(new MemoryAccess(arrayID, arrayID, "" + offset, true));

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Assignment extends Statement{
-	public String labelIn, labelOut;
+	private String labelIn, labelOut;
 	
 	public Assignment(String labelIn, String labelOut) {
 		this.labelIn = labelIn;
@@ -29,5 +29,10 @@ public class Assignment extends Statement{
 		labelIn = inMemLocation;
 		labelOut = outMemLocation;
 		return Arrays.asList(getInFromMem, this);
+	}
+
+	@Override
+	public String localVariableAssigned() {
+		return labelOut;
 	}
 }

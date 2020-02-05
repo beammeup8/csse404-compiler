@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Jump extends Statement {
-	public String label;
-	public JumpType jumpType;
+	private String label;
+	private JumpType jumpType;
 	
 	public Jump(String label, JumpType jumpType) {
 		this.label = label;
@@ -56,5 +56,10 @@ public class Jump extends Statement {
 	@Override
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		return Arrays.asList(this);
+	}
+
+	@Override
+	public String localVariableAssigned() {
+		return null;
 	}
 }

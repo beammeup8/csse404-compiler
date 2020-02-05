@@ -4,7 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Compare extends Statement{
-	public String labelA, labelB;
+	private String labelA, labelB;
+	
+	public Compare(String labelA, String labelB) {
+		this.labelA = labelA;
+		this.labelB = labelB;
+	}
 	
 	@Override
 	public String toString() {
@@ -28,5 +33,10 @@ public class Compare extends Statement{
 		labelA = aMemLocation;
 		labelB = bMemLocation;
 		return Arrays.asList(getInFromMem, this);
+	}
+
+	@Override
+	public String localVariableAssigned() {
+		return null;
 	}
 }
