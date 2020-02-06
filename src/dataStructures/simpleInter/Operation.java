@@ -76,7 +76,8 @@ public class Operation extends Statement {
 			toReturn.add(new Assignment("" + 0, "EDX"));
 		}
 		if(op == OpType.NOT){
-			toReturn.add(new Operation(bMem, "1", bMem, OpType.SUB));
+			toReturn.add(new Operation(bMem, "1", "EAX", OpType.SUB));
+			toReturn.add(new Assignment(bMem, "EAX"));
 			op = OpType.NEG;
 		}
 		if(aMem != null && !aMem.equals(labelA)){
