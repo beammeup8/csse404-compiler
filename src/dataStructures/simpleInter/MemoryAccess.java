@@ -27,7 +27,7 @@ public class MemoryAccess extends Statement {
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		List<Statement> toReturn = new ArrayList<Statement>();
 		String registerAddr = getMemLocation(localVariables, registerLabel);
-		if (!registerLabel.equals(registerAddr)) {
+		if (!isRead && !registerLabel.equals(registerAddr)) {
 			registerLabel = "EDX";
 			toReturn.add(new Assignment(registerAddr, registerLabel));
 		}
@@ -42,6 +42,10 @@ public class MemoryAccess extends Statement {
 			toReturn.add(new Assignment(offsetLabelAddr, offsetLabel));
 		}
 		toReturn.add(this);
+		if(isRead && !registerLabel.equals(registerAddr)){
+			registerLabel = "EBX";
+			toReturn.add(new Assignment(registerLabel, registerAddr));
+		}
 		return toReturn;
 	}
 

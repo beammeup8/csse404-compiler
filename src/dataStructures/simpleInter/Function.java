@@ -33,13 +33,21 @@ public class Function {
 	}
 
 	private void addPrologueToStatements() {
-		statements.add(0, new StackOperation(StackOpType.PUSHAD));
-		statements.add(1, new Assignment("ESP", "EBP"));
-		statements.add(2, new Operation("ESP", "" + localVariables.size() * 4, "ESP", OpType.SUB));
+		List<Statement> setup = new ArrayList<>();
+		setup.add(new StackOperation("EBX", StackOpType.PUSH));
+		setup.add(new StackOperation("ECX", StackOpType.PUSH));
+		setup.add(new StackOperation("EDX", StackOpType.PUSH));
+		setup.add(new StackOperation("ESI", StackOpType.PUSH));
+		setup.add(new StackOperation("EDI", StackOpType.PUSH));
+		setup.add(new StackOperation("ESP", StackOpType.PUSH));
+		setup.add(new StackOperation("EBP", StackOpType.PUSH));
+		setup.add(new Assignment("ESP", "EBP"));
+		setup.add(new Operation("ESP", "" + localVariables.size() * 4, "ESP", OpType.SUB));
+		statements.addAll(0, setup);
 	}
 
 	private void addParametersToStatements() {
-		int offset = 12;
+		int offset = 40;
 		for (int i = parameters.size() - 1; i >= 0; i--) {
 			statements.add(0, new MemoryAccess(parameters.get(i), "EBP", "" + offset, true));
 			offset += 4;
@@ -47,9 +55,14 @@ public class Function {
 	}
 
 	private void addEpilogueToStatements() {
-		statements.add(new Assignment("DWORD PTR [ESP-32]", "EAX"));
 		statements.add(new Operation("ESP", "" + localVariables.size() * 4, "ESP", OpType.ADD));
-		statements.add(new StackOperation(StackOpType.POPAD));
+		statements.add(new StackOperation("EBP", StackOpType.POP));
+		statements.add(new StackOperation("ESP", StackOpType.POP));
+		statements.add(new StackOperation("EDI", StackOpType.POP));
+		statements.add(new StackOperation("ESI", StackOpType.POP));
+		statements.add(new StackOperation("EDX", StackOpType.POP));
+		statements.add(new StackOperation("ECX", StackOpType.POP));
+		statements.add(new StackOperation("EBX", StackOpType.POP));
 	}
 
 	private void extractLocalVariables() {
