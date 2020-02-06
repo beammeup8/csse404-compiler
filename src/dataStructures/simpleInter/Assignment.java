@@ -20,13 +20,8 @@ public class Assignment extends Statement{
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		String inMemLocation = getMemLocation(localVariables, labelIn);
 		String outMemLocation = getMemLocation(localVariables, labelOut);
-		if(inMemLocation.equals(labelIn) || outMemLocation.equals(labelOut)){
-			labelIn = inMemLocation;
-			labelOut = outMemLocation;
-			return Arrays.asList(this);
-		}
 		Assignment getInFromMem = new Assignment(inMemLocation, "EBX");
-		labelIn = inMemLocation;
+		labelIn = "EBX";
 		labelOut = outMemLocation;
 		return Arrays.asList(getInFromMem, this);
 	}

@@ -19,6 +19,7 @@ public class Main {
 		filesToCompile.add("sampleCode/QuickSort.java");
 		filesToCompile.add("sampleCode/shortExample.java");
 		filesToCompile.add("sampleCode/shortExample2.java");
+		filesToCompile.add("sampleCode/shortExample3.java");
 		filesToCompile.add("sampleCode/TreeVisitor.java");
 		
 		//run

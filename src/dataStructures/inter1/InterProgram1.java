@@ -56,8 +56,8 @@ public class InterProgram1 implements IInter1 {
 		classes.forEach(x -> x.populateSymbolTable(table, namesToClasses));
 	}
 	
-	public Program toCodeBlock(){
-		Program progBlock =  new Program();
+	public Program toCodeBlock(String filename){
+		Program progBlock =  new Program(filename);
 		classes.forEach(x -> progBlock.addAll(x.toCodeBlock()));
 		return progBlock;
 	}

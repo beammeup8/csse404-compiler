@@ -56,7 +56,7 @@ public class Operation extends Statement {
 	}
 	
 	private String setConditionalToString(String op) {
-		return "\tset" + op + " " + labelB;
+		return "\tset" + op + " AL";
 	}
 
 	private String oneParamToString(String op) {

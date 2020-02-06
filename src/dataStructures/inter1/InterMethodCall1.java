@@ -63,7 +63,14 @@ public class InterMethodCall1 implements IInterExpression1 {
 		block.add(new StackOperation(calledOn.getId(), StackOpType.PUSH));
 		
 		block.add(new Jump(localMethodName, JumpType.CALL));
+		
+		block.add(new StackOperation(calledOn.getId(), StackOpType.POP));
+		for (int i = 0; i < parameters.size(); i++) {
+			block.add(new StackOperation(parameters.get(i).getId(), StackOpType.POP));
+		}
+		
 		block.add(new Assignment("EAX", id));
+		
 		return block;
 	}
 

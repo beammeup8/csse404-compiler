@@ -86,7 +86,7 @@ public class InterClass1 implements IInter1 {
 	public List<Function> toCodeBlock() {
 		List<Function> block = new ArrayList<>();
 		if (isMain) {
-			block.add(methods.get(0).toFunction("_MAIN"));
+			block.add(methods.get(0).toFunction("_main"));
 			return block;
 		}
 		methods.forEach(x -> {

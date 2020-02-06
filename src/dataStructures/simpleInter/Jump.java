@@ -50,7 +50,7 @@ public class Jump extends Statement {
 		default:
 			break;
 		}
-		return "\t" + jumpName + " " + label + ";";
+		return "\t" + jumpName + " " + label;
 	}
 
 	@Override

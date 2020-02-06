@@ -35,7 +35,7 @@ public class Compiler {
 		ProgramNode parseTree = parser.parse(tags);
 		InterProgram1 interProgram1 = parseTree.convertToInter1();
 		interProgram1.createSymbolTable();
-		Program prog = interProgram1.toCodeBlock();
+		Program prog = interProgram1.toCodeBlock(filename);
 		optimizers.forEach(x -> x.optimize(prog));
 		outputter.output(filename, prog);
 	}

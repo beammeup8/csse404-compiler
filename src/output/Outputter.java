@@ -9,7 +9,7 @@ public class Outputter<T> {
 	private String fileExtension;
 	
 	public Outputter() {
-		fileExtension = ".txt";
+		fileExtension = ".s";
 	}
 	
 	public void output(String filename, List<T> toOutput){

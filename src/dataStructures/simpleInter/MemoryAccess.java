@@ -16,7 +16,7 @@ public class MemoryAccess extends Statement {
 
 	@Override
 	public String toString() {
-		String memPart = "DWORD PTR [" + memoryLabel + "+" +offsetLabel + "]";
+		String memPart = "DWORD PTR [" + memoryLabel + " + " + offsetLabel + "]";
 		if (isRead) {
 			return "\tmov " + registerLabel + ", " + memPart;
 		}
@@ -26,16 +26,20 @@ public class MemoryAccess extends Statement {
 	@Override
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		List<Statement> toReturn = new ArrayList<Statement>();
-		registerLabel = getMemLocation(localVariables, registerLabel);
+		String registerAddr = getMemLocation(localVariables, registerLabel);
+		if (!registerLabel.equals(registerAddr)) {
+			registerLabel = "EDX";
+			toReturn.add(new Assignment(registerAddr, registerLabel));
+		}
 		String memLabelAddr = getMemLocation(localVariables, memoryLabel);
 		if(!memoryLabel.equals(memLabelAddr)){
 			memoryLabel = "EBX";
-			toReturn.add(new Assignment(memLabelAddr, "EBX"));
+			toReturn.add(new Assignment(memLabelAddr, memoryLabel));
 		}
 		String offsetLabelAddr = getMemLocation(localVariables, offsetLabel);
 		if(!offsetLabelAddr.equals(offsetLabel)){
-			memoryLabel = "ECX";
-			toReturn.add(new Assignment(offsetLabelAddr, "ECX"));
+			offsetLabel = "ECX";
+			toReturn.add(new Assignment(offsetLabelAddr, offsetLabel));
 		}
 		toReturn.add(this);
 		return toReturn;
