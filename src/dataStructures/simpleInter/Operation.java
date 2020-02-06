@@ -20,7 +20,6 @@ public class Operation extends Statement {
 
 	@Override
 	public String toString() {
-		String opName;
 		switch (op) {
 		case ADD:
 			return twoParamToString("add");
@@ -76,6 +75,10 @@ public class Operation extends Statement {
 		if (op == OpType.DIV) {
 			toReturn.add(new Assignment("" + 0, "EDX"));
 		}
+		if(op == OpType.NOT){
+			toReturn.add(new Operation(bMem, "1", bMem, OpType.SUB));
+			op = OpType.NEG;
+		}
 		if(aMem != null && !aMem.equals(labelA)){
 			labelA = "EAX";
 			toReturn.add(new Assignment(aMem, labelA));
@@ -86,6 +89,7 @@ public class Operation extends Statement {
 		}
 		if (comparisons.contains(op)) {
 			toReturn.add(new Compare(labelA, labelB));
+			toReturn.add(new Assignment("0", labelA));
 		}
 		toReturn.add(this);
 		if(outMem != null && !outMem.equals(labelOut)){

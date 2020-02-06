@@ -81,10 +81,10 @@ public class InterValueExpression1 implements IInterExpression1 {
 	public List<Statement> toStatementList() {
 		List<Statement> stmt = new ArrayList<>();
 		if (type == TermType.ID && offset > -1) {
-			stmt.add(new MemoryAccess(localId, "EBP", "8", true));
+			stmt.add(new MemoryAccess(localId, "EBP", "36", true));
 			stmt.add(new MemoryAccess(id, localId, "" + offset, true));
 		} else if (type == TermType.THIS) {
-			stmt.add(new MemoryAccess(id, "EBP", "8", true));
+			stmt.add(new MemoryAccess(id, "EBP", "36", true));
 		} else {
 			stmt.add(new Assignment(localId, id));
 		}

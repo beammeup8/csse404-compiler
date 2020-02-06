@@ -28,7 +28,7 @@ public class Program {
 		builder.append("\t.file \"");
 		builder.append(filename);
 		builder.append("\"\n\t.def ___main; .scl 2; .type 32; .endef\n\t.intel_syntax noprefix\n\t.section .rdata, \"dr\"\n");
-		builder.append("LC0:\n\t.ascii \"%d\\0\"\n\t.text\n\t.globl _main\n\t.def _main; .scl 2; .type 32; .endef\n");
+		builder.append("LC0:\n\t.ascii \"%d\\n\\0\"\n\t.text\n\t.globl _main\n\t.def _main; .scl 2; .type 32; .endef\n");
 		return builder.toString();
 	}
 	

@@ -49,7 +49,7 @@ class LS {
 	int aux01 ;
 	int aux02 ;
 	int nt ;
-
+	
 	j = 1 ;
 	ls01 = false ;
 	ifound = 0 ;
@@ -61,6 +61,7 @@ class LS {
 	    if (aux01 < num) nt = 0 ;
 	    else if (!(aux01 < aux02)) nt = 0 ;
 	    else {
+	    System.out.println(number[j]);
 		ls01 = true ;
 		ifound = 1 ;
 		j = size ;
