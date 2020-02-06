@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-void nothing()
+int main(int argc, char *argv)
 {
-  int *i = malloc(20);
-  *i = 20;
-  int k = *i + 70;
-  free(i);
+  printf("%d", 2 + 13);
+}
+
+int hi()
+{
+  int i = 9;
+  return i;
 }
