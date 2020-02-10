@@ -55,7 +55,9 @@ public class InterMethodCall1 implements IInterExpression1 {
 		List<Statement> block = new ArrayList<Statement>();
 		block.addAll(calledOn.toStatementList());
 
-		parameters.forEach(x -> block.addAll(x.toStatementList()));
+		for(int i = 0; i < parameters.size(); i ++){
+			block.addAll(parameters.get(i).toStatementList());
+		}
 
 		for (int i = parameters.size() - 1; i >= 0; i--) {
 			block.add(new StackOperation(parameters.get(i).getId(), StackOpType.PUSH));

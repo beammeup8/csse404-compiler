@@ -8,12 +8,11 @@ declare -a arr=(BinarySearch
 								shortExample2 
 								shortExample3 
 								TreeVisitor
-                )							
+                )
 for x in ${arr[@]}
 do
 	printf "running ${x}\n"
-	gcc ${x}.s -o ${x}.exe
-	./${x}.exe > ${x}.output
-	diff ${x}.output ${x}.correct
+	javac ${x}.java
+	java ${x} > ${x}.correct
 	printf "\n"
 done

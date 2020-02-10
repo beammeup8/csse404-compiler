@@ -48,7 +48,7 @@ public class Function {
 
 	private void addParametersToStatements() {
 		int offset = 40;
-		for (int i = parameters.size() - 1; i >= 0; i--) {
+		for (int i = 0; i  < parameters.size(); i++) {
 			statements.add(0, new MemoryAccess(parameters.get(i), "EBP", "" + offset, true));
 			offset += 4;
 		}
