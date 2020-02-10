@@ -6,6 +6,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class Operation extends Statement {
 	private String labelA, labelB, labelOut;
 	private OpType op;
@@ -109,5 +112,78 @@ public class Operation extends Statement {
 	@Override
 	public List<String> localVariablesUsed() {
 		return Arrays.asList(labelA, labelB);
+	}
+
+	@Override
+	public Command toX86() {
+		CommandType type = null;
+		switch (op) {
+		case ADD:
+			type = CommandType.ADD;
+			break;
+		case AND:
+			type = CommandType.AND;
+			break;
+		case DIV:
+			type = CommandType.DIV;
+			break;
+		case EQ:
+			type = CommandType.EQ;
+			break;
+		case GRE:
+			type = CommandType.GRE;
+			break;
+		case GRT:
+			type = CommandType.GRT;
+			break;
+		case LSE:
+			type = CommandType.LSE;
+			break;
+		case LST:
+			type = CommandType.LST;
+			break;
+		case MULT:
+			type = CommandType.MULT;
+			break;
+		case NEG:
+			type = CommandType.NEG;
+			break;
+		case NEQ:
+			type = CommandType.NEQ;
+			break;
+		case NOT:
+			type = CommandType.NOT;
+			break;
+		case OR:
+			type = CommandType.OR;
+			break;
+		case SUB:
+			type = CommandType.SUB;
+			break;
+		default:
+			break;
+		}
+		
+		switch (op) {
+		case ADD:
+		case AND:
+		case MULT:
+		case OR:
+		case SUB:
+			return new Command(type, labelA, labelB);
+		case DIV:
+		case NEG:
+		case NOT:
+			return new Command(type, labelOut);
+		case EQ:
+		case GRE:
+		case GRT:
+		case LSE:
+		case LST:
+		case NEQ:
+			return new Command(type, "AL");
+		default:
+			return null;
+		}
 	}
 }

@@ -1,7 +1,7 @@
 package optimizers;
 
-import dataStructures.simpleInter.Program;
+import dataStructures.x86.ProgramX86;
 
 public interface Optimizer {
-	void optimize(Program prog);
+	void optimize(ProgramX86 prog);
 }

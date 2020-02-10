@@ -3,6 +3,9 @@ package dataStructures.simpleInter;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class Assignment extends Statement{
 	private String labelIn, labelOut;
 	
@@ -34,5 +37,10 @@ public class Assignment extends Statement{
 	@Override
 	public List<String> localVariablesUsed() {
 		return Arrays.asList(labelIn);
+	}
+
+	@Override
+	public Command toX86() {
+		return new Command(CommandType.MOV, labelOut, labelIn);
 	}
 }

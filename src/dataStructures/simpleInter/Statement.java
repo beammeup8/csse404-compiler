@@ -2,6 +2,8 @@ package dataStructures.simpleInter;
 
 import java.util.List;
 
+import dataStructures.x86.Command;
+
 public abstract class Statement {
 
 	public abstract String localVariableAssigned();
@@ -17,4 +19,6 @@ public abstract class Statement {
 		}
 		return "DWORD PTR [EBP - " + (4 * (i + 1)) + "]";
 	}
+
+	public abstract Command toX86();
 }

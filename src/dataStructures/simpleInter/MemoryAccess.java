@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class MemoryAccess extends Statement {
 	private String registerLabel, memoryLabel, offsetLabel;
 	private boolean isRead;
@@ -68,5 +71,13 @@ public class MemoryAccess extends Statement {
 			return Arrays.asList(memoryLabel, offsetLabel, getMemPart());
 		}
 		return Arrays.asList(registerLabel, memoryLabel, offsetLabel);
+	}
+
+	@Override
+	public Command toX86() {
+		if (isRead) {
+			return new Command(CommandType.MOV, registerLabel, getMemPart());
+		}
+		return new Command(CommandType.MOV, getMemPart(), registerLabel);
 	}
 }

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class Jump extends Statement {
 	private String label;
 	private JumpType jumpType;
@@ -15,35 +18,13 @@ public class Jump extends Statement {
 	
 	@Override
 	public String toString() {
-		return toX86();
-	}
-	
-	public String toX86(){
 		String jumpName = "";
 		switch (jumpType) {
 		case EQUAL:
 			jumpName = "je";
 			break;
-		case GREATER:
-			jumpName = "jg";
-			break;
-		case GREATER_EQUAL:
-			jumpName = "jge";
-			break;
-		case LESS:
-			jumpName = "jl";
-			break;
-		case LESS_EQUAL:
-			jumpName = "jle";
-			break;
 		case NONE:
 			jumpName = "jmp";
-			break;
-		case NOT_EQUAL:
-			jumpName = "jne";
-			break;
-		case ZERO:
-			jumpName = "jz";
 			break;
 		case CALL:
 			jumpName = "call";
@@ -52,6 +33,20 @@ public class Jump extends Statement {
 			break;
 		}
 		return "\t" + jumpName + " " + label;
+	}
+	
+	public Command toX86(){
+		switch (jumpType) {
+		case EQUAL:
+			return new Command(CommandType.JE, label);
+		case NONE:
+			return new Command(CommandType.JMP, label);
+		case CALL:
+			return new Command(CommandType.CALL, label);
+		default:
+			break;
+		}
+		return null;
 	}
 
 	@Override

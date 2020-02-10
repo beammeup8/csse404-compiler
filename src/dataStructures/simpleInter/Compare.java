@@ -3,6 +3,9 @@ package dataStructures.simpleInter;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class Compare extends Statement{
 	private String labelA, labelB;
 	
@@ -13,11 +16,11 @@ public class Compare extends Statement{
 	
 	@Override
 	public String toString() {
-		return toX86();
+		return "\tcmp " + labelA + ", " + labelB;
 	}
 	
-	public String toX86(){
-		return "\tcmp " + labelA + ", " + labelB;
+	public Command toX86(){
+		return new Command(CommandType.CMP, labelA, labelB);
 	}
 
 	@Override

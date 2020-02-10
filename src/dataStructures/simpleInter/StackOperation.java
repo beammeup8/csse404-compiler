@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class StackOperation extends Statement {
 	private String label;
 	private StackOpType opType;
@@ -56,6 +59,17 @@ public class StackOperation extends Statement {
 			return Arrays.asList(label);
 		}
 		return new ArrayList<>();
+	}
+
+	@Override
+	public Command toX86() {
+		switch (opType) {
+		case POP:
+			return new Command(CommandType.POP, label);
+		case PUSH:
+			return new Command(CommandType.PUSH, label);
+		}
+		return null;
 	}
 
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+
 public class Label extends Statement {
 	private String label = "";
 	
@@ -29,5 +31,10 @@ public class Label extends Statement {
 	@Override
 	public List<String> localVariablesUsed() {
 		return new ArrayList<>();
+	}
+
+	@Override
+	public Command toX86() {
+		return new Command(label);
 	}
 }

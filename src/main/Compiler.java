@@ -7,6 +7,7 @@ import dataStructures.Tag;
 import dataStructures.inter1.InterProgram1;
 import dataStructures.parseTree.ProgramNode;
 import dataStructures.simpleInter.Program;
+import dataStructures.x86.ProgramX86;
 import lexer.Lexer;
 import optimizers.Optimizer;
 import output.Outputter;
@@ -16,7 +17,7 @@ public class Compiler {
 	private Lexer lexer;
 	private Parser parser;
 	private List<Optimizer> optimizers;
-	private Outputter<Program> outputter;
+	private Outputter<ProgramX86> outputter;
 	
 	public Compiler() {
 		lexer = new Lexer();
@@ -36,8 +37,9 @@ public class Compiler {
 		InterProgram1 interProgram1 = parseTree.convertToInter1();
 		interProgram1.createSymbolTable();
 		Program prog = interProgram1.toCodeBlock(filename);
-		optimizers.forEach(x -> x.optimize(prog));
-		outputter.output(filename, prog);
+		ProgramX86 x86Prog = prog.toX86();
+		optimizers.forEach(x -> x.optimize(x86Prog));
+		outputter.output(filename, x86Prog);
 	}
 	
 	public void compile(List<String> filenames){

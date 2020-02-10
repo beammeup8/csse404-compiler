@@ -3,6 +3,9 @@ package dataStructures.simpleInter;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class Allocation extends Statement {
 	private String localName;
 	private String sizeLocation;
@@ -35,6 +38,11 @@ public class Allocation extends Statement {
 	@Override
 	public List<String> localVariablesUsed() {
 		return Arrays.asList(sizeLocation);
+	}
+
+	@Override
+	public Command toX86() {
+		return new Command(CommandType.CALL, "_malloc");
 	}
 
 }

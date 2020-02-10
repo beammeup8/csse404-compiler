@@ -3,6 +3,9 @@ package dataStructures.simpleInter;
 import java.util.ArrayList;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.FunctionX86;
+
 public class Function {
 	private String name;
 	private Label nameLabel;
@@ -78,6 +81,14 @@ public class Function {
 				localVariables.add(a);
 			}
 		}
+	}
+	
+	public FunctionX86 toX86(){
+		List<Command> commands = new ArrayList<>();
+		for(int i = 0; i < statements.size(); i++){
+			commands.add(statements.get(i).toX86());
+		}
+		return new FunctionX86(commands, name.equals("_main"), name);
 	}
 
 	@Override

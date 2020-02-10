@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dataStructures.x86.Command;
+import dataStructures.x86.CommandType;
+
 public class Print extends Statement {
 	private String localName;
 	
@@ -33,5 +36,10 @@ public class Print extends Statement {
 	@Override
 	public List<String> localVariablesUsed() {
 		return new ArrayList<>();
+	}
+
+	@Override
+	public Command toX86() {
+		return new Command(CommandType.CALL, "_printf");
 	}
 }
