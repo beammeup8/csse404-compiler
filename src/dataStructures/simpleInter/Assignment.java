@@ -6,9 +6,9 @@ import java.util.List;
 import dataStructures.x86.Command;
 import dataStructures.x86.CommandType;
 
-public class Assignment extends Statement{
+public class Assignment extends Statement {
 	private String labelIn, labelOut;
-	
+
 	public Assignment(String labelIn, String labelOut) {
 		this.labelIn = labelIn;
 		this.labelOut = labelOut;
@@ -16,7 +16,7 @@ public class Assignment extends Statement{
 
 	@Override
 	public String toString() {
-		return "\tmov " + labelOut +  ", " + labelIn; 
+		return "\tmov " + labelOut + ", " + labelIn;
 	}
 
 	@Override
@@ -34,9 +34,12 @@ public class Assignment extends Statement{
 		return labelOut;
 	}
 
-	@Override
-	public List<String> localVariablesUsed() {
-		return Arrays.asList(labelIn);
+	public String getLabelIn() {
+		return labelIn;
+	}
+
+	public String getLabelOut() {
+		return labelOut;
 	}
 
 	@Override

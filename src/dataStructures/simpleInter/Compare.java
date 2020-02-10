@@ -8,12 +8,12 @@ import dataStructures.x86.CommandType;
 
 public class Compare extends Statement{
 	private String labelA, labelB;
-	
+
 	public Compare(String labelA, String labelB) {
 		this.labelA = labelA;
 		this.labelB = labelB;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "\tcmp " + labelA + ", " + labelB;
@@ -27,7 +27,7 @@ public class Compare extends Statement{
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		String aMemLocation = getMemLocation(localVariables, labelA);
 		String bMemLocation = getMemLocation(localVariables, labelB);
-		if(aMemLocation.equals(labelA) || bMemLocation.equals(labelB)){
+		if (aMemLocation.equals(labelA) || bMemLocation.equals(labelB)) {
 			labelA = aMemLocation;
 			labelB = bMemLocation;
 			return Arrays.asList(this);
@@ -41,10 +41,5 @@ public class Compare extends Statement{
 	@Override
 	public String localVariableAssigned() {
 		return null;
-	}
-
-	@Override
-	public List<String> localVariablesUsed() {
-		return Arrays.asList(labelA, labelB);
 	}
 }

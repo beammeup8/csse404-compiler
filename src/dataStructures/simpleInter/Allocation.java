@@ -36,11 +36,6 @@ public class Allocation extends Statement {
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		return Arrays.asList(sizeLocation);
-	}
-
-	@Override
 	public Command toX86() {
 		return new Command(CommandType.CALL, "_malloc");
 	}

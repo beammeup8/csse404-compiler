@@ -1,7 +1,6 @@
 package dataStructures.simpleInter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import dataStructures.x86.Command;
@@ -63,14 +62,6 @@ public class MemoryAccess extends Statement {
 			return registerLabel;
 		}
 		return getMemPart();
-	}
-
-	@Override
-	public List<String> localVariablesUsed() {
-		if (isRead) {
-			return Arrays.asList(memoryLabel, offsetLabel, getMemPart());
-		}
-		return Arrays.asList(registerLabel, memoryLabel, offsetLabel);
 	}
 
 	@Override

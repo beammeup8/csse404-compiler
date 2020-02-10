@@ -1,6 +1,5 @@
 package dataStructures.simpleInter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,12 +9,12 @@ import dataStructures.x86.CommandType;
 public class Jump extends Statement {
 	private String label;
 	private JumpType jumpType;
-	
+
 	public Jump(String label, JumpType jumpType) {
 		this.label = label;
 		this.jumpType = jumpType;
 	}
-	
+
 	@Override
 	public String toString() {
 		String jumpName = "";
@@ -57,10 +56,5 @@ public class Jump extends Statement {
 	@Override
 	public String localVariableAssigned() {
 		return null;
-	}
-
-	@Override
-	public List<String> localVariablesUsed() {
-		return new ArrayList<>();
 	}
 }

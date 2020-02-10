@@ -1,9 +1,7 @@
 package dataStructures.simpleInter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import dataStructures.x86.Command;
 import dataStructures.x86.CommandType;
 
@@ -48,17 +46,6 @@ public class StackOperation extends Statement {
 			return null;
 		}
 		return null;
-	}
-
-	@Override
-	public List<String> localVariablesUsed() {
-		switch (opType) {
-		case POP:
-			return new ArrayList<>();
-		case PUSH:
-			return Arrays.asList(label);
-		}
-		return new ArrayList<>();
 	}
 
 	@Override

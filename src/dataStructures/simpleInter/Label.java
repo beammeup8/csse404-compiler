@@ -1,18 +1,16 @@
 package dataStructures.simpleInter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import dataStructures.x86.Command;
 
 public class Label extends Statement {
 	private String label = "";
-	
+
 	public Label(String label) {
 		this.label = label;
 	}
-	
+
 	@Override
 	public String toString() {
 		return label + ":";
@@ -26,11 +24,6 @@ public class Label extends Statement {
 	@Override
 	public String localVariableAssigned() {
 		return null;
-	}
-
-	@Override
-	public List<String> localVariablesUsed() {
-		return new ArrayList<>();
 	}
 
 	@Override

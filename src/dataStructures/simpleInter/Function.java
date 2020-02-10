@@ -2,7 +2,6 @@ package dataStructures.simpleInter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import dataStructures.x86.Command;
 import dataStructures.x86.FunctionX86;
 
@@ -25,9 +24,29 @@ public class Function {
 		convertToMemAccesses();
 		optimize();
 	}
-
+	
 	private void optimize() {
-		
+		boolean hasChanged = true;
+		while (hasChanged) {
+			hasChanged = false;
+			for (int i = 0; i < statements.size() - 1; i++) {
+				if (isAssignment(statements.get(i)) && isAssignment(statements.get(i + 1))) {
+					Assignment a1 = (Assignment) statements.get(i);
+					Assignment a2 = (Assignment) statements.get(i + 1);
+					if (!a1.getLabelIn().startsWith("DWORD") && !a1.getLabelOut().startsWith("DWORD") && a1.getLabelOut().equals(a2.getLabelIn())) {
+						statements.remove(i + 1);
+						statements.remove(i);
+						statements.add(i, new Assignment(a1.getLabelIn(), a2.getLabelOut()));
+						hasChanged = true;
+						i--;
+					}
+				}
+			}
+		}
+	}
+
+	private boolean isAssignment(Statement s) {
+		return s.getClass() == Assignment.class;
 	}
 
 	private void convertToMemAccesses() {
@@ -56,7 +75,7 @@ public class Function {
 
 	private void addParametersToStatements() {
 		int offset = 40;
-		for (int i = 0; i  < parameters.size(); i++) {
+		for (int i = 0; i < parameters.size(); i++) {
 			statements.add(0, new MemoryAccess(parameters.get(i), "EBP", "" + offset, true));
 			offset += 4;
 		}
@@ -95,7 +114,8 @@ public class Function {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(nameLabel.toString() + "\n");
-		builder.append("\t.cfi_startproc\n\tpush ebp\n\t.cfi_def_cfa_offset 8\n\t.cfi_offset 5, -8\n\tmov ebp, esp\n\t.cfi_def_cfa_register 5\n");
+		builder.append(
+				"\t.cfi_startproc\n\tpush ebp\n\t.cfi_def_cfa_offset 8\n\t.cfi_offset 5, -8\n\tmov ebp, esp\n\t.cfi_def_cfa_register 5\n");
 		if (name.equals("_main")) {
 			builder.append("\tand esp, -16\n\tsub esp, 16\n\tcall ___main\n");
 		}
