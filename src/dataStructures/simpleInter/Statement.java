@@ -6,6 +6,8 @@ public abstract class Statement {
 
 	public abstract String localVariableAssigned();
 	
+	public abstract List<String> localVariablesUsed();
+	
 	public abstract List<Statement> convertToMemAccesses(List<String> localVariables);
 
 	protected String getMemLocation(List<String> localVariables, String label) {

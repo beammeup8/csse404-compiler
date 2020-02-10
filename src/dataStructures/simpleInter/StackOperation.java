@@ -1,5 +1,6 @@
 package dataStructures.simpleInter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,12 +22,8 @@ public class StackOperation extends Statement {
 		switch (opType) {
 		case POP:
 			return "\tpop " + label;
-		case POPAD:
-			return "\tpopad";
 		case PUSH:
 			return "\tpush " + label;
-		case PUSHAD:
-			return "\tpushad";
 		}
 		return null;
 	}
@@ -41,7 +38,24 @@ public class StackOperation extends Statement {
 
 	@Override
 	public String localVariableAssigned() {
-		return label;
+		switch (opType) {
+		case POP:
+			return label;
+		case PUSH:
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> localVariablesUsed() {
+		switch (opType) {
+		case POP:
+			return new ArrayList<>();
+		case PUSH:
+			return Arrays.asList(label);
+		}
+		return new ArrayList<>();
 	}
 
 }

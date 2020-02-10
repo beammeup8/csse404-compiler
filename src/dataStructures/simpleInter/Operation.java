@@ -1,6 +1,7 @@
 package dataStructures.simpleInter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -103,5 +104,10 @@ public class Operation extends Statement {
 	@Override
 	public String localVariableAssigned() {
 		return labelOut;
+	}
+
+	@Override
+	public List<String> localVariablesUsed() {
+		return Arrays.asList(labelA, labelB);
 	}
 }

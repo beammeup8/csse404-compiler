@@ -32,4 +32,9 @@ public class Allocation extends Statement {
 		return localName;
 	}
 
+	@Override
+	public List<String> localVariablesUsed() {
+		return Arrays.asList(sizeLocation);
+	}
+
 }

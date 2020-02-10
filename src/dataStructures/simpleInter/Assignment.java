@@ -30,4 +30,9 @@ public class Assignment extends Statement{
 	public String localVariableAssigned() {
 		return labelOut;
 	}
+
+	@Override
+	public List<String> localVariablesUsed() {
+		return Arrays.asList(labelIn);
+	}
 }

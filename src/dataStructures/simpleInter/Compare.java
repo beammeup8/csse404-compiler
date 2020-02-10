@@ -39,4 +39,9 @@ public class Compare extends Statement{
 	public String localVariableAssigned() {
 		return null;
 	}
+
+	@Override
+	public List<String> localVariablesUsed() {
+		return Arrays.asList(labelA, labelB);
+	}
 }

@@ -1,6 +1,7 @@
 package dataStructures.simpleInter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MemoryAccess extends Statement {
@@ -13,10 +14,14 @@ public class MemoryAccess extends Statement {
 		this.offsetLabel = offsetLabel;
 		this.isRead = isRead;
 	}
+	
+	private String getMemPart() {
+		return "DWORD PTR [" + memoryLabel + " + " + offsetLabel + "]";
+	}
 
 	@Override
 	public String toString() {
-		String memPart = "DWORD PTR [" + memoryLabel + " + " + offsetLabel + "]";
+		String memPart = getMemPart();
 		if (isRead) {
 			return "\tmov " + registerLabel + ", " + memPart;
 		}
@@ -51,6 +56,17 @@ public class MemoryAccess extends Statement {
 
 	@Override
 	public String localVariableAssigned() {
-		return registerLabel;
+		if (isRead) {
+			return registerLabel;
+		}
+		return getMemPart();
+	}
+
+	@Override
+	public List<String> localVariablesUsed() {
+		if (isRead) {
+			return Arrays.asList(memoryLabel, offsetLabel, getMemPart());
+		}
+		return Arrays.asList(registerLabel, memoryLabel, offsetLabel);
 	}
 }

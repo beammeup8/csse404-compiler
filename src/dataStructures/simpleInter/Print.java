@@ -1,5 +1,6 @@
 package dataStructures.simpleInter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,5 +28,10 @@ public class Print extends Statement {
 	@Override
 	public String localVariableAssigned() {
 		return null;
+	}
+
+	@Override
+	public List<String> localVariablesUsed() {
+		return new ArrayList<>();
 	}
 }

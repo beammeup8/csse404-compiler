@@ -20,6 +20,11 @@ public class Function {
 		addPrologueToStatements();
 		addEpilogueToStatements();
 		convertToMemAccesses();
+		optimize();
+	}
+
+	private void optimize() {
+		
 	}
 
 	private void convertToMemAccesses() {
