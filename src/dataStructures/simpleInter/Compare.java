@@ -2,21 +2,22 @@ package dataStructures.simpleInter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class Compare extends Statement{
+public class Compare extends Statement {
 	private String labelA, labelB;
-	
+
 	public Compare(String labelA, String labelB) {
 		this.labelA = labelA;
 		this.labelB = labelB;
 	}
-	
+
 	@Override
 	public String toString() {
 		return toX86();
 	}
-	
-	public String toX86(){
+
+	public String toX86() {
 		return "\tcmp " + labelA + ", " + labelB;
 	}
 
@@ -24,7 +25,7 @@ public class Compare extends Statement{
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		String aMemLocation = getMemLocation(localVariables, labelA);
 		String bMemLocation = getMemLocation(localVariables, labelB);
-		if(aMemLocation.equals(labelA) || bMemLocation.equals(labelB)){
+		if (aMemLocation.equals(labelA) || bMemLocation.equals(labelB)) {
 			labelA = aMemLocation;
 			labelB = bMemLocation;
 			return Arrays.asList(this);
@@ -41,7 +42,19 @@ public class Compare extends Statement{
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		return Arrays.asList(labelA, labelB);
+	public void populateVarMap(Map<String, String> varMap) {
+
 	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+		labelA = getNewVarName(labelA, varMap);
+		labelB = getNewVarName(labelB, varMap);
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return false;
+	}
+
 }

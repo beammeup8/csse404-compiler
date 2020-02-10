@@ -2,6 +2,7 @@ package dataStructures.simpleInter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Allocation extends Statement {
 	private String localName;
@@ -33,8 +34,19 @@ public class Allocation extends Statement {
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		return Arrays.asList(sizeLocation);
+	public void populateVarMap(Map<String, String> varMap) {
+		
+	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+		localName = getNewVarName(localName, varMap);
+		sizeLocation = getNewVarName(sizeLocation, varMap);
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return false;
 	}
 
 }

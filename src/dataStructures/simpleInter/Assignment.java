@@ -2,10 +2,11 @@ package dataStructures.simpleInter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class Assignment extends Statement{
+public class Assignment extends Statement {
 	private String labelIn, labelOut;
-	
+
 	public Assignment(String labelIn, String labelOut) {
 		this.labelIn = labelIn;
 		this.labelOut = labelOut;
@@ -13,7 +14,7 @@ public class Assignment extends Statement{
 
 	@Override
 	public String toString() {
-		return "\tmov " + labelOut +  ", " + labelIn; 
+		return "\tmov " + labelOut + ", " + labelIn;
 	}
 
 	@Override
@@ -31,8 +32,29 @@ public class Assignment extends Statement{
 		return labelOut;
 	}
 
+	public String getLabelIn() {
+		return labelIn;
+	}
+
+	public String getLabelOut() {
+		return labelOut;
+	}
+
 	@Override
-	public List<String> localVariablesUsed() {
-		return Arrays.asList(labelIn);
+	public void populateVarMap(Map<String, String> varMap) {
+		if (labelIn.startsWith("_")) {
+			varMap.put(labelOut, labelIn);
+		}
+	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+		labelIn = getNewVarName(labelIn, varMap);
+		labelOut = getNewVarName(labelOut, varMap);
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return labelIn.equals(labelOut);
 	}
 }

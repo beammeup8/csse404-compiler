@@ -1,16 +1,16 @@
 package dataStructures.simpleInter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Label extends Statement {
 	private String label = "";
-	
+
 	public Label(String label) {
 		this.label = label;
 	}
-	
+
 	@Override
 	public String toString() {
 		return label + ":";
@@ -27,7 +27,18 @@ public class Label extends Statement {
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		return new ArrayList<>();
+	public void populateVarMap(Map<String, String> varMap) {
+
 	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return false;
+	}
+
 }

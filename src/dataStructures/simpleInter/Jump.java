@@ -1,24 +1,24 @@
 package dataStructures.simpleInter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Jump extends Statement {
 	private String label;
 	private JumpType jumpType;
-	
+
 	public Jump(String label, JumpType jumpType) {
 		this.label = label;
 		this.jumpType = jumpType;
 	}
-	
+
 	@Override
 	public String toString() {
 		return toX86();
 	}
-	
-	public String toX86(){
+
+	public String toX86() {
 		String jumpName = "";
 		switch (jumpType) {
 		case EQUAL:
@@ -65,7 +65,18 @@ public class Jump extends Statement {
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		return new ArrayList<>();
+	public void populateVarMap(Map<String, String> varMap) {
+
 	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return false;
+	}
+
 }

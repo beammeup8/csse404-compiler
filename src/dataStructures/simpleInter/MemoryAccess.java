@@ -1,8 +1,8 @@
 package dataStructures.simpleInter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MemoryAccess extends Statement {
 	private String registerLabel, memoryLabel, offsetLabel;
@@ -63,10 +63,20 @@ public class MemoryAccess extends Statement {
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		if (isRead) {
-			return Arrays.asList(memoryLabel, offsetLabel, getMemPart());
-		}
-		return Arrays.asList(registerLabel, memoryLabel, offsetLabel);
+	public void populateVarMap(Map<String, String> varMap) {
+
 	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+		registerLabel = getNewVarName(registerLabel, varMap);
+		memoryLabel = getNewVarName(memoryLabel, varMap);
+		offsetLabel = getNewVarName(offsetLabel, varMap);
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return offsetLabel.equals("0") && memoryLabel.equals(registerLabel);
+	}
+
 }

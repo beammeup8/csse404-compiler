@@ -1,8 +1,8 @@
 package dataStructures.simpleInter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class StackOperation extends Statement {
 	private String label;
@@ -48,14 +48,19 @@ public class StackOperation extends Statement {
 	}
 
 	@Override
-	public List<String> localVariablesUsed() {
-		switch (opType) {
-		case POP:
-			return new ArrayList<>();
-		case PUSH:
-			return Arrays.asList(label);
-		}
-		return new ArrayList<>();
+	public void populateVarMap(Map<String, String> varMap) {
+
 	}
+
+	@Override
+	public void simplifyVariables(Map<String, String> varMap) {
+		label = getNewVarName(label, varMap);
+	}
+
+	@Override
+	public boolean isRedundant() {
+		return false;
+	}
+
 
 }
