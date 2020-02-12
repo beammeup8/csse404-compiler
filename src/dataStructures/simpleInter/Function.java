@@ -22,31 +22,6 @@ public class Function {
 		addPrologueToStatements();
 		addEpilogueToStatements();
 		convertToMemAccesses();
-		optimize();
-	}
-	
-	private void optimize() {
-		boolean hasChanged = true;
-		while (hasChanged) {
-			hasChanged = false;
-			for (int i = 0; i < statements.size() - 1; i++) {
-				if (isAssignment(statements.get(i)) && isAssignment(statements.get(i + 1))) {
-					Assignment a1 = (Assignment) statements.get(i);
-					Assignment a2 = (Assignment) statements.get(i + 1);
-					if (!a1.getLabelIn().startsWith("DWORD") && !a1.getLabelOut().startsWith("DWORD") && a1.getLabelOut().equals(a2.getLabelIn())) {
-						statements.remove(i + 1);
-						statements.remove(i);
-						statements.add(i, new Assignment(a1.getLabelIn(), a2.getLabelOut()));
-						hasChanged = true;
-						i--;
-					}
-				}
-			}
-		}
-	}
-
-	private boolean isAssignment(Statement s) {
-		return s.getClass() == Assignment.class;
 	}
 
 	private void convertToMemAccesses() {

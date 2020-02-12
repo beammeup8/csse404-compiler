@@ -1,7 +1,7 @@
 package dataStructures.x86;
 
 public enum CommandType {
-	ADD, SUB, MULT, DIV, CALL, AND, OR, NEG, NOT, EQ, GRE, GRT, LSE, LST, NEQ, PUSH, POP, MOV, JE, JMP, CMP;
+	ADD, SUB, MULT, DIV, CALL, AND, OR, NEG, NOT, EQ, GRE, GRT, LSE, LST, NEQ, PUSH, POP, MOV, JE, JMP, CMP, LABEL;
 	
 	@Override
 	public String toString() {

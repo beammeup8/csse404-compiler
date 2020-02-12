@@ -17,7 +17,7 @@ public class Command {
 	}
 	
 	public Command(String label) {
-		this(label, null, null, null);
+		this(label, CommandType.LABEL, null, null);
 	}
 	
 	public Command(CommandType op, String reg1) {
