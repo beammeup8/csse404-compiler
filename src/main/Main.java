@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import optimizers.ImmediateInLiner;
-import optimizers.RemoveUnusedMem;
+import optimizers.RemoveUnusedAssignments;
+import optimizers.CollapseMemChain;
+import optimizers.WriteReadToWrite;
 
 
 public class Main {
@@ -28,7 +30,9 @@ public class Main {
 		
 		//add optimazers here
 		compiler.addOptimizer(new ImmediateInLiner());
-		compiler.addOptimizer(new RemoveUnusedMem());
+		compiler.addOptimizer(new CollapseMemChain());
+		compiler.addOptimizer(new WriteReadToWrite());
+		compiler.addOptimizer(new RemoveUnusedAssignments());
 		
 		//run
 		compiler.compile(filesToCompile);
