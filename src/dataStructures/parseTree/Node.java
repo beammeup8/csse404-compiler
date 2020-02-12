@@ -2,13 +2,13 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import Exceptions.CustomException;
-import Exceptions.DefaultException;
-import Exceptions.IncorrectOperatorFound;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.GenericOpType;
 import dataStructures.Tag;
+import exceptions.CustomException;
+import exceptions.DefaultException;
+import exceptions.IncorrectOperatorFound;
 
 public abstract class Node {
 

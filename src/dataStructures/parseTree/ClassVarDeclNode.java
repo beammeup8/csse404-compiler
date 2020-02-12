@@ -2,10 +2,10 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.InterDeclaration1;
+import exceptions.CustomException;
 
 public class ClassVarDeclNode extends Node {
 	private TypeNode type;

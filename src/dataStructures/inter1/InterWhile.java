@@ -9,6 +9,8 @@ import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
 import dataStructures.simpleInter.Label;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
+import exceptions.IncompatibleTypeException;
 
 public class InterWhile implements IInterStatement1 {
 	private IInterExpression1 conditional;
@@ -20,12 +22,11 @@ public class InterWhile implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		conditional.populateSymbolTable(parent, classMap);
 		body.populateSymbolTable(new SymbolTable(parent), classMap);
 		if(!conditional.getType().equals("boolean")){
-			System.err.println("While loops can only have boolean conditionals");
-			System.exit(0);
+			throw new IncompatibleTypeException("While loops can only have boolean conditionals");
 		}
 	}
 

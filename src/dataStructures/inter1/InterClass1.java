@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Function;
+import exceptions.CustomException;
 
 public class InterClass1 implements IInter1 {
 
@@ -39,14 +40,18 @@ public class InterClass1 implements IInter1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		this.classMap = classMap;
 		table.addEntry("this", className);
-		methods.forEach(x -> x.populateSymbolTable(table, classMap));
+		for (InterMethod1 method : methods) {
+			method.populateSymbolTable(table, classMap);
+		}
 	}
 
-	public void addMethodsToSymbolTable(SymbolTable table) {
-		methods.forEach(x -> table.addEntry(className + "." + x.getName(), x.getType()));
+	public void addMethodsToSymbolTable(SymbolTable table) throws CustomException {
+		for (InterMethod1 method : methods) {
+			table.addEntry(className + "." + method.getName(), method.getType());
+		}
 	}
 
 	public String getClassName() {
@@ -75,7 +80,7 @@ public class InterClass1 implements IInter1 {
 		return methods;
 	}
 
-	public SymbolTable prepareSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public SymbolTable prepareSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		table = new SymbolTable(parent);
 		for (int i = 0; i < fields.size(); i++) {
 			fields.get(i).populateSymbolTable(table, classMap, 4 * i);

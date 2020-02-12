@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterDeclaration1 implements IInterStatement1 {
 	private String typeID, id, localID;
@@ -22,11 +23,11 @@ public class InterDeclaration1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		populateSymbolTable(parent, classMap, -1);
 	}
 	
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap, int offset) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap, int offset) throws CustomException {
 		parent.addEntry(id, typeID, offset);
 		localID = parent.getLocalName(id);
 	}

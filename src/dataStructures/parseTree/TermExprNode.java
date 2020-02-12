@@ -2,7 +2,6 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
@@ -11,6 +10,7 @@ import dataStructures.inter1.IInterExpression1;
 import dataStructures.inter1.InterNewArrayInstance;
 import dataStructures.inter1.InterNewClassInstance;
 import dataStructures.inter1.InterValueExpression1;
+import exceptions.CustomException;
 
 public class TermExprNode extends Node {
 	private TermType type;

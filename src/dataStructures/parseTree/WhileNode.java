@@ -2,11 +2,11 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterStatement1;
 import dataStructures.inter1.InterWhile;
+import exceptions.CustomException;
 
 public class WhileNode extends Node {
 	private ExprNode conditional;

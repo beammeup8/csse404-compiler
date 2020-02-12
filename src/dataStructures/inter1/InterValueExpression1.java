@@ -8,6 +8,7 @@ import dataStructures.TermType;
 import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterValueExpression1 implements IInterExpression1 {
 
@@ -40,7 +41,7 @@ public class InterValueExpression1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		table = parent;
 		if(type == TermType.ID){
 			localId = parent.getLocalName(symbol);
@@ -55,11 +56,6 @@ public class InterValueExpression1 implements IInterExpression1 {
 	@Override
 	public String getType() {
 		switch (type){
-		case NEW_ARRAY:
-		case NEW_CLASS_INSTANCE:
-		case EXPRESSION:
-			System.err.println("Invalid Value Expression Type");
-			System.exit(0);
 		case TRUE:
 		case FALSE:
 			return "boolean";
@@ -72,6 +68,7 @@ public class InterValueExpression1 implements IInterExpression1 {
 		case THIS:
 			return table.getType("this");
 		default:
+			System.err.println("Should be unreachable code: value expressions should not be this type");
 			break;
 		}
 		return null;

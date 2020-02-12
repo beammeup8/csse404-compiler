@@ -2,6 +2,9 @@ package dataStructures.inter1;
 
 import java.util.HashMap;
 
+import exceptions.CustomException;
+import exceptions.DefaultException;
+
 public class SymbolTable {
 	SymbolTable parent;
 	HashMap<String, SymbolEntry> table;
@@ -11,16 +14,15 @@ public class SymbolTable {
 		this.table = new HashMap<>();
 	}
 
-	public void addEntry(String symbol, String type, int offset) {
+	public void addEntry(String symbol, String type, int offset) throws CustomException {
 		SymbolEntry entry = new SymbolEntry(type, IdGenerator.getUniqueId(), offset);
 		SymbolEntry previousEntry = table.put(symbol, entry);
 		if (previousEntry != null) {
-			System.err.println("symbol: " + symbol + "has been declared more than once in this scope");
-			System.exit(0);
+			throw new DefaultException("symbol: " + symbol + "has been declared more than once in this scope");
 		}
 	}
 	
-	public void addEntry(String symbol, String type) {
+	public void addEntry(String symbol, String type) throws CustomException {
 		addEntry(symbol, type, -1);
 	}
 

@@ -12,6 +12,7 @@ import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.StackOpType;
 import dataStructures.simpleInter.StackOperation;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterMethodCall1 implements IInterExpression1 {
 
@@ -39,10 +40,12 @@ public class InterMethodCall1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		table = parent;
 		calledOn.populateSymbolTable(parent, classMap);
-		parameters.forEach(x -> x.populateSymbolTable(parent, classMap));
+		for (IInterExpression1 parameter : parameters) {
+			parameter.populateSymbolTable(table, classMap);
+		}
 		localMethodName = parent.getLocalName(calledOn.getType() + "." + methodId);
 	}
 

@@ -3,10 +3,10 @@ package dataStructures.parseTree;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.InterDeclaration1;
+import exceptions.CustomException;
 
 public class FormalNode extends Node {
 	private boolean isEpsilon;

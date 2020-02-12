@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public abstract class CustomException extends Exception {
 

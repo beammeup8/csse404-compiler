@@ -3,11 +3,11 @@ package dataStructures.parseTree;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.InterClass1;
 import dataStructures.inter1.InterProgram1;
+import exceptions.CustomException;
 
 /**
  * Program -> MainClassDecl ClassDecl

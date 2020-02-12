@@ -7,6 +7,7 @@ import java.util.Map;
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 {
 	
@@ -25,7 +26,7 @@ public class InterArrayAccess1 extends InterArray1 implements IInterExpression1 
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		arrayExpression.populateSymbolTable(parent, classMap);
 		arrayIndex.populateSymbolTable(parent, classMap);
 	}

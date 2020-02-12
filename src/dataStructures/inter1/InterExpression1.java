@@ -7,6 +7,8 @@ import java.util.Map;
 import dataStructures.simpleInter.OpType;
 import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
+import exceptions.IncompatibleTypeException;
 
 public class InterExpression1 implements IInterExpression1 {
 	private IInterExpression1 a, b;
@@ -90,7 +92,7 @@ public class InterExpression1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		if (a != null) {
 			a.populateSymbolTable(parent, classMap);
 		}
@@ -104,20 +106,17 @@ public class InterExpression1 implements IInterExpression1 {
 		case EQ:
 		case NEQ:
 			if (!aType.equals(bType)) {
-				System.err.println("Incompatible type equality: " + aType + " and " + bType);
-				System.exit(0);
+				throw new IncompatibleTypeException(aType + "and " + bType);
 			}
 			break;
 		case AND:
 		case OR:
 			if (!aType.equals(bType)) {
-				System.err.println("Incompatible types: " + aType + " and " + bType);
-				System.exit(0);
+				throw new IncompatibleTypeException(aType + "and " + bType);
 			}
 		case NOT:
 			if (!bType.equals("boolean")) {
-				System.err.println("Incompatible types: operand not boolean");
-				System.exit(0);
+				throw new IncompatibleTypeException("operand not boolean");
 			}
 			break;
 		case GRE:
@@ -129,13 +128,11 @@ public class InterExpression1 implements IInterExpression1 {
 		case DIV:
 		case MULT:
 			if (!aType.equals(bType)) {
-				System.err.println("Incompatible type equality: " + aType + " and " + bType);
-				System.exit(0);
+				throw new IncompatibleTypeException(aType + "and " + bType);
 			}
 		case NEG:
 			if (!bType.equals("int")) {
-				System.err.println("Incompatible types: operand not integer");
-				System.exit(0);
+				throw new IncompatibleTypeException("operand not integer");
 			}
 			break;
 		}

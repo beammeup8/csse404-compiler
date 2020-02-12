@@ -7,6 +7,7 @@ import java.util.Map;
 import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.Function;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterMethod1 implements IInter1 {
 	private String typeID, id;
@@ -35,10 +36,14 @@ public class InterMethod1 implements IInter1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		SymbolTable table = new SymbolTable(parent);
-		parameters.forEach(x -> x.populateSymbolTable(table, classMap));
-		statements.forEach(x -> x.populateSymbolTable(table, classMap));
+		for (InterDeclaration1 parameter : parameters) {
+			parameter.populateSymbolTable(table, classMap);
+		}
+		for (IInterStatement1 statement : statements) {
+			statement.populateSymbolTable(table, classMap);
+		}
 		if (returnExpr != null) {
 			returnExpr.populateSymbolTable(table, classMap);
 		}

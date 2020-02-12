@@ -6,6 +6,8 @@ import java.util.Map;
 
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
+import exceptions.InvalidCallException;
 
 public class InterLength1 extends InterArray1 implements IInterExpression1 {
 
@@ -23,11 +25,10 @@ public class InterLength1 extends InterArray1 implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		arrayExpression.populateSymbolTable(parent, classMap);
 		if (!arrayExpression.getType().equals("int[]")) {
-			System.err.println("Can not take the length of a non-array object");
-			System.exit(0);
+			throw new InvalidCallException("Can not take the length of a non-array object");
 		}
 	}
 

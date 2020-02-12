@@ -7,6 +7,7 @@ import java.util.Map;
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 	private String arrayID;
@@ -20,7 +21,7 @@ public class InterArrayAssign1 extends InterArray1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		arrayIndex.populateSymbolTable(parent, classMap);
 		value.populateSymbolTable(parent, classMap);
 		parent.checkType(arrayID, "int[]");

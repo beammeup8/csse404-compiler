@@ -2,9 +2,9 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import exceptions.CustomException;
 
 public class TypeNode extends Node {
 	private TerminalNode type;

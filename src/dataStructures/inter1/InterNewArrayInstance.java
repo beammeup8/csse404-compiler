@@ -8,6 +8,8 @@ import dataStructures.simpleInter.Allocation;
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Operation;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
+import exceptions.IncompatibleTypeException;
 
 public class InterNewArrayInstance extends InterArray1 implements IInterExpression1 {
 
@@ -25,11 +27,10 @@ public class InterNewArrayInstance extends InterArray1 implements IInterExpressi
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		length.populateSymbolTable(parent, classMap);
 		if(!length.getType().equals("int")){
-			System.err.println("Arrays must have a numeric length");
-			System.exit(0);
+			throw new IncompatibleTypeException("Arrays must have a numeric length");
 		}
 		
 	}

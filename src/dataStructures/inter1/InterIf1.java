@@ -9,6 +9,8 @@ import dataStructures.simpleInter.Jump;
 import dataStructures.simpleInter.JumpType;
 import dataStructures.simpleInter.Label;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
+import exceptions.IncompatibleTypeException;
 
 public class InterIf1 implements IInterStatement1 {
 
@@ -29,11 +31,10 @@ public class InterIf1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		expression.populateSymbolTable(parent, classMap);
 		if (!expression.getType().equals("boolean")) {
-			System.err.println("Conditionals must be boolean expressions");
-			System.exit(0);
+			throw new IncompatibleTypeException("Conditionals must be boolean expressions");
 		}
 		thenStatement.populateSymbolTable(new SymbolTable(parent), classMap);
 		elseStatement.populateSymbolTable(new SymbolTable(parent), classMap);

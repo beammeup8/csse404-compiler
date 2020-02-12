@@ -6,6 +6,8 @@ import java.util.Map;
 
 import dataStructures.simpleInter.Print;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
+import exceptions.IncompatibleTypeException;
 
 public class InterPrintStatement1 implements IInterStatement1 {
 
@@ -21,11 +23,10 @@ public class InterPrintStatement1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		toPrint.populateSymbolTable(parent, classMap);
 		if (!toPrint.getType().equals("int")) {
-			System.err.println("Print can only print integers");
-			System.exit(0);
+			throw new IncompatibleTypeException("Print can only print integers");
 		}
 	}
 

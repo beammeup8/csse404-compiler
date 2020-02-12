@@ -2,11 +2,11 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.GenericOpType;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
+import exceptions.CustomException;
 
 public class EqualityExprNode extends Node {
 	boolean isEpsilon;

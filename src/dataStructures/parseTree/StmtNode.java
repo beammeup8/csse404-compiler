@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
 import dataStructures.Tag;
@@ -15,6 +14,7 @@ import dataStructures.inter1.InterDeclaration1;
 import dataStructures.inter1.InterMultiStatement1;
 import dataStructures.inter1.InterNoScope1;
 import dataStructures.inter1.InterPrintStatement1;
+import exceptions.CustomException;
 
 /**
  * 

@@ -7,6 +7,7 @@ import java.util.Map;
 import dataStructures.simpleInter.Assignment;
 import dataStructures.simpleInter.MemoryAccess;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterAssign1 implements IInterStatement1 {
 
@@ -25,7 +26,7 @@ public class InterAssign1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		value.populateSymbolTable(parent, classMap);
 		parent.checkType(id, value.getType());
 		localId = parent.getLocalName(id);

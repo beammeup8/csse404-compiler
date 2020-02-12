@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterNoScope1 implements IInterStatement1 {
 
@@ -15,8 +16,10 @@ public class InterNoScope1 implements IInterStatement1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
-		statements.forEach(x -> x.populateSymbolTable(parent, classMap));
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
+		for (IInterStatement1 statement : statements) {
+			statement.populateSymbolTable(parent, classMap);
+		}
 	}
 
 	@Override

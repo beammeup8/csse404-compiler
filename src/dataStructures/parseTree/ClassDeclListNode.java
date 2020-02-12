@@ -3,9 +3,9 @@ package dataStructures.parseTree;
 import java.util.LinkedList;
 import java.util.List;
 
-import Exceptions.CustomException;
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import exceptions.CustomException;
 
 public class ClassDeclListNode extends Node {
 	private boolean isEpsilon;

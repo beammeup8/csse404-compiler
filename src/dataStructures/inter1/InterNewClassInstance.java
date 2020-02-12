@@ -6,6 +6,7 @@ import java.util.Map;
 
 import dataStructures.simpleInter.Allocation;
 import dataStructures.simpleInter.Statement;
+import exceptions.CustomException;
 
 public class InterNewClassInstance implements IInterExpression1 {
 
@@ -23,7 +24,7 @@ public class InterNewClassInstance implements IInterExpression1 {
 	}
 
 	@Override
-	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) {
+	public void populateSymbolTable(SymbolTable parent, Map<String, InterClass1> classMap) throws CustomException {
 		this.classMap = classMap;
 	}
 
