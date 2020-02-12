@@ -3,7 +3,6 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import optimizers.RemoveEmptyCodeBlocks;
 
 public class Main {
 
@@ -22,9 +21,11 @@ public class Main {
 		filesToCompile.add("sampleCode/shortExample3.java");
 		filesToCompile.add("sampleCode/TreeVisitor.java");
 		
-		//run
 		Compiler compiler = new Compiler();
-		compiler.addOptimizer(new RemoveEmptyCodeBlocks());
+		
+		//add optimazers here
+		
+		//run
 		compiler.compile(filesToCompile);
 	}
 
