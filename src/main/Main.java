@@ -3,6 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import optimizers.ImmediateInLiner;
+import optimizers.RemoveUnusedMem;
+
 
 public class Main {
 
@@ -24,6 +27,8 @@ public class Main {
 		Compiler compiler = new Compiler();
 		
 		//add optimazers here
+		compiler.addOptimizer(new ImmediateInLiner());
+		compiler.addOptimizer(new RemoveUnusedMem());
 		
 		//run
 		compiler.compile(filesToCompile);

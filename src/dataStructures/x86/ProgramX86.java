@@ -3,8 +3,8 @@ package dataStructures.x86;
 import java.util.List;
 
 public class ProgramX86 {
-	private List<FunctionX86> functions;
-	private String filename;
+	public List<FunctionX86> functions;
+	public String filename;
 	
 	public ProgramX86(String filename, List<FunctionX86> funcs) {
 		this.filename = filename;

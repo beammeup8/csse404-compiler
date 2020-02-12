@@ -38,8 +38,20 @@ public class Compiler {
 		interProgram1.createSymbolTable();
 		Program prog = interProgram1.toCodeBlock(filename);
 		ProgramX86 x86Prog = prog.toX86();
-		optimizers.forEach(x -> x.optimize(x86Prog));
+		optimize(x86Prog);
 		outputter.output(filename, x86Prog);
+	}
+	
+	private void optimize(ProgramX86 x86Prog){
+		boolean hasChanged = true;
+		while(hasChanged){
+			hasChanged = false;
+			for(Optimizer opt: optimizers){
+				if(opt.optimize(x86Prog)){
+					hasChanged = true;
+				}
+			}
+		}
 	}
 	
 	public void compile(List<String> filenames){
