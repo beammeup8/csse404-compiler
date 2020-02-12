@@ -29,14 +29,8 @@ public class ExtendNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String toString() {
-		if(isEpsilon){
+		if (isEpsilon) {
 			return "";
 		}
 		return " extends " + superClass.toString();

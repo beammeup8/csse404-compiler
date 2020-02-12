@@ -29,21 +29,15 @@ public class StmtLstNode extends Node {
 			isEpsilon = true;
 		}
 	}
-	
-	public List<StmtNode> getStatements(){
-		if(isEpsilon){
+
+	public List<StmtNode> getStatements() {
+		if (isEpsilon) {
 			return new LinkedList<>();
 		}
 		LinkedList<StmtNode> statements = new LinkedList<StmtNode>();
 		statements.addFirst(currentStatment);
 		statements.addAll(furtherStatements.getStatements());
 		return statements;
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

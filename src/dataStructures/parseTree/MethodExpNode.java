@@ -10,16 +10,10 @@ import exceptions.CustomException;
 public class MethodExpNode extends Node {
 	private TermExprNode terminalExpression;
 	private MethodCallNode methodCall;
-	
+
 	public MethodExpNode(List<Tag> tags, IntWrap head) throws CustomException {
 		terminalExpression = new TermExprNode(tags, head);
 		methodCall = new MethodCallNode(tags, head);
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

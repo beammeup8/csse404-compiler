@@ -31,12 +31,6 @@ public class WhileNode extends Node {
 		return builder.toString();
 	}
 
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public IInterStatement1 convertToInter1() {
 		return new InterWhile(conditional.convertToInter1(), body.convertToInter1());
 	}

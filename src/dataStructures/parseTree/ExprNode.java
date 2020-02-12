@@ -9,7 +9,8 @@ import dataStructures.inter1.InterExpression1;
 import exceptions.CustomException;
 
 /**
- * Expr ->	Comp LogicExpr
+ * Expr -> Comp LogicExpr
+ * 
  * @author mastermk beemanla
  *
  */
@@ -23,14 +24,8 @@ public class ExprNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String toString() {
-		return "Expression: " + equality.toString() + " " + logicExpr.toString(); 
+		return "Expression: " + equality.toString() + " " + logicExpr.toString();
 	}
 
 	public IInterExpression1 convertToInter1() {

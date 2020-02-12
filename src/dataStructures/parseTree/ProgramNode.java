@@ -31,18 +31,12 @@ public class ProgramNode extends Node {
 			System.err.println(e.getMessage());
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return "( Program: " + mainClass.toString() + " " +  otherClasses.toString() + " )";
-	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
+	public String toString() {
+		return "( Program: " + mainClass.toString() + " " + otherClasses.toString() + " )";
 	}
-	
+
 	public InterProgram1 convertToInter1() {
 		List<InterClass1> classes = new ArrayList<>();
 		classes.add(mainClass.convertToInter1());

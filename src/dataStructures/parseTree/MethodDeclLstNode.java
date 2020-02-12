@@ -25,19 +25,13 @@ public class MethodDeclLstNode extends Node {
 	}
 
 	public List<MethodDeclNode> getMethods() {
-		if(isEpsilon){
+		if (isEpsilon) {
 			return new LinkedList<MethodDeclNode>();
 		}
 		LinkedList<MethodDeclNode> methods = new LinkedList<>();
 		methods.add(currentMethod);
 		methods.addAll(furtherMethods.getMethods());
 		return methods;
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -5,9 +5,9 @@ import java.util.List;
 
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterStatement1;
 import dataStructures.inter1.InterMethod1;
 import exceptions.CustomException;
-import dataStructures.inter1.IInterStatement1;
 
 public class MethodDeclNode extends Node {
 	private TypeNode type;
@@ -17,24 +17,18 @@ public class MethodDeclNode extends Node {
 	private ExprNode returnExpression;
 
 	public MethodDeclNode(List<Tag> tags, IntWrap head) throws CustomException {
-		validateTerminal(tags, head , "public");
+		validateTerminal(tags, head, "public");
 		type = new TypeNode(tags, head);
 		id = addID(tags, head);
-		validateTerminal(tags, head , "(");
+		validateTerminal(tags, head, "(");
 		params = new FormalNode(tags, head);
-		validateTerminal(tags, head , ")");
-		validateTerminal(tags, head , "{");
+		validateTerminal(tags, head, ")");
+		validateTerminal(tags, head, "{");
 		statements = new StmtLstNode(tags, head).getStatements();
-		validateTerminal(tags, head , "return");
+		validateTerminal(tags, head, "return");
 		returnExpression = new ExprNode(tags, head);
-		validateTerminal(tags, head , ";");
-		validateTerminal(tags, head , "}");
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
+		validateTerminal(tags, head, ";");
+		validateTerminal(tags, head, "}");
 	}
 
 	@Override
@@ -58,7 +52,8 @@ public class MethodDeclNode extends Node {
 		for (int i = 0; i < statements.size(); i++) {
 			interStatements.add(statements.get(i).convertToInter1());
 		}
-		return new InterMethod1(type.getType(), id.symbol, params.convertToInter1(), interStatements, returnExpression.convertToInter1());
+		return new InterMethod1(type.getType(), id.symbol, params.convertToInter1(), interStatements,
+				returnExpression.convertToInter1());
 	}
 
 }

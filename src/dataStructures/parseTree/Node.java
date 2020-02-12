@@ -2,9 +2,9 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
+import dataStructures.GenericOpType;
 import dataStructures.IntWrap;
 import dataStructures.LexerType;
-import dataStructures.GenericOpType;
 import dataStructures.Tag;
 import exceptions.CustomException;
 import exceptions.DefaultException;
@@ -12,10 +12,8 @@ import exceptions.IncorrectOperatorFound;
 
 public abstract class Node {
 
-	public abstract void optimize();
-
 	@Override
-	public String toString(){
+	public String toString() {
 		System.err.println("This toString should never be called.");
 		return null;
 	}

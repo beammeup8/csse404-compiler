@@ -2,8 +2,8 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import dataStructures.IntWrap;
 import dataStructures.GenericOpType;
+import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
 import exceptions.CustomException;
@@ -23,12 +23,6 @@ public class AddSubExprNode extends Node {
 			head.integer = initialHead;
 			isEpsilon = true;
 		}
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

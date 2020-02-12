@@ -5,14 +5,15 @@ import java.util.List;
 
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterStatement1;
 import dataStructures.inter1.InterClass1;
 import dataStructures.inter1.InterDeclaration1;
 import dataStructures.inter1.InterMethod1;
 import exceptions.CustomException;
-import dataStructures.inter1.IInterStatement1;
 
 /**
- * MainClassDecl -> class ID { public static void main ( String [ ] ID ) { StmtLst } }
+ * MainClassDecl -> class ID { public static void main ( String [ ] ID ) {
+ * StmtLst } }
  * 
  * @author mastermk beemanla
  *
@@ -40,7 +41,7 @@ public class MainClassDeclNode extends Node {
 		validateTerminal(tags, head, "}");
 		validateTerminal(tags, head, "}");
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -54,12 +55,6 @@ public class MainClassDeclNode extends Node {
 		return builder.toString();
 	}
 
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public InterClass1 convertToInter1() {
 		List<IInterStatement1> statements = new ArrayList<>();
 		for (int i = 0; i < statementList.size(); i++) {

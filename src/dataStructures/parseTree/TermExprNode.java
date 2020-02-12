@@ -61,16 +61,10 @@ public class TermExprNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public String toString() {
 		switch (type) {
 		case EXPRESSION:
-			return "( " + expression.toString() + " )"; 
+			return "( " + expression.toString() + " )";
 		case FALSE:
 			return " false ";
 		case ID:
@@ -78,7 +72,7 @@ public class TermExprNode extends Node {
 		case INTEGER:
 			return integerVal.toString();
 		case NEW_ARRAY:
-			return "( new int [ " + expression.toString() + " ] )"; 
+			return "( new int [ " + expression.toString() + " ] )";
 		case NEW_CLASS_INSTANCE:
 			return "( new " + id.toString() + "() )";
 		case NULL:
@@ -94,9 +88,9 @@ public class TermExprNode extends Node {
 	public IInterExpression1 convertToInter1() {
 		switch (type) {
 		case EXPRESSION:
-			return expression.convertToInter1(); 
+			return expression.convertToInter1();
 		case NEW_ARRAY:
-			return new InterNewArrayInstance(expression.convertToInter1()); 
+			return new InterNewArrayInstance(expression.convertToInter1());
 		case NEW_CLASS_INSTANCE:
 			return new InterNewClassInstance(id.symbol);
 		case ID:

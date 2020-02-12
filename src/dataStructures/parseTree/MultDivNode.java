@@ -18,12 +18,6 @@ public class MultDivNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public String toString() {
 		return "( Multiplicative Expression: " + negExpr.toString() + " " + multDivExpr.toString();
 	}

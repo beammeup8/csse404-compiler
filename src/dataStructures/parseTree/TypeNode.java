@@ -15,9 +15,9 @@ public class TypeNode extends Node {
 		} else if (tags.get(head.integer).symbol.equals("int")) {
 			type = addTerminal(tags, head, "int");
 			if (tags.get(head.integer).symbol.equals("[")) {
-				validateTerminal(tags, head,  "[");
-				validateTerminal(tags, head,  "]");
-				type.symbol+="[]";
+				validateTerminal(tags, head, "[");
+				validateTerminal(tags, head, "]");
+				type.symbol += "[]";
 			}
 		} else {
 			type = addID(tags, head);
@@ -25,16 +25,10 @@ public class TypeNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String toString() {
 		return type.toString();
 	}
-	
+
 	public String getType() {
 		return this.type.symbol;
 	}

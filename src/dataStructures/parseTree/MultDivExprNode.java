@@ -2,8 +2,8 @@ package dataStructures.parseTree;
 
 import java.util.List;
 
-import dataStructures.IntWrap;
 import dataStructures.GenericOpType;
+import dataStructures.IntWrap;
 import dataStructures.Tag;
 import dataStructures.inter1.IInterExpression1;
 import exceptions.CustomException;
@@ -24,19 +24,13 @@ public class MultDivExprNode extends Node {
 			isEpsilon = true;
 		}
 	}
-	
-	@Override
-	public String toString() {
-		if(isEpsilon){
-			return "";
-		}
-		return "( " +  op.toString() + " " + multDiv.toString() + " )";
-	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
+	public String toString() {
+		if (isEpsilon) {
+			return "";
+		}
+		return "( " + op.toString() + " " + multDiv.toString() + " )";
 	}
 
 	public IInterExpression1 convertToInter1() {

@@ -44,12 +44,6 @@ public class ClassDeclNode extends Node {
 		return builder.toString();
 	}
 
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public InterClass1 convertToInter1() {
 		List<InterDeclaration1> declarations = new ArrayList<>();
 		classVars.forEach(x -> declarations.add(x.convertToInter1()));

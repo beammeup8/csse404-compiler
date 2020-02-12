@@ -18,14 +18,8 @@ public class ClassVarDeclNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String toString() {
-		return "( Field: " + type.toString() + " " + id.toString() + " ; )"; 
+		return "( Field: " + type.toString() + " " + id.toString() + " ; )";
 	}
 
 	public InterDeclaration1 convertToInter1() {

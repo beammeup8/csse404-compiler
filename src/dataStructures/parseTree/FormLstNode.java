@@ -29,12 +29,6 @@ public class FormLstNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String toString() {
 		if (isEpsilon) {
 			return "";

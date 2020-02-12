@@ -18,12 +18,6 @@ public class EqualityNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String toString() {
 		return "( Equality: " + comparison.toString() + " " + equalityExpr.toString();
 	}
@@ -32,7 +26,8 @@ public class EqualityNode extends Node {
 		if (equalityExpr.isEpsilon) {
 			return comparison.convertToInter1();
 		}
-		return new InterExpression1(comparison.convertToInter1(), equalityExpr.op.symbol, equalityExpr.convertToInter1());
+		return new InterExpression1(comparison.convertToInter1(), equalityExpr.op.symbol,
+				equalityExpr.convertToInter1());
 	}
 
 }

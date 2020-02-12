@@ -38,10 +38,4 @@ public class ClassDeclListNode extends Node {
 		return classes;
 	}
 
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

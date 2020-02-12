@@ -51,12 +51,6 @@ public class MethodCallNode extends Node {
 		}
 	}
 
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
-	}
-
 	private List<IInterExpression1> getParameters() {
 		List<IInterExpression1> converted = new ArrayList<IInterExpression1>();
 		for (int i = 0; i < params.size(); i++) {

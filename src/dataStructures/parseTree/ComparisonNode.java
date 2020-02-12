@@ -11,16 +11,10 @@ import exceptions.CustomException;
 public class ComparisonNode extends Node {
 	private AddSubNode addSub;
 	private ComparisonExprNode comparisonExpr;
-	
+
 	public ComparisonNode(List<Tag> tags, IntWrap head) throws CustomException {
 		addSub = new AddSubNode(tags, head);
 		comparisonExpr = new ComparisonExprNode(tags, head);
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -32,7 +26,8 @@ public class ComparisonNode extends Node {
 		if (comparisonExpr.isEpsilon) {
 			return addSub.convertToInter1();
 		}
-		return new InterExpression1(addSub.convertToInter1(), comparisonExpr.op.symbol, comparisonExpr.convertToInter1());
+		return new InterExpression1(addSub.convertToInter1(), comparisonExpr.op.symbol,
+				comparisonExpr.convertToInter1());
 	}
 
 }

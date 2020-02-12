@@ -24,21 +24,15 @@ public class ParamLstNode extends Node {
 			isEpsilon = true;
 		}
 	}
-	
-	public List<ExprNode> getParams(){
-		if(isEpsilon){
+
+	public List<ExprNode> getParams() {
+		if (isEpsilon) {
 			return new LinkedList<ExprNode>();
 		}
 		LinkedList<ExprNode> params = new LinkedList<>();
 		params.add(expression);
 		params.addAll(furtherParams.getParams());
 		return params;
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

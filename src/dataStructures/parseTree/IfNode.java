@@ -4,19 +4,19 @@ import java.util.List;
 
 import dataStructures.IntWrap;
 import dataStructures.Tag;
+import dataStructures.inter1.IInterStatement1;
 import dataStructures.inter1.InterIf1;
 import exceptions.CustomException;
-import dataStructures.inter1.IInterStatement1;
 
 public class IfNode extends Node {
-	private ExprNode conditional; 
+	private ExprNode conditional;
 	private StmtNode thenBody, elseBody;
 
 	public IfNode(List<Tag> tags, IntWrap head) throws CustomException {
 		validateTerminal(tags, head, "if");
 		validateTerminal(tags, head, "(");
 		conditional = new ExprNode(tags, head);
-		addTerminal(tags, head,  ")");
+		addTerminal(tags, head, ")");
 		thenBody = new StmtNode(tags, head);
 		validateTerminal(tags, head, "else");
 		elseBody = new StmtNode(tags, head);
@@ -33,12 +33,6 @@ public class IfNode extends Node {
 		builder.append(elseBody.toString());
 		builder.append(")");
 		return builder.toString();
-	}
-
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public IInterStatement1 convertToInter1() {

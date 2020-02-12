@@ -22,12 +22,6 @@ public class AddSubNode extends Node {
 		return "( AddSub: " + multDiv.toString() + " " + addSubExpr.toString() + " )";
 	}
 
-	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public IInterExpression1 convertToInter1() {
 		if (addSubExpr.isEpsilon) {
 			return multDiv.convertToInter1();

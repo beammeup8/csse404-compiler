@@ -96,12 +96,6 @@ public class StmtNode extends Node {
 	}
 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public String toString() {
 		switch (stmtType) {
 		case ARRAY_ASSIGN:
