@@ -43,15 +43,19 @@ public class Compiler {
 	}
 	
 	private void optimize(ProgramX86 x86Prog){
-		boolean hasChanged = true;
-		while(hasChanged){
-			hasChanged = false;
+		int totalChanges = 0;
+		int changesThisPass = 1;
+		while(changesThisPass != 0){
+			changesThisPass = 0;
 			for(Optimizer opt: optimizers){
-				if(opt.optimize(x86Prog)){
-					hasChanged = true;
-				}
+				int changes = opt.optimize(x86Prog);
+				System.out.println("Optimizer " + opt.getName() + " made " + changes + " changes");
+				changesThisPass += changes;
 			}
+			System.out.println("Changes this pass: " + changesThisPass);
+			totalChanges += changesThisPass;
 		}
+		System.out.println("Total changes made by optimizers: " + totalChanges);
 	}
 	
 	public void compile(List<String> filenames){

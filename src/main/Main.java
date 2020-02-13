@@ -3,7 +3,12 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import optimizers.*;
+import optimizers.CollapseMemChain;
+import optimizers.ImmediateInLiner;
+import optimizers.MinimizeMemLookup;
+import optimizers.RemoveInstantOverwrite;
+import optimizers.RemoveUnusedAssignments;
+import optimizers.WriteReadToWrite;
 
 
 public class Main {
@@ -31,6 +36,7 @@ public class Main {
 		compiler.addOptimizer(new WriteReadToWrite());
 		compiler.addOptimizer(new RemoveUnusedAssignments());
 		compiler.addOptimizer(new RemoveInstantOverwrite());
+		compiler.addOptimizer(new MinimizeMemLookup());
 		
 		//run
 		compiler.compile(filesToCompile);

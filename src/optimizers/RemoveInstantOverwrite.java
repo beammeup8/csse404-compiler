@@ -7,8 +7,8 @@ import dataStructures.x86.FunctionX86;
 public class RemoveInstantOverwrite extends Optimizer {
 
 	@Override
-	protected boolean optimizeFunction(FunctionX86 func) {
-		boolean hasChanged = false;
+	protected int optimizeFunction(FunctionX86 func) {
+		int changes = 0;
 		for (int i = 0; i < func.commands.size() - 1; i++) {
 			Command a1 = func.commands.get(i);
 			Command a2 = func.commands.get(i + 1);
@@ -16,10 +16,16 @@ public class RemoveInstantOverwrite extends Optimizer {
 				if (a1.param1.equals(a2.param1) && !a2.param2.contains(a1.param1)) {
 					func.commands.remove(i);
 					i--;
+					changes++;
 				}
 			}
 		}
-		return hasChanged;
+		return changes;
+	}
+
+	@Override
+	public String getName() {
+		return "Remove Instant Overwrite";
 	}
 
 }

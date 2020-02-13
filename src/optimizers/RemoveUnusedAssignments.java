@@ -12,7 +12,7 @@ import dataStructures.x86.FunctionX86;
 public class RemoveUnusedAssignments extends Optimizer {
 
 	@Override
-	protected boolean optimizeFunction(FunctionX86 func) {
+	protected int optimizeFunction(FunctionX86 func) {
 		Set<String> hasBeenUsed = new HashSet<String>();
 		hasBeenUsed.add("EAX");
 		hasBeenUsed.add("EBP");
@@ -32,18 +32,18 @@ public class RemoveUnusedAssignments extends Optimizer {
 			}
 		}
 		
-		boolean hasChanged = false;
+		int changes = 0;
 		for (int i = func.commands.size() - 1; i >= 0; i--) {
 			Command a1 = func.commands.get(i);
 			if (a1.type == CommandType.MOV) {
 				if (!hasBeenUsed.contains(a1.param1) && isEBPMemAddr(a1.param1)) {
 					func.commands.remove(a1);
-					hasChanged = true;
+					changes++;
 				}
 			}
 
 		}
-		return hasChanged;
+		return changes;
 	}
 	
 	private boolean isEBPMemAddr(String param){
@@ -74,6 +74,11 @@ public class RemoveUnusedAssignments extends Optimizer {
 			}
 		}
 		return toReturn;
+	}
+
+	@Override
+	public String getName() {
+		return "Remove Unused Assignments";
 	}
 
 }
