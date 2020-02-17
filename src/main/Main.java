@@ -8,6 +8,7 @@ import optimizers.ImmediateInLiner;
 import optimizers.MinimizeMemLookup;
 import optimizers.RemoveInstantOverwrite;
 import optimizers.RemoveUnusedAssignments;
+import optimizers.StackRecalculator;
 import optimizers.WriteReadToWrite;
 
 
@@ -37,6 +38,7 @@ public class Main {
 		compiler.addOptimizer(new RemoveUnusedAssignments());
 		compiler.addOptimizer(new RemoveInstantOverwrite());
 		compiler.addOptimizer(new MinimizeMemLookup());
+		compiler.addOptimizer(new StackRecalculator());
 		
 		//run
 		compiler.compile(filesToCompile);

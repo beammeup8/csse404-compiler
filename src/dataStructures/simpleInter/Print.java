@@ -21,10 +21,10 @@ public class Print extends Statement {
 	@Override
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		localName = getMemLocation(localVariables, localName);
-		Assignment intoEAX = new Assignment(localName, "EAX");
-		Assignment setParam = new Assignment("EAX", "DWORD PTR [ESP+4]");
-		Assignment unknown = new Assignment("OFFSET FLAT:LC0", "DWORD PTR [ESP]");
-		return Arrays.asList(intoEAX, setParam, unknown, this);
+		StackOperation setParam = new StackOperation(localName, StackOpType.PUSH);
+		StackOperation unknown = new StackOperation("OFFSET FLAT:LC0", StackOpType.PUSH);
+		Operation addToStackPtr = new Operation("ESP", "8", "ESP", OpType.ADD);
+		return Arrays.asList(setParam, unknown, this, addToStackPtr);
 	}
 
 	@Override

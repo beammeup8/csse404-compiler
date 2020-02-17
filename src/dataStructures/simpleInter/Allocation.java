@@ -24,10 +24,10 @@ public class Allocation extends Statement {
 	public List<Statement> convertToMemAccesses(List<String> localVariables) {
 		String memoryAddress = getMemLocation(localVariables, localName);
 		String sizeAddress = getMemLocation(localVariables, sizeLocation);
-		Assignment putSizeInMem = new Assignment(sizeAddress, "EBX");
-		Assignment sizeInCall = new Assignment("EBX", "DWORD PTR [ESP]");
+		StackOperation putSizeInMem = new StackOperation(sizeAddress, StackOpType.PUSH);
 		Assignment putInMem = new Assignment("EAX", memoryAddress);
-		return Arrays.asList(putSizeInMem, sizeInCall, this, putInMem);
+		Operation UndoStackOp = new Operation("ESP", "4", "ESP", OpType.ADD);
+		return Arrays.asList(putSizeInMem, this, putInMem, UndoStackOp);
 	}
 
 	@Override
