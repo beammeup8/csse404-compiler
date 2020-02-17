@@ -2,6 +2,7 @@ package dataStructures.simpleInter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import dataStructures.x86.Command;
 import dataStructures.x86.FunctionX86;
 
@@ -62,20 +63,9 @@ public class Function {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(nameLabel.toString() + "\n");
-		builder.append(
-				"\t.cfi_startproc\n\tpush ebp\n\t.cfi_def_cfa_offset 8\n\t.cfi_offset 5, -8\n\tmov ebp, esp\n\t.cfi_def_cfa_register 5\n");
-		if (name.equals("_main")) {
-			builder.append("\tand esp, -16\n\tsub esp, 16\n\tcall ___main\n");
-		}
 		for (int i = 0; i < statements.size(); i++) {
 			builder.append(statements.get(i).toString() + "\n");
 		}
-		if (name.equals("_main")) {
-			builder.append("\tleave\n");
-		} else {
-			builder.append("\tpop ebp\n");
-		}
-		builder.append("\t.cfi_restore 5\n\t.cfi_def_cfa 4, 4\n\tret\n\t.cfi_endproc\n");
 		return builder.toString();
 	}
 }
