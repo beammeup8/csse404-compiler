@@ -29,6 +29,7 @@ public class Main {
 		filesToCompile.add("sampleCode/shortExample2.java");
 		filesToCompile.add("sampleCode/shortExample3.java");
 		filesToCompile.add("sampleCode/TreeVisitor.java");
+		filesToCompile.add("sampleCode/Fibonacci.java");
 		
 		Compiler compiler = new Compiler();
 		
