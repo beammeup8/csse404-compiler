@@ -1,6 +1,6 @@
 class Fibonacci{
     public static void main(String[] a){
-    	System.out.println(new Fib().ComputeFib(40));
+    	System.out.println(new Fib().ComputeFib(43));
     }
 }
 
